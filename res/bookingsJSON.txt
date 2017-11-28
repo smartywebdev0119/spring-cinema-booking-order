@@ -1,0 +1,23 @@
+{
+  "Titanic": {
+    "date": "2017-11-28",
+    "time": "17:00",
+    "customer": "ghita",
+    "seat": "A1",
+    "status": "booked"
+  },
+  "Inception": {
+    "date": "2017-11-28",
+    "time": "18:00",
+    "customer": "filip",
+    "seat": "B2",
+    "status": "booked"
+  },
+  "The Avengers": {
+    "date": "2017-11-29",
+    "time": "19:00",
+    "customer": "lucio",
+    "seat": "C3",
+    "status": "cancelled"
+  }
+}

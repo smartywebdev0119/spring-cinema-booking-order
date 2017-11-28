@@ -1,0 +1,3 @@
+Filippos,Zofakis,filip,c,filippos.zofakis.17@ucl.ac.uk,1000
+Lucio,D’Alessandro,lucio,c,lucio.d'alessandro.17@ucl.ac.uk,1000
+Ghita,Kouadri Mostefaoui,ghita,c,g.kouadri@ucl.ac.uk,1000000
