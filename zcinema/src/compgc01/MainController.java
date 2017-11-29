@@ -19,7 +19,10 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -140,16 +143,19 @@ public class MainController extends SceneCreator {
 	@FXML
 	public void manageBookingsClick(ActionEvent event) throws IOException {
 
-		// IMPORTANT FOR LATER TO SHOW SEATS ALREADY BOOKED!!!
-		// for(Node node : gridSeats.getChildren()) {
-		// if(node.getStyle().length() == 69){
-		// int id = Integer.parseInt(node.getId());
-		// redFixedSeats.add(id);
-		// }
-		// }
+
 
 	    // calling the scene from parent class and avoiding code duplication
 		launchScene("ManageBookingsScene.fxml", event);
+		
+//		 IMPORTANT FOR LATER TO SHOW SEATS ALREADY BOOKED!!!
+//		 for(Node node : gridSeats.getChildren()) {
+//			 if(node.getStyle().length() > 55){
+//				 String getId = node.getId();
+//				 System.out.println(getId);
+//				 redFixedSeats.add(getId);
+//			 }
+//		 }
 	}
 
 	//////////////////////////////////////////////
@@ -171,21 +177,31 @@ public class MainController extends SceneCreator {
 	@FXML
 	public void turnSeatRed(MouseEvent e) {
 
+		if(((Node) e.getSource()).getStyle().length() == 55){
+			Alert alert = new Alert(AlertType.WARNING, "The seat " + ((Node) e.getSource()).getId()  + " is booked already!", ButtonType.OK);
+			alert.showAndWait();
+			if (alert.getResult() == ButtonType.OK) {
+				alert.close();
+			}
+		}
+		
 		for (Node node : gridSeats.getChildren()) {
 			node.setStyle("-fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
 		}
-
+		
 		if (((Node) e.getSource()).getStyle().length() == 55) {
 			((Node) e.getSource()).setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
 		} else {
 			((Node) e.getSource()).setStyle("-fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
 		}
-
-		// BOOKED SEATS COLORS CAN'T TURN BLACK!!
-		// for(Integer id : redFixedSeats){
-		// gridSeats.getChildren().get(id).setStyle("-fx-fill:red;
-		// -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-		// }
+	
+//		 BOOKED SEATS COLORS CAN'T TURN BLACK!!
+//		 for(Integer id : redFixedSeats){
+//		 gridSeats.getChildren().get(id).setStyle("-fx-fill:#c2a9a9; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
+//		 }
+		 
+		// Alert for booked seat
+		
 	}
 	///////////////////////////////////////////
 
@@ -208,7 +224,9 @@ public class MainController extends SceneCreator {
 	}
 
 	@FXML
-	public void showBookingHistoryOnClick(MouseEvent event) {
+	public void showBookingHistoryOnClick(ActionEvent event) throws IOException {
+		
+		launchScene("BookingHistory.fxml", event);
 
 	}
 
@@ -401,6 +419,7 @@ public class MainController extends SceneCreator {
 			// null, ex);
 		}
 	}
+	
 	
 	// maybe implement a clock if we have time
 	public void testLocalDateTime() {
