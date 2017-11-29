@@ -349,7 +349,7 @@ public class MainController extends SceneCreator {
 		personaliseScene();
 	}
 
-	private void personaliseScene() throws IOException {
+	void personaliseScene() throws IOException {
 	    
 		// personalising page based on logged-in user
 		MainController controller = super.getController(loader);
@@ -429,7 +429,7 @@ public class MainController extends SceneCreator {
 	
 	
 	// maybe implement a clock if we have time
-	public void testLocalDateTime() {
+	public LocalDateTime testLocalDateTime() {
 	    
 	      // Get the current date and time
 	      LocalDateTime currentTime = LocalDateTime.now();
@@ -458,5 +458,7 @@ public class MainController extends SceneCreator {
 	      //parse a string
 	      LocalTime date5 = LocalTime.parse("20:15:30");
 	      System.out.println("date5: " + date5);
+	      
+	      return currentTime;
 	   }
 }

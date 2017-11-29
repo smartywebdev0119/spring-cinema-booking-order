@@ -1,19 +1,19 @@
-package compgc01.bookinghistory;
+package compgc01;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class MovieList {
+public class BookingHistory {
 
-	private final SimpleStringProperty status, name, lastname, movie, date, time, price;
+	private final SimpleStringProperty status, name, lastname, movie, date, time, seat;
 
-	public MovieList (String status, String name, String lastname, String movie, String date, String time, String price){
+	public BookingHistory (String status, String name, String lastname, String movie, String date, String time, String price){
 		this.status = new SimpleStringProperty(status);
 		this.name = new SimpleStringProperty(name);
 		this.lastname = new SimpleStringProperty(lastname);
 		this.movie = new SimpleStringProperty(movie);
 		this.date = new SimpleStringProperty(date);
 		this.time = new SimpleStringProperty(time);
-		this.price = new SimpleStringProperty(price);
+		this.seat = new SimpleStringProperty(price);
 	}
 	
 	public String getStatus(){
@@ -34,9 +34,7 @@ public class MovieList {
 	public String getTime(){
 		return time.get();
 	}
-	public String getPrice(){
-		return price.get();
+	public String getSeat(){
+		return seat.get();
 	}
-
-
 }
