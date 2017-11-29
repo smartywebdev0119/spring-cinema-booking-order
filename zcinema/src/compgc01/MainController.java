@@ -1,6 +1,7 @@
 package compgc01;
 
 import java.io.*;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -9,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import javax.imageio.ImageIO;
 
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
@@ -18,7 +21,10 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -37,6 +43,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * The controller for our GUI.
@@ -226,9 +233,14 @@ public class MainController extends SceneCreator {
 	@FXML
 	public void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 		
-		launchScene("BookingHistory.fxml", event);
-
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("bookinghistory/LoginScene.fxml"));
+	      Parent root = loader.load();
+	      Scene scene = new Scene(root);
+	      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	      stage.setScene(scene);
+	      stage.show();
 	}
+	
 
 	// Edit Info Scene
 	@FXML

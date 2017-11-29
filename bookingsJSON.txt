@@ -1,4 +1,4 @@
-{
+{	
   "Titanic": {
     "date": "2017-11-28",
     "time": "17:00",
@@ -19,5 +19,6 @@
     "customer": "lucio",
     "seat": "A1",
     "status": "cancelled"
-  }
+  },
+"array": ["first", "two", "three", "four", "five"]
 }
