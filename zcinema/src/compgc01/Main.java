@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
@@ -15,6 +16,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -38,7 +41,7 @@ public class Main extends Application {
 
         m = new Main();
 
-        playMusic("mai_sakura.mp3");
+        playMusic("wonderful_world.mp3");
 
         // if files do not exist, create them using default values
         try {
@@ -196,12 +199,12 @@ public class Main extends Application {
     }
 
     public static void playMusic(String musicFile) {
-
+        
         try {
-            String path = getPath();
-            String file = URLDecoder.decode(path + "res/sounds/" + musicFile, "UTF-8");
-            MP3 mp3 = new MP3(file);
-            mp3.play();
+            File file = new File(URLDecoder.decode(getPath() + "res/sounds/" + musicFile, "UTF-8"));
+            Media backgroundMusic = new Media(file.toPath().toUri().toString());
+            MediaPlayer player = new MediaPlayer(backgroundMusic);
+            player.play();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
