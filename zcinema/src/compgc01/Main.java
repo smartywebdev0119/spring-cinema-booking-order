@@ -38,7 +38,7 @@ public class Main extends Application {
 
         m = new Main();
 
-        playMusic(“mai_sakura.mp3");
+        playMusic("mai_sakura.mp3");
 
         // if files do not exist, create them using default values
         try {

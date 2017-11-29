@@ -1,3 +1,0 @@
-Filippos,Zofakis,filip,e,filippos.zofakis.17@ucl.ac.uk
-Lucio,D’Alessandro,lucio,e,lucio.d'alessandro.17@ucl.ac.uk
-Ghita,Kouadri Mostefaoui,ghita,e,g.kouadri@ucl.ac.uk
