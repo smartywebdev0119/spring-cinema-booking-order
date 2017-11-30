@@ -118,4 +118,12 @@ public class User {
         if (!email.isEmpty())
             this.email = email;
     }
+    
+    /**
+     * Returns the user's type as a String.
+     * @return Type
+     */
+    public String getType() {
+        return "user";
+    }
 }
