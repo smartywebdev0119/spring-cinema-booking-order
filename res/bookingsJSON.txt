@@ -2,22 +2,33 @@
   "Titanic": {
     "date": "2017-11-28",
     "time": "17:00",
-    "customer": "ghita",
+    "firstName": "Ghita",
+    "lastName": "K Mostefaoui",
     "seat": "A1",
-    "status": "booked"
+    "status": "cancelled"
   },
   "Inception": {
     "date": "2017-11-28",
     "time": "18:00",
-    "customer": "filip",
-    "seat": "B2",
+    "firstName": "John",
+    "lastName": "Smith",
+    "seat": "A1",
     "status": "booked"
   },
   "The Avengers": {
     "date": "2017-11-29",
     "time": "19:00",
-    "customer": "lucio",
-    "seat": "C3",
-    "status": "cancelled"
+    "firstName": "Mark",
+    "lastName": "Chester",
+    "seat": "C5",
+    "status": "booked"
+  },
+  "The Gladiator": {
+    "date": "2014-3-09",
+    "time": "11:00",
+    "firstName": "Franz",
+    "lastName": "Thompson",
+    "seat": "B3",
+    "status": "booked"
   }
 }

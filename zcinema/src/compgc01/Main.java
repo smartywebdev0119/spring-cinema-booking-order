@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
@@ -53,8 +52,8 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        readJSONUserFile("employees");
-        readJSONUserFile("customers");
+        readJSONUserFile("employeesJSON.txt");
+        readJSONUserFile("customersJSON.txt");
         
         launch(args);
     }
@@ -71,15 +70,12 @@ public class Main extends Application {
         return m;
     }
 
-    public static JSONObject readJSONUserFile(String userType) {
+    public static JSONObject readJSONUserFile(String file) {
 
         try {
             String path = getPath();
 
-            if (userType.equals("employees"))
-                path = URLDecoder.decode(path + "res/employeesJSON.txt", "UTF-8");
-            else           
-                path = URLDecoder.decode(path + "res/customersJSON.txt", "UTF-8");
+                path = URLDecoder.decode(path + "res/" + file, "UTF-8");
 
             JSONParser parser = new JSONParser();
             JSONObject users =  (JSONObject) parser.parse(new FileReader(path));
@@ -87,7 +83,7 @@ public class Main extends Application {
                 // System.out.println((String) s);
                 JSONObject user = (JSONObject) users.get(s);
 
-                if (userType.equals("employees"))
+                if (file.contains("employees"))
                     employees.add( new Employee ((String) user.get("firstName"), (String) user.get("lastName"), (String) user.get("username"), (String) user.get("password"), (String) user.get("email")));
                 else
                     customers.add( new Customer ((String) user.get("firstName"), (String) user.get("lastName"), (String) user.get("username"), (String) user.get("password"), (String) user.get("email"), Double.parseDouble(String.valueOf(user.get("accountBalance")))));
@@ -101,24 +97,20 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public static void modifyJSONUserFile(User user, String attribute, String newValue) {
+    public static void modifyJSONFile(String file, String identifier, String attribute, String newValue) {
 
         try {
-            String userType = user.getClass().getName().toLowerCase() + "s";
-            JSONObject users = readJSONUserFile(userType);
-            JSONObject userToEdit = (JSONObject) users.get(user.getUsername());
-            userToEdit.put(attribute, newValue);
+            JSONObject items = readJSONUserFile(file);
+            JSONObject itemToEdit = (JSONObject) items.get(identifier);
+            itemToEdit.put(attribute, newValue);
 
             String path = getPath();
-            if (userType.equals("employees"))
-                path = URLDecoder.decode(path + "res/employeesJSON.txt", "UTF-8");
-            else           
-                path = URLDecoder.decode(path + "res/customersJSON.txt", "UTF-8");
+                path = URLDecoder.decode(path + "res/" + file, "UTF-8");
             // System.out.println(path);
 
-            File file = new File(path);
-            PrintWriter writer = new PrintWriter(file);
-            writer.print(users.toJSONString());
+            File jsonFile = new File(path);
+            PrintWriter writer = new PrintWriter(jsonFile);
+            writer.print(items.toJSONString());
             writer.close();
             
             // System.out.println("-- updated file successfully --");

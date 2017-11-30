@@ -29,12 +29,12 @@
 		<TableView fx:id="table" layoutY="34.0" onMouseClicked="#ButtonClicked" prefHeight="367.0" prefWidth="700.0">
 			<columns>
 				<TableColumn fx:id="status" prefWidth="68.95062577724457" text="Status" />
-				<TableColumn fx:id="name" minWidth="0.7432861328125" prefWidth="113.04937744140625" text="Name" />
-				<TableColumn fx:id="lastname" minWidth="0.0" prefWidth="171.0" text="Last Name" />
-				<TableColumn fx:id="movie" prefWidth="163.0" text="Movie" />
+				<TableColumn fx:id="firstName" prefWidth="113.04937744140625" text="First Name" />
+				<TableColumn fx:id="lastName" prefWidth="171.0" text="Last Name" />
+				<TableColumn fx:id="film" prefWidth="163.0" text="Movie" />
 				<TableColumn fx:id="date" prefWidth="85.0" text="Date" />
-				<TableColumn fx:id="time" minWidth="0.0" prefWidth="56.0" text="Time" />
-				<TableColumn fx:id="seat" minWidth="0.0" prefWidth="41.0" text="Seat" />
+				<TableColumn fx:id="time" prefWidth="56.0" text="Time" />
+				<TableColumn fx:id="seat" prefWidth="41.0" text="Seat" />
 			</columns>
 		</TableView>
 	</children>

@@ -28,4 +28,12 @@ public class Customer extends User {
             this.accountBalance += addAmount;
         else System.out.println("Invalid ammount. The amount to add has to be positive.");
     }
+
+    /**
+     * Returns the user's type as a String.
+     * @return Type
+     */
+    public String getType() {
+        return "customer";
+    }
 }

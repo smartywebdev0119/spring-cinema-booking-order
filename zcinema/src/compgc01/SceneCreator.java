@@ -18,32 +18,26 @@ import javafx.stage.Stage;
 
 public class SceneCreator {
 
-    String sceneName;
-	
-	@FXML
-	FXMLLoader loader;
-	
-	// launching the new scene based on the .fxml file name passed in the argument as a String variable
-	public void launchScene (String sceneName, ActionEvent event) throws IOException{
-	    this.sceneName = sceneName;
-	    createNewScene(event);
-	 }
-	
-	  // building the scene and setting the value for the instance variable loader
-	  @FXML
-	  public void createNewScene (ActionEvent event) throws IOException {
-	      FXMLLoader loader = new FXMLLoader(getClass().getResource(this.sceneName));
-	      Parent root = loader.load();
-	      Scene scene = new Scene(root);
-	      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	      stage.setScene(scene);
-	      stage.show();
-	      this.loader = loader;
-	 }
-	
-	  // creating a controller to be called in the child class 'MainController' to customize the scene elements
-	  public MainController getController(FXMLLoader loader){
-	      MainController controller = (MainController)loader.getController();
-	      return controller;
-	  }
+    FXMLLoader loader;
+    
+    protected String sceneName;
+
+    // launching the new scene based on the .fxml file name passed in the argument as a String variable
+    // building the scene and setting the value for the instance variable loader
+    public void launchScene (String sceneName, ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        this.sceneName = sceneName;
+        this.loader = loader;
+        stage.show();
+    }
+
+    // creating a controller to be called in the child class 'MainController' to customize the scene elements
+    public MainController getController(FXMLLoader loader){
+        MainController controller = (MainController)loader.getController();
+        return controller;
+    }
 }
