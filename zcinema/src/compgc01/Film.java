@@ -7,7 +7,7 @@ package compgc01;
  */
 public class Film {
     
-    private String title = "No Title Chosen", description = "No Description Provided";
+    private String title = "No Title Chosen", description = "No Description Providedr";
     private double duration = 0;
 
     public Film(String title, double duration, String description) {

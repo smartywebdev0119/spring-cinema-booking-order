@@ -40,7 +40,7 @@ public class Main extends Application {
 
         m = new Main();
 
-        playMusic("wonderful_world.mp3");
+//        playMusic("wonderful_world.mp3");
 
         // if files do not exist, create them using default values
         try {
