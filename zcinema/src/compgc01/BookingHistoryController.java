@@ -113,7 +113,6 @@ public class BookingHistoryController implements Initializable {
 	  row = table.getSelectionModel().getSelectedItems();         
 	  row.forEach(allRows::remove);
 	 
-	 
 	  if(table.getItems().get(0).getDate().equals("")) {
 	  }
 	}
