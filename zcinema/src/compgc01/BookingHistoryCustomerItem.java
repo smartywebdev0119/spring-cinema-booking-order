@@ -9,9 +9,9 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class BookingHistoryCustomerItem {
 
-	private final SimpleStringProperty status, firstName, lastName, film, date, time, seat;
+	private final SimpleStringProperty status, firstName, lastName, film, date, time, seat, idNumber;
 
-	public BookingHistoryCustomerItem (String status, String firstName, String lastName, String film, String date, String time, String price){
+	public BookingHistoryCustomerItem (String status, String firstName, String lastName, String film, String date, String time, String price, String idNumber){
 		this.status = new SimpleStringProperty(status);
 		this.firstName = new SimpleStringProperty(firstName);
 		this.lastName = new SimpleStringProperty(lastName);
@@ -19,6 +19,7 @@ public class BookingHistoryCustomerItem {
 		this.date = new SimpleStringProperty(date);
 		this.time = new SimpleStringProperty(time);
 		this.seat = new SimpleStringProperty(price);
+		this.idNumber = new SimpleStringProperty(idNumber);
 	}
 	
 	public String getStatus(){
@@ -41,5 +42,8 @@ public class BookingHistoryCustomerItem {
 	}
 	public String getSeat(){
 		return seat.get();
+	}
+	public String getIdNumber(){
+		return idNumber.get();
 	}
 }

@@ -5,17 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.ResourceBundle;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,10 +18,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -38,7 +32,7 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	@FXML
 	private TableView<BookingHistoryCustomerItem> table;
 	@FXML
-	private TableColumn<BookingHistoryCustomerItem, String> status, firstName, lastName, film, date, time, seat;
+	private TableColumn<BookingHistoryCustomerItem, String> idNumber, status, firstName, lastName, film, date, time, seat;
 	@FXML
 	private ArrayList<BookingHistoryCustomerItem> listRows = new ArrayList<BookingHistoryCustomerItem>();
 	@FXML
@@ -51,6 +45,8 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	public void initialize(URL location, ResourceBundle resources) {
 
 		setBookingHistoryList("bookingsJSON.txt");
+		changeColor();
+		
 	}
 
 	private JSONObject setBookingHistoryList(String bookingsFile) {
@@ -63,29 +59,40 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 		date.setCellValueFactory(new PropertyValueFactory<BookingHistoryCustomerItem, String>("date"));
 		time.setCellValueFactory(new PropertyValueFactory<BookingHistoryCustomerItem, String>("time"));
 		seat.setCellValueFactory(new PropertyValueFactory<BookingHistoryCustomerItem, String>("seat"));
+		idNumber.setCellValueFactory(new PropertyValueFactory<BookingHistoryCustomerItem, String>("idNumber"));
+
+
 
 		JSONParser parser = new JSONParser();
 
 		try {
 			// getting the path of the booking history .json file
 			String path = URLDecoder.decode(Main.getPath() + "res/" + bookingsFile, "UTF-8");
-			// System.out.println(path);
+//			 System.out.println(path);
 
 			// creating JSONObject containing all contents of the JSON file
 			JSONObject user = (JSONObject) parser.parse(new FileReader(path));
-			// System.out.println((String)user.get("firstName"));
+
 
 			// looping through .json file keys
 			// creating a variable to temporarily store all values of the keys
 			// pushing the values in the ArrayList populated by BookingHistory
-			// objects
 			for (Object s : user.keySet()) {
+//				System.out.println(s);
 				JSONObject bookingRow = (JSONObject) user.get(s);
-				// System.out.println(bookingRow.get("lastName"));
-				listRows.add(new BookingHistoryCustomerItem((String) bookingRow.get("status"),
-						(String) bookingRow.get("firstName"), (String) bookingRow.get("lastName"), (String) (s),
-						(String) bookingRow.get("date"), (String) bookingRow.get("time"),
-						(String) bookingRow.get("seat")));
+
+				listRows.add(new BookingHistoryCustomerItem
+						(
+						(String) bookingRow.get("status"),
+						(String) bookingRow.get("firstName"), 
+						(String) bookingRow.get("lastName"), 
+						(String) bookingRow.get("film"), 
+						(String) bookingRow.get("date"), 
+						(String) bookingRow.get("time"),
+						(String) bookingRow.get("seat"),
+						(String) (s)
+						)
+						);
 			}
 
 			// storing elements in the ObservableLisr
@@ -126,7 +133,7 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	}
 
 	@FXML
-	public boolean deleteBookingValidator(MouseEvent e) {
+	public boolean deleteBookingValidator() {
 		
 			// getting current date
 			LocalDate currentDate = LocalDate.now();// For reference
@@ -152,40 +159,78 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 			return dateComparison > 0 ? true : false;
 	}
 	
-	
-//			BookingHistoryCustomerItem Item = getTableView().getItems().get(getIndex());
-//
-//			   for(int i=0; i<getChildren().size();i++){
-//                   ((Labeled) getChildren().get(i)).setTextFill(Color.RED);
-//                   ((Labeled) getChildren().get(i)).setStyle("-fx-background-color: yellow");
-//               }  
-//			
-//			if(date3.compareTo(localDate) > 0){
-//				table.gettab
-//			}
-//						
-/////////////////////////////////////////////////////////////////////////////////
-//			
-//			ObservableList<BookingHistoryCustomerItem> row, allRows;
-//
-//			allRows = table.getItems();
-//			
-//			allRows = table.getItems().s
-//
-//			row = table.getSelectionModel().getSelectedItems();
-//			row.forEach(allRows::remove);
-//		} catch (Exception ex) {
-//			System.out.println(ex.getMessage());
-//		}
-//
-//		if (table.getItems().get(0).getDate().equals("")) {
-//		}
-//
-//	}
+	@FXML
+	void changeColor() {
+		
+//		CREDITS
+//		https://stackoverflow.com/questions/30889732/javafx-tableview-change-row-color-based-on-column-value
+		
+		table.setRowFactory(row -> {
+		    return new TableRow<BookingHistoryCustomerItem>() {
+		        @Override
+		        public void updateItem(BookingHistoryCustomerItem item, boolean empty){
+		            super.updateItem(item, empty);
+		            
+		            if (item == null || empty) { //If the row is empty
+		                setText(null);
+		                setStyle("");
+		            } else { //If the row is not empty
+		            	
+		                // We get here all the info of the Bookings of this row
+		                BookingHistoryCustomerItem RowInfo = getTableView().getItems().get(getIndex());
+		                
+		                // Style all rows whose status is set to "cancelled"
+		                if (RowInfo.getStatus().equals("cancelled")) {
+		                	//The background of the row in gray
+		                	setStyle("-fx-background-color: #D3D3D3"); 
+		                } 
+		            }
+		        }
+		    };
+		});
+	}
 
 	@FXML
 	public void backToPrevScene(ActionEvent event) throws IOException {
 
 		SceneCreator.launchScene("ManageBookingsScene.fxml", event);
 	}
+	
+	
+	
+	@FXML
+	void deleteBooking(MouseEvent e){
+	
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//	Alert alert = new Alert(AlertType.CONFIRMATION,
+//            "Do you want to cancel this booking?", ButtonType.OK, ButtonType.NO);
+//    alert.showAndWait();
+//
+//    // close alert on click and restore all fields to empty
+//    if (alert.getResult() == ButtonType.OK) {
+//        if(deleteBookingValidator())
+//        	
+//      find clicked row, get that name, 
+        	
+        	
+        
+    
+}
+	
+	
+	
+	
+	
 }
