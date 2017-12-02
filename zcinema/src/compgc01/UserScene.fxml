@@ -36,7 +36,7 @@
             <Separator layoutX="168.0" layoutY="13.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="9.0" />
             <ImageView fx:id="uploadedUserIcon" fitHeight="114.0" fitWidth="123.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../res/images/userImages/default.png" />
+                  <Image url="@../../../res/images/userImages/defaultUserIcon.png" />
                </image>
             </ImageView>
             <MaterialIconView glyphName="ACCOUNT_CIRCLE" layoutX="33.0" layoutY="218.0" size="20" />

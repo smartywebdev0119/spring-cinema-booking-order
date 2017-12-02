@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -18,25 +17,23 @@ import javafx.scene.input.KeyEvent;
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 02.12.2017
  */
-public class EditInfoController extends UserSceneController {
+public class EditInfoController {
 
     @FXML
-    Button logOutButton, manageMoviesButton, manageBookingsButton, backButton, sendEmailButton;
+    Button backButton;
     @FXML
     Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
     @FXML
     Label firstNameLabelNew, lastNameLabelNew, titleLabelNew, emailLabelNew;
     @FXML
     TextField updateFirstName, updateLastName, updateEmail, updatePassword, titleMovie;
-    @FXML
-    ImageView uploadedUserIcon, uploadedMoviePicture;
 
     @FXML
-    void initialize() throws IOException{
+    void initialize() throws IOException {
+        
         personaliseScene();
     }
 
-    // Edit Info Scene
     @FXML
     public void editUpdateText(KeyEvent e) {
 
@@ -92,10 +89,8 @@ public class EditInfoController extends UserSceneController {
     protected void personaliseScene() throws IOException {
 
         // personalising page based on logged-in user
-
         firstNameLabel.setText(Main.getCurrentUser().getFirstName());
         lastNameLabel.setText(Main.getCurrentUser().getLastName());
-
         if (!Main.employeeMode) {
             titleLabel.setText("Customer");
             windowTitleLabel.setText("Edit " + titleLabel.getText() + " Profile");
