@@ -19,11 +19,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 // implementing the interface Initializable so that the method initialize gets read at load time
@@ -38,7 +40,7 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	@FXML
 	public ObservableList<BookingHistoryCustomerItem> populateTable;
 	@FXML
-	private Button backButton;
+	private Button backButton, cancelBookingButton;
 
 	// mothod that gets executed at load time
 	@Override
@@ -177,13 +179,16 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 		            } else { //If the row is not empty
 		            	
 		                // We get here all the info of the Bookings of this row
-		                BookingHistoryCustomerItem RowInfo = getTableView().getItems().get(getIndex());
-		                
+		                BookingHistoryCustomerItem rowInfo = getTableView().getItems().get(getIndex());
+		                System.out.println(row.getStyle().toString());
 		                // Style all rows whose status is set to "cancelled"
-		                if (RowInfo.getStatus().equals("cancelled")) {
+		                if (rowInfo.getStatus().equals("cancelled")) {
 		                	//The background of the row in gray
 		                	setStyle("-fx-background-color: #D3D3D3"); 
-		                } 
+		                } else {
+		                	//if the table is reordered 
+		                	setStyle(table.getStyle()); 
+		                }
 		            }
 		        }
 		    };
@@ -197,22 +202,32 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	}
 	
 	
+
 	
 	@FXML
 	void deleteBooking(MouseEvent e){
 	
-
-		table.setRowFactory(tv -> {
-            TableRow<ObservableList> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                
-            });
-            return row;
-        });
-
 		
-		
-		
+//		status.setCellFactory(column -> {
+//		    return new TableCell<BookingHistoryCustomerItem, String>() {
+//		        @Override
+//		        protected void updateItem(String item, boolean empty) {
+//		            super.updateItem(item, empty);
+//
+//		            if (item == null || empty) {
+//		                setText(null);
+//		                setStyle("");
+//		            } else {
+//		           
+//		            	
+//		            	
+//		            }
+//		        }
+//		    };
+//		});
+//		
+//		
+//		
 		
 		
 		

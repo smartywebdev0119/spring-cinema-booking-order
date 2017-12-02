@@ -38,6 +38,6 @@
             <TableColumn fx:id="idNumber" prefWidth="34.314208984375" text="ID" />
 			</columns>
 		</TableView>
-      <Button layoutX="-2.0" layoutY="370.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="704.0" text="Cancel Selected Booking" />
+      <Button fx:id="cancelBookingButton" layoutX="-2.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#deleteBooking" prefHeight="31.0" prefWidth="704.0" text="Cancel Selected Booking" />
 	</children>
 </AnchorPane>
