@@ -18,7 +18,7 @@ import javafx.scene.layout.GridPane;
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 02.12.2017
  */
-public class ManageBookingsController extends UserSceneController {
+public class ManageBookingsController {
     
     @FXML
     GridPane gridSeats;

@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -28,7 +30,7 @@ import javafx.stage.FileChooser;
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 02.12.2017
  */
-public class UserSceneController extends MainController {
+public class UserSceneController {
 
     static ArrayList<Booking> bookings;
 
@@ -56,28 +58,6 @@ public class UserSceneController extends MainController {
 
         // loading login stage
         SceneCreator.launchScene("LoginScene.fxml", event);
-    }
-
-    @FXML
-    public void uploadImageClick(ActionEvent event) throws IOException {
-
-        /*
-         * Inspired by:
-         * https://stackoverflow.com/questions/17850191/why-am-i-getting-java-
-         * lang-illegalstateexception-not-on-fx-application-thread
-         * Avoid throwing IllegalStateException by running from a non-JavaFX thread.
-         * Beautiful lambda expression version.
-         */
-        Platform.runLater(() -> {
-            try {
-                changeImage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        SceneCreator.launchScene("UserScene.fxml", event);
-        personaliseScene();
     }
 
     @FXML
@@ -140,7 +120,29 @@ public class UserSceneController extends MainController {
         uploadedUserIcon.setImage(img);
 
     }
+    
+    @FXML
+    public void uploadImageClick(ActionEvent event) throws IOException {
 
+        /*
+         * Inspired by:
+         * https://stackoverflow.com/questions/17850191/why-am-i-getting-java-
+         * lang-illegalstateexception-not-on-fx-application-thread
+         * Avoid throwing IllegalStateException by running from a non-JavaFX thread.
+         * Beautiful lambda expression version.
+         */
+        Platform.runLater(() -> {
+            try {
+                changeImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        SceneCreator.launchScene("UserScene.fxml", event);
+        personaliseScene();
+    }
+    
     protected void changeImage() throws IOException {
 
         try {
@@ -162,8 +164,8 @@ public class UserSceneController extends MainController {
                 Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (FileNotFoundException ex) {
-            // Logger.getLogger(MainController.class.getName()).log(Level.SEVERE,
-            // null, ex);
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE,
+            null, ex);
         }
     }
 
