@@ -162,7 +162,7 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	@FXML
 	void changeColor() {
 		
-//		CREDITS
+//		PARTIAL CREDITS
 //		https://stackoverflow.com/questions/30889732/javafx-tableview-change-row-color-based-on-column-value
 		
 		table.setRowFactory(row -> {
@@ -202,7 +202,14 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	void deleteBooking(MouseEvent e){
 	
 
-		
+		table.setRowFactory(tv -> {
+            TableRow<ObservableList> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                
+            });
+            return row;
+        });
+
 		
 		
 		
