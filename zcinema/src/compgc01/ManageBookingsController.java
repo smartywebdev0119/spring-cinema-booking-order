@@ -86,7 +86,10 @@ public class ManageBookingsController extends UserSceneController {
     @FXML
     public void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("BookingHistory.fxml", event);
+    	if(Main.employeeMode)
+    		SceneCreator.launchScene("BookingHistoryEmployee.fxml", event);
+    	else
+    		SceneCreator.launchScene("BookingHistoryCustomer.fxml", event);
     }
 
     @FXML

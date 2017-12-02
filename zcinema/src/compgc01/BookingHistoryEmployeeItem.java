@@ -7,11 +7,11 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 28.11.2017
  */
-public class BookingHistoryItem {
+public class BookingHistoryEmployeeItem {
 
 	private final SimpleStringProperty status, firstName, lastName, film, date, time, seat;
 
-	public BookingHistoryItem (String status, String firstName, String lastName, String film, String date, String time, String price){
+	public BookingHistoryEmployeeItem (String status, String firstName, String lastName, String film, String date, String time, String price){
 		this.status = new SimpleStringProperty(status);
 		this.firstName = new SimpleStringProperty(firstName);
 		this.lastName = new SimpleStringProperty(lastName);
