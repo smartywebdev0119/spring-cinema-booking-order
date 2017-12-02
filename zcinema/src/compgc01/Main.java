@@ -30,7 +30,9 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 
     Parent root;
-    public static Main m = null;
+    static Main m = null;
+    static User currentUser;
+    static Boolean employeeMode = false;
 
     // arrayLists to be populated with the information from the text files
     private static ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -214,6 +216,14 @@ public class Main extends Application {
         return path;
     }
 
+    public static User getCurrentUser() {
+           return currentUser;
+        }
+        
+    public static void setCurrentUser(User currentUser) {
+        Main.currentUser = currentUser;
+     }
+    
     @Override
     public void start(Stage primaryStage) {
 

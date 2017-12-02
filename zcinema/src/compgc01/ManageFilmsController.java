@@ -1,19 +1,15 @@
 package compgc01;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
-import java.time.LocalDate;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -22,16 +18,32 @@ import javafx.scene.input.KeyEvent;
 ////// THIS CLASS NEEDS TO BE REFINED... YET EVERYTHING WORKS GREAT!
 // we make the MainController abstract and implements the methods that we need in all children being the controllers for every scene
 // just to keep everything more organized....let me know what you think about it..
-public class ManageFilmsController extends MainController {
+public class ManageFilmsController extends UserSceneController {
 
-	@FXML
-	public void backToPrevScene(ActionEvent event) throws IOException {
-		super.backToPrevScene(event);
-	}
+    @FXML
+    void initialize() throws IOException{
+    }
+    
+    @FXML
+    public void backToPrevScene(ActionEvent event) throws IOException {
+
+        SceneCreator.launchScene("UserScene.fxml", event);
+    }
 
 	@FXML
 	public void uploadImageClick(ActionEvent event) throws IOException {
-		super.uploadImageClick(event);
+	    
+        /*
+         * Inspired by:
+         * https://stackoverflow.com/questions/17850191/why-am-i-getting-java-
+         * lang-illegalstateexception-not-on-fx-application-thread
+         * Avoid throwing IllegalStateException by running from a non-JavaFX thread.
+         * Beautiful lambda expression version.
+         */
+       
+                super.changeImage();
+          		
+        // super.launchScene("ManageFilmsScene.fxml", event);
 	}
 
 	@FXML
@@ -89,9 +101,9 @@ public class ManageFilmsController extends MainController {
 				super.aboutMovie.setText("");
 				super.titleMovie.setText("");
 				// RESTORE THEM LIKE THIS yyyy-mm-dd hh:mm
-				super.dateFromMovie.getValue();
-				super.dateToMovie.getValue();
-				super.timeMovie.getValue();
+				super.dateFromMovie.setPromptText("yyyy-mm-dd");
+                super.dateToMovie.setPromptText("yyyy-mm-dd");
+                super.timeMovie.setPromptText("hh:mm");
 
 			}
 
@@ -121,18 +133,20 @@ public class ManageFilmsController extends MainController {
 
 		if (super.titleMovie.getText().equals("") || 
 			super.aboutMovie.getText().equals("") || 
-			super.dateFromMovieNew.equals("yyyy-mm-dd") || 
-			super.dateToMovieNew.getText().equals("yyyy-mm-dd")|| 
-			super.timeMovieNew.getText().equals("hh:mm")) 
+			// super.dateFromMovie.getValue().equals("yyyy-mm-dd") || 
+			// super.dateToMovie.getValue().equals("yyyy-mm-dd")|| 
+			// super.timeMovie.getValue().equals("hh:mm") ||
+	        super.dateFromMovie.getValue().compareTo(super.dateFromMovie.getValue()) < 0)
 		{
 			throw new InvalidMovieInputException("All fields must be completed!");
-
 		}
 	}
 }
 
 class InvalidMovieInputException extends Exception {
-	InvalidMovieInputException(String s) {
+	private static final long serialVersionUID = 1L;
+
+    InvalidMovieInputException(String s) {
 		super(s);
 	}
 }

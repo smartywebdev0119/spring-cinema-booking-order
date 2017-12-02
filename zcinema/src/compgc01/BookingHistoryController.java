@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 // implementing the interface Initializable so that the method initialize gets read at load time
-public class BookingHistoryController implements Initializable {
+public class BookingHistoryController extends UserSceneController implements Initializable {
 	
 	@FXML 
 	private TableView <BookingHistoryItem> table;
@@ -124,6 +124,6 @@ public class BookingHistoryController implements Initializable {
 	@FXML
 	public void backToPrevScene(ActionEvent event) throws IOException {
 	    MainController controller = new MainController();
-		controller.launchScene("ManageBookingsScene.fxml", event);
+		SceneCreator.launchScene("ManageBookingsScene.fxml", event);
 	}
 }

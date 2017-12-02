@@ -70,12 +70,12 @@
                   <Font name="System Bold" size="16.0" />
                </font></Text>
             <Text layoutX="25.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About:" />
-            <DatePicker fx:id="dateFromMovie" layoutX="73.0" layoutY="221.0" onAction="#getDateTime" prefHeight="26.0" prefWidth="120.0" />
+            <DatePicker fx:id="dateFromMovie" layoutX="73.0" layoutY="221.0" onAction="#getDateTime" prefHeight="28.0" prefWidth="127.0" promptText="yyyy-mm-dd" />
             <Text layoutX="32.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-            <ComboBox fx:id="timeMovie" layoutX="76.0" layoutY="268.0" onAction="#getDateTime" onKeyReleased="#textUpdateMovie" prefHeight="28.0" prefWidth="91.0" />
+            <ComboBox fx:id="timeMovie" layoutX="76.0" layoutY="268.0" onAction="#getDateTime" onKeyReleased="#textUpdateMovie" prefHeight="28.0" prefWidth="91.0" promptText="hh:mm" />
             <Text layoutX="34.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
             <Text layoutX="75.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" />
-            <Text layoutX="199.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" />
+            <Text layoutX="203.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" />
             <Text layoutX="30.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" />
             <TextField fx:id="titleMovie" layoutX="72.0" layoutY="87.0" onKeyPressed="#textUpdateMovie" onKeyReleased="#textUpdateMovie" prefHeight="27.0" prefWidth="245.0" promptText="Title movie here" />
             <TextArea fx:id="aboutMovie" layoutX="72.0" layoutY="128.0" onKeyPressed="#textUpdateMovie" onKeyReleased="#textUpdateMovie" prefHeight="58.0" prefWidth="245.0" promptText="Film description here" />
@@ -90,7 +90,7 @@
                </graphic>
             </Button>
             <Text layoutX="21.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
-            <DatePicker fx:id="dateToMovie" layoutX="198.0" layoutY="221.0" onAction="#getDateTime" onKeyReleased="#textUpdateMovie" prefHeight="26.0" prefWidth="120.0" />
+            <DatePicker fx:id="dateToMovie" layoutX="202.0" layoutY="221.0" onAction="#getDateTime" onKeyReleased="#textUpdateMovie" prefHeight="28.0" prefWidth="127.0" promptText="yyyy-mm-dd" />
          </children>
       </AnchorPane>
    </children>
