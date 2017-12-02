@@ -24,7 +24,7 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 26.11.2017
+ * @since 02.12.2017
  * Uses open-source icons made by http://www.jensd.de/wordpress/.
  */
 public class Main extends Application {
@@ -32,17 +32,18 @@ public class Main extends Application {
     Parent root;
     static Main m = null;
     static User currentUser;
-    static Boolean employeeMode = false;
+    private static Boolean employeeMode = false;
 
     // arrayLists to be populated with the information from the text files
     private static ArrayList<Employee> employees = new ArrayList<Employee>();
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
+    private static ArrayList<Film> films = new ArrayList<Film>();
 
     public static void main(String[] args) {
 
         m = new Main();
 
-//        playMusic("wonderful_world.mp3");
+        //        playMusic("wonderful_world.mp3");
 
         // if files do not exist, create them using default values
         try {
@@ -50,52 +51,66 @@ public class Main extends Application {
                 createJSONUserFile("employees");
             if (!(new File(URLDecoder.decode(getPath() + "res/customersJSON.txt", "UTF-8")).exists()))
                 createJSONUserFile("customers");
+            if (!(new File(URLDecoder.decode(getPath() + "res/filmsJSON.txt", "UTF-8")).exists()))
+                createJSONUserFile("films");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
         readJSONUserFile("employeesJSON.txt");
         readJSONUserFile("customersJSON.txt");
-        
+        readJSONUserFile("filmsJSON.txt");
+
         launch(args);
     }
 
     public static ArrayList<Employee> getEmployeeList() {
+
         return employees;
     }
 
     public static ArrayList<Customer> getCustomerList() {
+
         return customers;
     }
 
+    public static ArrayList<Film> getFilmList() {
+
+        return films;
+    }
+
     public static Main getMainApplication() {
+
         return m;
     }
 
     public static JSONObject readJSONUserFile(String file) {
 
+        JSONObject items = null;
+
         try {
             String path = getPath();
 
-                path = URLDecoder.decode(path + "res/" + file, "UTF-8");
+            path = URLDecoder.decode(path + "res/" + file, "UTF-8");
 
             JSONParser parser = new JSONParser();
-            JSONObject users =  (JSONObject) parser.parse(new FileReader(path));
-            for (Object s : users.keySet()) {
+            items =  (JSONObject) parser.parse(new FileReader(path));
+            for (Object s : items.keySet()) {
                 // System.out.println((String) s);
-                JSONObject user = (JSONObject) users.get(s);
+                JSONObject user = (JSONObject) items.get(s);
 
                 if (file.contains("employees"))
                     employees.add( new Employee ((String) user.get("firstName"), (String) user.get("lastName"), (String) user.get("username"), (String) user.get("password"), (String) user.get("email")));
-                else
+                else if (file.contains("customers"))
                     customers.add( new Customer ((String) user.get("firstName"), (String) user.get("lastName"), (String) user.get("username"), (String) user.get("password"), (String) user.get("email"), Double.parseDouble(String.valueOf(user.get("accountBalance")))));
+                else if (file.contains("films"))
+                    films.add( new Film ((String) user.get("title"), (String) user.get("description"), (String) user.get("startDate"), (String) user.get("endDate"), (String) user.get("time")));
             }
-            return users;
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return items;
     }
 
     @SuppressWarnings("unchecked")
@@ -106,15 +121,14 @@ public class Main extends Application {
             JSONObject itemToEdit = (JSONObject) items.get(identifier);
             itemToEdit.put(attribute, newValue);
 
-            String path = getPath();
-                path = URLDecoder.decode(path + "res/" + file, "UTF-8");
+            String path = URLDecoder.decode(getPath() + "res/" + file, "UTF-8");
             // System.out.println(path);
 
             File jsonFile = new File(path);
             PrintWriter writer = new PrintWriter(jsonFile);
             writer.print(items.toJSONString());
             writer.close();
-            
+
             // System.out.println("-- updated file successfully --");
         }
         catch (Exception ex) {
@@ -123,65 +137,77 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public static void createJSONUserFile(String userType) {
+    public static void createJSONUserFile(String type) {
 
         try {
             // Creating JSON files
-            JSONObject users = new JSONObject();
+            JSONObject items = new JSONObject();
 
-            JSONObject filip = new JSONObject();
-            filip.put("username", "filip");
-            filip.put("firstName", "Filippos");
-            filip.put("lastName", "Zofakis");
-            filip.put("email", "filippos.zofakis.17@ucl.ac.uk");
-            if (userType.equals("employees"))
-                filip.put("password", "e");
-            else {
-                filip.put("password", "c");
-                filip.put("accountBalance", 1000);
+            if (type.equals("films")) {
+                JSONObject titanic = new JSONObject();
+                titanic.put("title", "Titanic");
+                titanic.put("description", "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.");
+                titanic.put("startDate", "2017-12-08");
+                titanic.put("endDate", "2017-12-14");
+                titanic.put("time", "20:00");
+                items.put("Titanic", titanic);
             }
-            users.put("filip", filip);
-
-            JSONObject lucio = new JSONObject();
-            lucio.put("username", "lucio");
-            lucio.put("firstName", "Lucio");
-            lucio.put("lastName", "D'Alessandro");
-            lucio.put("email", "lucio.d'alessandro.17@ucl.ac.uk");
-            if (userType.equals("employees"))
-                lucio.put("password", "e");
             else {
-                lucio.put("password", "c");
-                lucio.put("accountBalance", 1000);
-            }
-            users.put("lucio", lucio);
+                JSONObject filip = new JSONObject();
+                filip.put("username", "filip");
+                filip.put("firstName", "Filippos");
+                filip.put("lastName", "Zofakis");
+                filip.put("email", "filippos.zofakis.17@ucl.ac.uk");
+                if (type.equals("employees"))
+                    filip.put("password", "e");
+                else {
+                    filip.put("password", "c");
+                    filip.put("accountBalance", 1000);
+                }
+                items.put("filip", filip);
 
-            JSONObject ghita = new JSONObject();
-            ghita.put("username", "ghita");
-            ghita.put("firstName", "Ghita");
-            ghita.put("lastName", "K Mostefaoui");
-            ghita.put("email", "g.kouadri@ucl.ac.uk");
-            if (userType.equals("employees"))
-                ghita.put("password", "e");
-            else {
-                ghita.put("password", "c");
-                ghita.put("accountBalance", 1000000);
-            }
-            users.put("ghita", ghita);
+                JSONObject lucio = new JSONObject();
+                lucio.put("username", "lucio");
+                lucio.put("firstName", "Lucio");
+                lucio.put("lastName", "D'Alessandro");
+                lucio.put("email", "lucio.d'alessandro.17@ucl.ac.uk");
+                if (type.equals("employees"))
+                    lucio.put("password", "e");
+                else {
+                    lucio.put("password", "c");
+                    lucio.put("accountBalance", 1000);
+                }
+                items.put("lucio", lucio);
 
-            // System.out.println(users.toJSONString());
+                JSONObject ghita = new JSONObject();
+                ghita.put("username", "ghita");
+                ghita.put("firstName", "Ghita");
+                ghita.put("lastName", "K Mostefaoui");
+                ghita.put("email", "g.kouadri@ucl.ac.uk");
+                if (type.equals("employees"))
+                    ghita.put("password", "e");
+                else {
+                    ghita.put("password", "c");
+                    ghita.put("accountBalance", 1000000);
+                }
+                items.put("ghita", ghita);            
+            }
+
+            // System.out.println(items.toJSONString());
 
             String path = getPath();
 
-            if (userType.equals("employees"))
+            if (type.equals("employees"))
                 path = URLDecoder.decode(path + "res/employeesJSON.txt", "UTF-8");
-            else           
+            else if (type.equals("customers"))
                 path = URLDecoder.decode(path + "res/customersJSON.txt", "UTF-8");
-
-            // System.out.println(path);
+            else if (type.equals("films"))
+                // System.out.println(path);
+                path = URLDecoder.decode(path + "res/filmsJSON.txt", "UTF-8");
 
             File file = new File(path);
             PrintWriter writer = new PrintWriter(file);
-            writer.print(users.toJSONString());
+            writer.print(items.toJSONString());
             writer.close();
         }
         catch (FileNotFoundException ex) {
@@ -193,7 +219,7 @@ public class Main extends Application {
     }
 
     public static void playMusic(String musicFile) {
-        
+
         try {
             File file = new File(URLDecoder.decode(getPath() + "res/sounds/" + musicFile, "UTF-8"));
             Media backgroundMusic = new Media(file.toPath().toUri().toString());
@@ -217,13 +243,23 @@ public class Main extends Application {
     }
 
     public static User getCurrentUser() {
-           return currentUser;
-        }
-        
+
+        return currentUser;
+    }
+
     public static void setCurrentUser(User currentUser) {
+
         Main.currentUser = currentUser;
-     }
-    
+    }
+
+    public static boolean isEmployee() {
+        return employeeMode;
+    }
+
+    public static void setEmployeeMode(boolean employeeMode) {
+        Main.employeeMode = employeeMode;
+    }
+
     @Override
     public void start(Stage primaryStage) {
 

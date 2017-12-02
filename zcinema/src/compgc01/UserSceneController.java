@@ -53,7 +53,7 @@ public class UserSceneController {
 
         // resetting current user for security purposes
         Main.setCurrentUser(new User("default", "default", "default", "default", "default"));
-        Main.employeeMode = false;
+        Main.setEmployeeMode(false);
         bookings = new ArrayList<Booking>();
 
         // loading login stage
@@ -102,7 +102,7 @@ public class UserSceneController {
         firstNameLabel.setText(Main.getCurrentUser().getFirstName());
         lastNameLabel.setText(Main.getCurrentUser().getLastName());
 
-        if (!Main.employeeMode) {
+        if (!Main.isEmployee()) {
             titleLabel.setText("Customer");
 
             windowTitleLabel.setText("Customer View");

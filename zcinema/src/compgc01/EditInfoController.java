@@ -91,7 +91,7 @@ public class EditInfoController {
         // personalising page based on logged-in user
         firstNameLabel.setText(Main.getCurrentUser().getFirstName());
         lastNameLabel.setText(Main.getCurrentUser().getLastName());
-        if (!Main.employeeMode) {
+        if (!Main.isEmployee()) {
             titleLabel.setText("Customer");
             windowTitleLabel.setText("Edit " + titleLabel.getText() + " Profile");
         }

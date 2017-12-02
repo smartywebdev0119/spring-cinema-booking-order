@@ -27,6 +27,7 @@ public class MainController {
 
     @FXML
     public void exitButton(MouseEvent event) {
+        
         System.exit(0);
     }
 
@@ -41,7 +42,7 @@ public class MainController {
             if (usernameBox.getText().equals(u.getUsername()) && passwordBox.getText().equals(u.getPassword())) {
                 Main.setCurrentUser(u);
                 if (u.getType().equals("employee")) {
-                    Main.employeeMode = true;
+                    Main.setEmployeeMode(true);
                 }
 
                 // loading new scene

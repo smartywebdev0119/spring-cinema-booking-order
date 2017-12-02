@@ -154,37 +154,34 @@ public class ManageFilmsController {
     public void storeFilmInfo(ActionEvent event) {
 
         try {
+            /*
             System.out.println(filmTitle.getText());
             System.out.println(filmDescription.getText());
             System.out.println(newFilmStartDate.getText());
             System.out.println(newFilmEndDate.getText());
             System.out.println(newFilmTime.getText());
+             */
 
             validateFilmInput();
-            // save the input in the json file for the movies!
 
-            JSONObject movieTitle = new JSONObject();
-            JSONObject movie = new JSONObject();
+            // Creating JSON files
+            JSONObject films = Main.readJSONUserFile("filmsJSON.txt");
+            JSONObject filmToAdd = new JSONObject();
+            filmToAdd.put("title", filmTitle.getText());
+            filmToAdd.put("description", filmDescription.getText());
+            filmToAdd.put("startDate", newFilmStartDate.getText());
+            filmToAdd.put("endDate", newFilmEndDate.getText());
+            filmToAdd.put("time", newFilmTime.getText());
+            films.put(filmTitle.getText(), filmToAdd);
+            // System.out.println(films.toJSONString());
 
-            movie.put("description", filmDescription.getText());
-            movie.put("from", newFilmStartDate.getText());
-            movie.put("to", newFilmEndDate.getText());
-            movie.put("time", newFilmTime.getText());
-
-            movieTitle.put(filmTitle.getText(), movie);
-
-            String path = ClassLoader.getSystemClassLoader().getResource(".").getPath();
-
-            path = URLDecoder.decode(Main.getPath() + "res/" + "filmsJSON.txt", "UTF-8");
-
-            // Appending a new JSON object to the end of the text file instead of overwriting all the content
-            // DOES NOT PRODUCE VALID JSON TEXT SO NEED TO CHANGE THIS AND MAKE IT THE SAME AS USERS
-            PrintWriter writer = new PrintWriter(new FileWriter(path, true));
-
-            writer.print(movieTitle.toJSONString());
+            String path = URLDecoder.decode(Main.getPath() + "res/filmsJSON.txt", "UTF-8");
+            // System.out.println(path);
+            PrintWriter writer = new PrintWriter( new File(path));
+            writer.print(films.toJSONString());
             writer.close();
 
-            // Comfirmation Alert to inform the employee of the new added
+            // confirmation alert to inform the employee of the newly added film
             Alert alert = new Alert(AlertType.INFORMATION,
                     "The Film " + filmTitle.getText() + " has been added!", ButtonType.OK);
             alert.showAndWait();
@@ -198,6 +195,7 @@ public class ManageFilmsController {
                 filmEndDate.setPromptText("yyyy-mm-dd");
                 filmTime.setPromptText("hh:mm");
             }
+            // SceneCreator.launchScene("UserScene.fxml", event);
         } catch (FileNotFoundException e) {
             Alert alert = new Alert(AlertType.WARNING, "File Not Found!", ButtonType.OK);
             alert.showAndWait();
@@ -219,7 +217,7 @@ public class ManageFilmsController {
         }
     }
 
-    // creating exception if at least one field is empty
+    // custom exception to be thrown if at least one field is empty or if end date is before start date
     @SuppressWarnings("unlikely-arg-type")
     void validateFilmInput() throws InvalidFilmInputException {
 
