@@ -29,7 +29,8 @@ import javafx.stage.StageStyle;
  */
 public class Main extends Application {
 
-    Parent root;
+    private static Parent root;
+    private static Stage primaryStage;
     static Main m = null;
     static User currentUser;
     private static Boolean employeeMode = false;
@@ -38,6 +39,7 @@ public class Main extends Application {
     private static ArrayList<Employee> employees = new ArrayList<Employee>();
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
     private static ArrayList<Film> films = new ArrayList<Film>();
+    private static ArrayList<Booking> bookings = new ArrayList<Booking>();
 
     public static void main(String[] args) {
 
@@ -57,10 +59,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        readJSONUserFile("employeesJSON.txt");
-        readJSONUserFile("customersJSON.txt");
-        readJSONUserFile("filmsJSON.txt");
-
         launch(args);
     }
 
@@ -79,6 +77,26 @@ public class Main extends Application {
         return films;
     }
 
+    public static void resetEmployeeList() {
+
+        employees.clear();
+    }
+
+    public static void resetCustomerList() {
+
+        customers.clear();
+    }
+
+    public static void resetFilmList() {
+
+        films.clear();;
+    }
+
+    public static void resetBookingList() {
+
+        bookings.clear();;
+    }
+    
     public static Main getMainApplication() {
 
         return m;
@@ -260,12 +278,29 @@ public class Main extends Application {
         Main.employeeMode = employeeMode;
     }
 
+    public static Parent getRoot() {
+        return root;
+    }
+
+    public static void setRoot(Parent root) {
+        Main.root = root;
+    }
+
+    public static Stage getStage() {
+        return primaryStage;
+    }
+    
+    public static void setStage(Stage stage) {
+        Main.primaryStage = stage;
+    }
+    
     @Override
     public void start(Stage primaryStage) {
 
         try {
             // setting up the login scene
             root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
+            Main.primaryStage = primaryStage;
             primaryStage.setTitle("Cinema Booking Management System");
             primaryStage.initStyle(StageStyle.UNDECORATED);
             Scene scene = new Scene(root, 700, 400);
