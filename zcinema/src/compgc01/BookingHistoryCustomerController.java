@@ -41,7 +41,7 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	@FXML
 	private TableColumn<BookingHistoryCustomerItem, String> idNumber, status, firstName, lastName, film, date, time, seat;
 	@FXML
-	private BookingHistoryCustomerItem tableDate;
+	BookingHistoryCustomerItem tableDate;
 	@FXML
 	private ArrayList<BookingHistoryCustomerItem> listRows = new ArrayList<BookingHistoryCustomerItem>();
 	@FXML
@@ -54,6 +54,8 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	JSONObject user;
 	@FXML
 	String path;
+//	@FXML
+//	Alert alertConf, alertInfo, alertErr;
 
 	// mothod that gets executed at load time
 	@Override
@@ -210,12 +212,12 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 		BookingHistoryCustomerItem selectedRow = table.getSelectionModel().getSelectedItem();
 		// storing in a String the idNumber of the selected row
 		String selectedRowId = selectedRow.getIdNumber();
-
+		
 		this.selectedRowId = selectedRowId;
 	}
 	
-	boolean verifySelectedRow(String selectedRowId, BookingHistoryCustomerItem tableDate){
-		return selectedRowId != null && tableDate != null ? true : false;
+	boolean verifySelectedRow(String selectedRowId){
+		return selectedRowId != null ? true : false;
 	}
 	
 
@@ -235,27 +237,39 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 		setBookingHistoryList("bookingsJSON.txt");
 	}
 
+//	@FXML
+//	void alert(int i) throws InterruptedException{
+//	
+//	}
+	
 	@FXML
 	void deleteBooking(ActionEvent event) throws IOException {
-		// creating alert to delete booking
+		
+		
 		Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to cancel this booking?", ButtonType.OK, ButtonType.NO);
 		alert.showAndWait();
-
 		// user click OK
 		if (alert.getResult() == ButtonType.OK) {
 			// comparing booking today with current date
-			if (deleteBookingValidator() && verifySelectedRow(selectedRowId, tableDate)) {
+			if (verifySelectedRow(selectedRowId)) {
+				if(deleteBookingValidator()){
 				modifyStatusInJson();
 				SceneCreator.launchScene("BookingHistoryCustomer.fxml", event);
-				alert.close();
-			} else {
+				alert.close(); } else {
+					Alert alert2 = new Alert(AlertType.ERROR, "You cannot delete this booking!", ButtonType.CLOSE);
+					alert2.showAndWait();
+					if (alert2.getResult() == ButtonType.CLOSE) {
+						alert2.close();
+					}
+				
+			} 
+				} else {
 				Alert alert2 = new Alert(AlertType.ERROR, "You cannot delete this booking!", ButtonType.CLOSE);
 				alert2.showAndWait();
 				if (alert2.getResult() == ButtonType.CLOSE) {
 					alert2.close();
 				}
 			}
-
 		} else if (alert.getResult() == ButtonType.NO) {
 			alert.close();
 		}
@@ -263,3 +277,5 @@ public class BookingHistoryCustomerController extends UserSceneController implem
 	}
 
 }
+
+
