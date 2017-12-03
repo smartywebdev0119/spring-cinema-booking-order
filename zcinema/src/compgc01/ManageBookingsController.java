@@ -16,7 +16,7 @@ import javafx.scene.layout.GridPane;
  * The controller for the Bookings Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  */
 public class ManageBookingsController {
     
@@ -24,7 +24,6 @@ public class ManageBookingsController {
     GridPane gridSeats;
 
     public boolean gridSeatsStartVisibility = true;
-    static ArrayList<Booking> bookings;
     static ArrayList<Integer> redFixedSeats = new ArrayList<Integer>(5);
 
     @FXML
@@ -86,10 +85,7 @@ public class ManageBookingsController {
     @FXML
     public void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-    	if(Main.isEmployee())
-    		SceneCreator.launchScene("BookingHistoryEmployee.fxml", event);
-    	else
-    		SceneCreator.launchScene("BookingHistoryCustomer.fxml", event);
+    		SceneCreator.launchScene("BookingHistory.fxml", event);
     }
 
     @FXML

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,11 +27,9 @@ import javafx.stage.FileChooser;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  */
 public class UserSceneController {
-
-    static ArrayList<Booking> bookings;
 
     @FXML
     Button logOutButton, manageMoviesButton, manageBookingsButton, sendEmailButton;
@@ -40,7 +37,6 @@ public class UserSceneController {
     Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
     @FXML
     ImageView uploadedUserIcon;
-
 
     @FXML
     void initialize() throws IOException{
@@ -52,9 +48,12 @@ public class UserSceneController {
     public void logOutClick(ActionEvent event) throws IOException {
 
         // resetting current user for security purposes
-        Main.setCurrentUser(new User("default", "default", "default", "default", "default"));
+        Main.setCurrentUser(null);
         Main.setEmployeeMode(false);
-        bookings = new ArrayList<Booking>();
+        Main.resetEmployeeList();
+        Main.resetCustomerList();
+        Main.resetFilmList();
+        Main.resetBookingList();
 
         // loading login stage
         SceneCreator.launchScene("LoginScene.fxml", event);
@@ -76,15 +75,19 @@ public class UserSceneController {
         //		 }
     }
 
+    // NEED TO CREATE VIEW ALL FILMS SCENE FOR CUSTOMERS
     @FXML
     public void manageMoviesClick(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("ManageFilmsScene.fxml", event);
+        if (Main.isEmployee())
+            SceneCreator.launchScene("ManageFilmsScene.fxml", event);
+        else
+            SceneCreator.launchScene("EditInfoScene.fxml", event);
     }
 
     @FXML
     public void sendEmailClick(ActionEvent event) throws IOException {
-        
+
         Main m = Main.getMainApplication();
         m.getHostServices().showDocument("mailto:" + Main.getCurrentUser().getEmail());
     }
@@ -98,7 +101,6 @@ public class UserSceneController {
     protected void personaliseScene() throws IOException {
 
         // personalising page based on logged-in user
-
         firstNameLabel.setText(Main.getCurrentUser().getFirstName());
         lastNameLabel.setText(Main.getCurrentUser().getLastName());
 
@@ -106,21 +108,17 @@ public class UserSceneController {
             titleLabel.setText("Customer");
 
             windowTitleLabel.setText("Customer View");
-            manageMoviesButton.setText("View Movies");
+            manageMoviesButton.setText("View Films");
             manageBookingsButton.setText("View Bookings");
 
         }
 
-        String path = Main.getPath();
-        Image img;
-        path = URLDecoder.decode(path + "res/images/userImages/", "UTF-8");
-
+        String path = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
         File file = new File(path + Main.getCurrentUser().getUsername() + ".png");
-        img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+        Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
         uploadedUserIcon.setImage(img);
-
     }
-    
+
     @FXML
     public void uploadImageClick(ActionEvent event) throws IOException {
 
@@ -142,7 +140,7 @@ public class UserSceneController {
         SceneCreator.launchScene("UserScene.fxml", event);
         personaliseScene();
     }
-    
+
     protected void changeImage() throws IOException {
 
         try {
@@ -156,8 +154,7 @@ public class UserSceneController {
 
                 uploadedUserIcon.setImage(img);
 
-                String path = Main.getPath();
-                String folderPath = URLDecoder.decode(path + "res/images/userImages/", "UTF-8");
+                String folderPath = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
                 File uploads = new File(folderPath);
                 File file = new File(uploads, Main.getCurrentUser().getUsername() + ".png");
                 InputStream input = Files.newInputStream(selectedFile.toPath());
@@ -165,7 +162,7 @@ public class UserSceneController {
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE,
-            null, ex);
+                    null, ex);
         }
     }
 

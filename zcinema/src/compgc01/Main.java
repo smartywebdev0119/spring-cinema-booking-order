@@ -24,12 +24,13 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  * Uses open-source icons made by http://www.jensd.de/wordpress/.
  */
 public class Main extends Application {
 
-    Parent root;
+    private static Parent root;
+    private static Stage primaryStage;
     static Main m = null;
     static User currentUser;
     private static Boolean employeeMode = false;
@@ -38,6 +39,7 @@ public class Main extends Application {
     private static ArrayList<Employee> employees = new ArrayList<Employee>();
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
     private static ArrayList<Film> films = new ArrayList<Film>();
+    private static ArrayList<BookingHistoryItem> bookings = new ArrayList<BookingHistoryItem>();
 
     public static void main(String[] args) {
 
@@ -48,18 +50,14 @@ public class Main extends Application {
         // if files do not exist, create them using default values
         try {
             if (!(new File(URLDecoder.decode(getPath() + "res/employeesJSON.txt", "UTF-8")).exists()))
-                createJSONUserFile("employees");
+                createJSONFile("employees");
             if (!(new File(URLDecoder.decode(getPath() + "res/customersJSON.txt", "UTF-8")).exists()))
-                createJSONUserFile("customers");
+                createJSONFile("customers");
             if (!(new File(URLDecoder.decode(getPath() + "res/filmsJSON.txt", "UTF-8")).exists()))
-                createJSONUserFile("films");
+                createJSONFile("films");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
-        readJSONUserFile("employeesJSON.txt");
-        readJSONUserFile("customersJSON.txt");
-        readJSONUserFile("filmsJSON.txt");
 
         launch(args);
     }
@@ -79,12 +77,37 @@ public class Main extends Application {
         return films;
     }
 
+    public static ArrayList<BookingHistoryItem> getBookingList() {
+
+        return bookings;
+    }
+
+    public static void resetEmployeeList() {
+
+        employees.clear();
+    }
+
+    public static void resetCustomerList() {
+
+        customers.clear();
+    }
+
+    public static void resetFilmList() {
+
+        films.clear();;
+    }
+
+    public static void resetBookingList() {
+
+        bookings.clear();;
+    }
+
     public static Main getMainApplication() {
 
         return m;
     }
 
-    public static JSONObject readJSONUserFile(String file) {
+    public static JSONObject readJSONFile(String file) {
 
         JSONObject items = null;
 
@@ -97,14 +120,19 @@ public class Main extends Application {
             items =  (JSONObject) parser.parse(new FileReader(path));
             for (Object s : items.keySet()) {
                 // System.out.println((String) s);
-                JSONObject user = (JSONObject) items.get(s);
+                JSONObject item = (JSONObject) items.get(s);
 
                 if (file.contains("employees"))
-                    employees.add( new Employee ((String) user.get("firstName"), (String) user.get("lastName"), (String) user.get("username"), (String) user.get("password"), (String) user.get("email")));
+                    employees.add( new Employee ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email")));
                 else if (file.contains("customers"))
-                    customers.add( new Customer ((String) user.get("firstName"), (String) user.get("lastName"), (String) user.get("username"), (String) user.get("password"), (String) user.get("email"), Double.parseDouble(String.valueOf(user.get("accountBalance")))));
+                    customers.add( new Customer ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email"), Double.parseDouble(String.valueOf(item.get("accountBalance")))));
                 else if (file.contains("films"))
-                    films.add( new Film ((String) user.get("title"), (String) user.get("description"), (String) user.get("startDate"), (String) user.get("endDate"), (String) user.get("time")));
+                    films.add( new Film ((String) item.get("title"), (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), (String) item.get("time")));
+                else if (file.contains("bookings"))
+                    bookings.add(new BookingHistoryItem((String) item.get("status"), (String) item.get("username"),
+                            (String) item.get("firstName"), (String) item.get("lastName"),
+                            (String) item.get("film"), (String) item.get("date"),
+                            (String) item.get("time"), (String) item.get("seat"), (String) (s)));
             }
         }
         catch (Exception ex) {
@@ -117,7 +145,7 @@ public class Main extends Application {
     public static void modifyJSONFile(String file, String identifier, String attribute, String newValue) {
 
         try {
-            JSONObject items = readJSONUserFile(file);
+            JSONObject items = readJSONFile(file);
             JSONObject itemToEdit = (JSONObject) items.get(identifier);
             itemToEdit.put(attribute, newValue);
 
@@ -137,7 +165,7 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public static void createJSONUserFile(String type) {
+    public static void createJSONFile(String type) {
 
         try {
             // Creating JSON files
@@ -253,11 +281,33 @@ public class Main extends Application {
     }
 
     public static boolean isEmployee() {
+
         return employeeMode;
     }
 
     public static void setEmployeeMode(boolean employeeMode) {
+
         Main.employeeMode = employeeMode;
+    }
+
+    public static Parent getRoot() {
+
+        return root;
+    }
+
+    public static void setRoot(Parent root) {
+
+        Main.root = root;
+    }
+
+    public static Stage getStage() {
+
+        return primaryStage;
+    }
+
+    public static void setStage(Stage stage) {
+
+        Main.primaryStage = stage;
     }
 
     @Override
@@ -266,6 +316,7 @@ public class Main extends Application {
         try {
             // setting up the login scene
             root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
+            Main.primaryStage = primaryStage;
             primaryStage.setTitle("Cinema Booking Management System");
             primaryStage.initStyle(StageStyle.UNDECORATED);
             Scene scene = new Scene(root, 700, 400);

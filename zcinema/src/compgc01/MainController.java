@@ -34,6 +34,10 @@ public class MainController {
     @FXML
     public void loginClick(ActionEvent event) throws IOException {
 
+        Main.readJSONFile("employeesJSON.txt");
+        Main.readJSONFile("customersJSON.txt");
+        Main.readJSONFile("filmsJSON.txt");
+        
         ArrayList<User> users = new ArrayList<User>();
         users.addAll(Main.getEmployeeList());
         users.addAll(Main.getCustomerList());

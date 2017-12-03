@@ -2,7 +2,6 @@ package compgc01;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -41,10 +40,12 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  */
 public class ManageFilmsController {
 
+    private File selectedImage;
+    
     @FXML
     Button backButton;
     @FXML
@@ -66,7 +67,9 @@ public class ManageFilmsController {
         ObservableList<String> obsList = FXCollections.observableArrayList("14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
         filmTime.setItems(obsList);
-    }
+        File file = new File(URLDecoder.decode(Main.getPath() + "res/images/filmImages/DefaultFilmPoster.png", "UTF-8"));
+        Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+        uploadedFilmPoster.setImage(img);    }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
@@ -126,22 +129,14 @@ public class ManageFilmsController {
 
         try {
             FileChooser fc = new FileChooser();
-            File selectedFile = fc.showOpenDialog(null);
+            selectedImage = fc.showOpenDialog(null);
             // checking that input file is not null and handling the exception
-            if (selectedFile == null)
+            if (selectedImage == null)
                 return;
             else {
-                Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedFile), null);
+                Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);
 
                 uploadedFilmPoster.setImage(img);
-
-                String path = Main.getPath();
-                String folderPath = URLDecoder.decode(path + "res/images/filmImages/", "UTF-8");
-                File uploads = new File(folderPath);
-                // NEED TO MAKE SURE THIS STORES THE CORRECT TITLE IN THE END
-                File file = new File(uploads, filmTitle.getText() + ".png");
-                InputStream input = Files.newInputStream(selectedFile.toPath());
-                Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE,
@@ -165,7 +160,7 @@ public class ManageFilmsController {
             validateFilmInput();
 
             // Creating JSON files
-            JSONObject films = Main.readJSONUserFile("filmsJSON.txt");
+            JSONObject films = Main.readJSONFile("filmsJSON.txt");
             JSONObject filmToAdd = new JSONObject();
             filmToAdd.put("title", filmTitle.getText());
             filmToAdd.put("description", filmDescription.getText());
@@ -175,12 +170,19 @@ public class ManageFilmsController {
             films.put(filmTitle.getText(), filmToAdd);
             // System.out.println(films.toJSONString());
 
+            // storing film in JSON file
             String path = URLDecoder.decode(Main.getPath() + "res/filmsJSON.txt", "UTF-8");
             // System.out.println(path);
             PrintWriter writer = new PrintWriter( new File(path));
             writer.print(films.toJSONString());
             writer.close();
-
+            
+            // storing film poster in film images folder
+            String folderPath = URLDecoder.decode(Main.getPath() + "res/images/filmImages/", "UTF-8");
+            File uploads = new File(folderPath);
+            File file = new File(uploads, filmTitle.getText() + ".png");
+            InputStream input = Files.newInputStream(selectedImage.toPath());
+            Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             // confirmation alert to inform the employee of the newly added film
             Alert alert = new Alert(AlertType.INFORMATION,
                     "The Film " + filmTitle.getText() + " has been added!", ButtonType.OK);
