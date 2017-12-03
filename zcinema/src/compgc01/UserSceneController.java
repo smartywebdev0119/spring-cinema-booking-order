@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,11 +27,9 @@ import javafx.stage.FileChooser;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  */
 public class UserSceneController {
-
-    static ArrayList<Booking> bookings;
 
     @FXML
     Button logOutButton, manageMoviesButton, manageBookingsButton, sendEmailButton;
@@ -40,7 +37,6 @@ public class UserSceneController {
     Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
     @FXML
     ImageView uploadedUserIcon;
-
 
     @FXML
     void initialize() throws IOException{
@@ -105,7 +101,6 @@ public class UserSceneController {
     protected void personaliseScene() throws IOException {
 
         // personalising page based on logged-in user
-
         firstNameLabel.setText(Main.getCurrentUser().getFirstName());
         lastNameLabel.setText(Main.getCurrentUser().getLastName());
 

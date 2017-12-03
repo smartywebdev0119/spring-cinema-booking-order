@@ -15,7 +15,7 @@ import javafx.scene.input.KeyEvent;
  * The controller for the Edit Info Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  */
 public class EditInfoController {
 

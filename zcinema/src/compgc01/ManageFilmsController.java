@@ -40,7 +40,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 03.12.2017
  */
 public class ManageFilmsController {
 
@@ -160,7 +160,7 @@ public class ManageFilmsController {
             validateFilmInput();
 
             // Creating JSON files
-            JSONObject films = Main.readJSONUserFile("filmsJSON.txt");
+            JSONObject films = Main.readJSONFile("filmsJSON.txt");
             JSONObject filmToAdd = new JSONObject();
             filmToAdd.put("title", filmTitle.getText());
             filmToAdd.put("description", filmDescription.getText());
