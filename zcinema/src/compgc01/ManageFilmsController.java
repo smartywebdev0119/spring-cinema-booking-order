@@ -40,7 +40,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 04.12.2017
  */
 public class ManageFilmsController {
 
@@ -72,12 +72,10 @@ public class ManageFilmsController {
         uploadedFilmPoster.setImage(img);    }
 
     @FXML
-    public void launchSeeMovies(ActionEvent event) throws IOException {
+    public void launchViewFilms(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("SeeMovies.fxml", event);
+        SceneCreator.launchScene("ViewFilmsScene.fxml", event);
     }
-    
-    
     
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {

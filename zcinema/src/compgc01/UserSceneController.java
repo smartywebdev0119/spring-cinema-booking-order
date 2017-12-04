@@ -27,7 +27,7 @@ import javafx.stage.FileChooser;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 04.12.2017
  */
 public class UserSceneController {
 
@@ -82,7 +82,7 @@ public class UserSceneController {
         if (Main.isEmployee())
             SceneCreator.launchScene("ManageFilmsScene.fxml", event);
         else
-            SceneCreator.launchScene("EditInfoScene.fxml", event);
+            SceneCreator.launchScene("ViewFilmsScene.fxml", event);
     }
 
     @FXML
