@@ -72,6 +72,14 @@ public class ManageFilmsController {
         uploadedFilmPoster.setImage(img);    }
 
     @FXML
+    public void launchSeeMovies(ActionEvent event) throws IOException {
+
+        SceneCreator.launchScene("SeeMovies.fxml", event);
+    }
+    
+    
+    
+    @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
         SceneCreator.launchScene("UserScene.fxml", event);
@@ -135,7 +143,6 @@ public class ManageFilmsController {
                 return;
             else {
                 Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);
-
                 uploadedFilmPoster.setImage(img);
             }
         } catch (FileNotFoundException ex) {

@@ -94,12 +94,12 @@ public class Main extends Application {
 
     public static void resetFilmList() {
 
-        films.clear();;
+        films.clear();
     }
 
     public static void resetBookingList() {
 
-        bookings.clear();;
+        bookings.clear();
     }
 
     public static Main getMainApplication() {
