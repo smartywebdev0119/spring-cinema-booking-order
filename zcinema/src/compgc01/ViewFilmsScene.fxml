@@ -15,15 +15,13 @@
          <children>
             <ScrollPane fx:id="scrollPane" layoutY="32.0" prefHeight="368.0" prefWidth="703.0">
                <content>
-                  <GridPane fx:id="grid" style="-fx-background-color: black;">
-                    
-                  </GridPane>
+                  <GridPane fx:id="grid" style="-fx-background-color: black;" />
                </content>
             </ScrollPane>
          </children>
       </AnchorPane>
       <MenuBar prefHeight="35.0" prefWidth="702.0" style="-fx-min-width: 100%; -fx-background-color: #353238;" />
-      <Text fill="WHITE" layoutX="15.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="All Movies" wrappingWidth="256.8037519454956" />
+      <Text fill="WHITE" layoutX="15.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="All Films" wrappingWidth="256.8037519454956" />
       <Button fx:id="backButton" contentDisplay="TOP" graphicTextGap="0.0" layoutX="651.0" layoutY="-1.0" minHeight="21.0" mnemonicParsing="false" onAction="#backToPrevScene" prefHeight="34.0" prefWidth="48.0" style="-fx-background-color: none; -fx-label-padding: -10; -fx-font-size: 12;" text="Back" textAlignment="CENTER" textFill="#ebdfdf">
          <font>
             <Font size="18.0" />

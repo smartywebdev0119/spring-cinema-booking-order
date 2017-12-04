@@ -75,11 +75,11 @@ public class ViewFilmsController implements Initializable {
                 pic.setImage(image);
                 hb.getChildren().add(pic);
                 GridPane.setConstraints(pic, imageCol, imageRow, 1, 1, HPos.CENTER, VPos.CENTER);
-                //		    grid.add(pic, imageCol, imageRow);
+                // grid.add(pic, imageCol, imageRow);
                 grid.getChildren().addAll(pic);
                 imageCol++;
 
-                // to check if all the 4 images of a row are completed
+                // checking if all 4 images of a row have been filled in
                 if (imageCol > 3) {
                     // Reset Column
                     imageCol=0;
@@ -94,12 +94,14 @@ public class ViewFilmsController implements Initializable {
     }
 
     @FXML
-    void goToMovie (ActionEvent e) {
-
+    void filmClick (ActionEvent event) throws IOException {
+        
+        SceneCreator.launchScene("ManageBookingsScene.fxml", event);
     }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
+        
         if (Main.isEmployee())
             SceneCreator.launchScene("ManageFilmsScene.fxml", event);
         else

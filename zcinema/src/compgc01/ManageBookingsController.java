@@ -16,7 +16,7 @@ import javafx.scene.layout.GridPane;
  * The controller for the Bookings Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 04.12.2017
  */
 public class ManageBookingsController {
     
@@ -85,7 +85,7 @@ public class ManageBookingsController {
     @FXML
     public void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-    		SceneCreator.launchScene("BookingHistory.fxml", event);
+    		SceneCreator.launchScene("BookingHistoryScene.fxml", event);
     }
 
     @FXML
