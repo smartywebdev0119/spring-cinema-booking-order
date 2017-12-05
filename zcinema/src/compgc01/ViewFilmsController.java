@@ -78,7 +78,7 @@ System.out.println(id);
             	// creating id names for the pictures
             	String idToCut = fileList.get(i).getName();
             	String id = idToCut.substring(0, (idToCut.length() - 4));
-        	
+        	System.out.println(id);
             	// System.out.println(fileList.get(i).getName());
                 image = new Image(fileList.get(i).toURI().toString());
                 pic = new ImageView();
@@ -105,13 +105,15 @@ System.out.println(id);
             e.printStackTrace();
         }
         
-        // getting index id of clicked image
+        // getting  id of clicked image (when page scrolls the id's are messed up... only row 0 - 1
         grid.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
         	for( Node node: grid.getChildren()) {
 
                 if( node instanceof ImageView) {
                     if( node.getBoundsInParent().contains(e.getSceneX(),  e.getSceneY())) {
                         id = node.getId();
+                        System.out.println( "Node: " + node + " at " + GridPane.getRowIndex( node) + "/" + GridPane.getColumnIndex( node));
+
                     } 
                 }
             }
