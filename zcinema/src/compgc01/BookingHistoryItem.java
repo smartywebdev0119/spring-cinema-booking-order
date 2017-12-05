@@ -9,13 +9,12 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class BookingHistoryItem {
 
-    private final SimpleStringProperty status, firstName, lastName, film, date, time, seat, idNumber;
-    private Customer customer;
-    private String username;
+    private final SimpleStringProperty status, username, firstName, lastName, film, date, time, seat, idNumber;
 
     public BookingHistoryItem (String status, String username, String firstName, String lastName, String film, String date, String time, String price, String idNumber) {
 
         this.status = new SimpleStringProperty(status);
+        this.username = new SimpleStringProperty(username);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.film = new SimpleStringProperty(film);
@@ -23,15 +22,18 @@ public class BookingHistoryItem {
         this.time = new SimpleStringProperty(time);
         this.seat = new SimpleStringProperty(price);
         this.idNumber = new SimpleStringProperty(idNumber);
-        this.username = username;
-        // this.username = customer.getUsername();
     }
 
     public String getStatus() {
 
         return status.get();
     }
+    
+    public String getUsername() {
 
+        return username.get();
+    }
+    
     public String getFirstName() {
 
         return firstName.get();
@@ -65,10 +67,5 @@ public class BookingHistoryItem {
     public String getIdNumber() {
 
         return idNumber.get();
-    }
-
-    public String getUsername() {
-
-        return username;
     }
 }

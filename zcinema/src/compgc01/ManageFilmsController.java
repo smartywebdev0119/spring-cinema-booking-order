@@ -45,7 +45,7 @@ import javafx.stage.FileChooser;
 public class ManageFilmsController {
 
     private File selectedImage;
-    
+
     @FXML
     Button backButton;
     @FXML
@@ -76,7 +76,7 @@ public class ManageFilmsController {
 
         SceneCreator.launchScene("ViewFilmsScene.fxml", event);
     }
-    
+
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
@@ -167,7 +167,6 @@ public class ManageFilmsController {
             // Creating JSON files
             JSONObject films = Main.readJSONFile("filmsJSON.txt");
             JSONObject filmToAdd = new JSONObject();
-            filmToAdd.put("title", filmTitle.getText());
             filmToAdd.put("description", filmDescription.getText());
             filmToAdd.put("startDate", newFilmStartDate.getText());
             filmToAdd.put("endDate", newFilmEndDate.getText());
@@ -181,7 +180,7 @@ public class ManageFilmsController {
             PrintWriter writer = new PrintWriter( new File(path));
             writer.print(films.toJSONString());
             writer.close();
-            
+
             // storing film poster in film images folder
             String folderPath = URLDecoder.decode(Main.getPath() + "res/images/filmImages/", "UTF-8");
             File uploads = new File(folderPath);
@@ -235,9 +234,10 @@ public class ManageFilmsController {
                     filmEndDate.getValue().equals("yyyy-mm-dd") || 
                     filmTime.getValue().equals("hh:mm"))
                 throw new InvalidFilmInputException("Please complete all fields!");
-
-            if (filmStartDate.getValue().compareTo(filmEndDate.getValue()) > 0)
+            else if (filmStartDate.getValue().compareTo(filmEndDate.getValue()) > 0)
                 throw new InvalidFilmInputException("End date cannot be before start date!");
+            else if (selectedImage == null)
+                throw new InvalidFilmInputException("Please add the film poster!");
         }
         catch (NullPointerException e) {
             throw new InvalidFilmInputException("Please complete all fields!");
