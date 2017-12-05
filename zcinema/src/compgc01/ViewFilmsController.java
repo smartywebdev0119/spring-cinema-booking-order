@@ -13,17 +13,12 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 
 /**
  * The controller for the View Films Scene.
@@ -73,13 +68,8 @@ public class ViewFilmsController implements Initializable {
             grid.setVgap(10);
             // grid.setGridLinesVisible(true);
 
-            int imageCol = 0;
-            int imageRow = 0;
-
             int rows = (fileList.size() / 4) + 1;
             int columns = 4;
-            int numberOfLastRowItems = fileList.size() % 4;
-
             int imageIndex = 0;
 
             for (int i = 0 ; i < columns; i++) {
@@ -114,8 +104,10 @@ public class ViewFilmsController implements Initializable {
 
         pic.setOnMouseClicked(e -> {
             // System.out.printf("Mouse clicked cell [%d, %d]%n", rowIndex, colIndex);
-            System.out.println("Film Title: " + id);
+            // System.out.println("Film Title: " + id);
             try {
+                // storing the selected film to customise the newly created scene
+                Main.setSelectedFilmTitle(id);
                 SceneCreator.launchScene("ViewSelectedFilm.fxml");
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -129,7 +121,7 @@ public class ViewFilmsController implements Initializable {
         if (Main.isEmployee())
             SceneCreator.launchScene("ManageFilmsScene.fxml");
         else
-            SceneCreator.launchScene("UserScene.fxml");           
+            SceneCreator.launchScene("UserScene.fxml");
     }
 
     @FXML

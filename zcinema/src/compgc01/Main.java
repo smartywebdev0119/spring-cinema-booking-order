@@ -34,6 +34,7 @@ public class Main extends Application {
     static Main m = null;
     static User currentUser;
     private static Boolean employeeMode = false;
+    private static String selectedFilmTitle = "";
 
     // arrayLists to be populated with the information from the text files
     private static ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -62,52 +63,52 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static ArrayList<Employee> getEmployeeList() {
+    static ArrayList<Employee> getEmployeeList() {
 
         return employees;
     }
 
-    public static ArrayList<Customer> getCustomerList() {
+    static ArrayList<Customer> getCustomerList() {
 
         return customers;
     }
 
-    public static ArrayList<Film> getFilmList() {
+    static ArrayList<Film> getFilmList() {
 
         return films;
     }
 
-    public static ArrayList<BookingHistoryItem> getBookingList() {
+    static ArrayList<BookingHistoryItem> getBookingList() {
 
         return bookings;
     }
 
-    public static void resetEmployeeList() {
+    static void resetEmployeeList() {
 
         employees.clear();
     }
 
-    public static void resetCustomerList() {
+    static void resetCustomerList() {
 
         customers.clear();
     }
 
-    public static void resetFilmList() {
+    static void resetFilmList() {
 
         films.clear();
     }
 
-    public static void resetBookingList() {
+    static void resetBookingList() {
 
         bookings.clear();
     }
 
-    public static Main getMainApplication() {
+    static Main getMainApplication() {
 
         return m;
     }
 
-    public static JSONObject readJSONFile(String file) {
+    static JSONObject readJSONFile(String file) {
 
         JSONObject items = null;
 
@@ -142,7 +143,7 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public static void modifyJSONFile(String file, String identifier, String attribute, String newValue) {
+    static void modifyJSONFile(String file, String identifier, String attribute, String newValue) {
 
         try {
             JSONObject items = readJSONFile(file);
@@ -165,7 +166,7 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unchecked")
-    public static void createJSONFile(String type) {
+    static void createJSONFile(String type) {
 
         try {
             // creating JSON files
@@ -246,7 +247,7 @@ public class Main extends Application {
         }
     }
 
-    public static void playMusic(String musicFile) {
+    static void playMusic(String musicFile) {
 
         try {
             File file = new File(URLDecoder.decode(getPath() + "res/sounds/" + musicFile, "UTF-8"));
@@ -258,7 +259,7 @@ public class Main extends Application {
         }
     }
 
-    public static String getPath() {
+    static String getPath() {
 
         String path = ClassLoader.getSystemClassLoader().getResource(".").getPath();
 
@@ -270,27 +271,27 @@ public class Main extends Application {
         return path;
     }
 
-    public static User getCurrentUser() {
+    static User getCurrentUser() {
 
         return currentUser;
     }
 
-    public static void setCurrentUser(User currentUser) {
+    static void setCurrentUser(User currentUser) {
 
         Main.currentUser = currentUser;
     }
 
-    public static boolean isEmployee() {
+    static boolean isEmployee() {
 
         return employeeMode;
     }
 
-    public static void setEmployeeMode(boolean employeeMode) {
+    static void setEmployeeMode(boolean employeeMode) {
 
         Main.employeeMode = employeeMode;
     }
 
-    public static Customer getCustomerByUsername(String username) {
+    static Customer getCustomerByUsername(String username) {
         for (Customer c : customers)
             if (c.getUsername().equals(username))
                 return c;
@@ -298,26 +299,36 @@ public class Main extends Application {
         return null;
     }
     
-    public static Parent getRoot() {
+    static Parent getRoot() {
 
         return root;
     }
 
-    public static void setRoot(Parent root) {
+    static void setRoot(Parent root) {
 
         Main.root = root;
     }
 
-    public static Stage getStage() {
+    static Stage getStage() {
 
         return primaryStage;
     }
 
-    public static void setStage(Stage stage) {
+    static void setStage(Stage stage) {
 
         Main.primaryStage = stage;
     }
 
+    static void setSelectedFilmTitle (String selectedFilmTitle) {
+
+        Main.selectedFilmTitle = selectedFilmTitle;
+    }
+    
+    static String getSelectedFilmTitle () {
+
+        return selectedFilmTitle;
+    }
+    
     @Override
     public void start(Stage primaryStage) {
 
