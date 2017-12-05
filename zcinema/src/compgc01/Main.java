@@ -24,7 +24,7 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 05.12.2017
  * Uses open-source icons made by http://www.jensd.de/wordpress/.
  */
 public class Main extends Application {

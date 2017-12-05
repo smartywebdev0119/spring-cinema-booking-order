@@ -40,7 +40,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 04.12.2017
+ * @since 05.12.2017
  */
 public class ManageFilmsController {
 
