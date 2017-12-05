@@ -74,13 +74,13 @@ public class ManageFilmsController {
     @FXML
     public void launchViewFilms(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("ViewFilmsScene.fxml", event);
+        SceneCreator.launchScene("ViewFilmsScene.fxml");
     }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("UserScene.fxml", event);
+        SceneCreator.launchScene("UserScene.fxml");
     }
 
     @FXML

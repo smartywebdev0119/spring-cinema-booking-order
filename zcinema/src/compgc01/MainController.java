@@ -50,7 +50,7 @@ public class MainController {
                 }
 
                 // loading new scene
-                SceneCreator.launchScene("UserScene.fxml", event);
+                SceneCreator.launchScene("UserScene.fxml");
             }
         }
     }

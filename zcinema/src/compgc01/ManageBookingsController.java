@@ -85,13 +85,13 @@ public class ManageBookingsController {
     @FXML
     public void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-    		SceneCreator.launchScene("BookingHistoryScene.fxml", event);
+    		SceneCreator.launchScene("BookingHistoryScene.fxml");
     }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("UserScene.fxml", event);
+        SceneCreator.launchScene("UserScene.fxml");
     }
 
     protected void personaliseScene() throws IOException {

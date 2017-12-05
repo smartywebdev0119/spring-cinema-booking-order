@@ -45,7 +45,7 @@ public class ViewSelectedFilmController implements Initializable {
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("ViewFilmsScene.fxml", event);
+        SceneCreator.launchScene("ViewFilmsScene.fxml");
 
     }
 }

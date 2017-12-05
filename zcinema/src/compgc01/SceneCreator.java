@@ -15,7 +15,7 @@ public class SceneCreator {
 
     // launching the new scene based on the .fxml file name passed in the argument as a String variable
     // building the scene and setting the value for the instance variable loader
-    public static void launchScene (String sceneName, ActionEvent event) throws IOException {
+    public static void launchScene (String sceneName) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(sceneName));
         Main.setRoot(loader.load());
         Scene scene = new Scene(Main.getRoot());

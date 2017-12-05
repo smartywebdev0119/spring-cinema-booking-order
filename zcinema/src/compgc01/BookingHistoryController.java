@@ -143,7 +143,7 @@ public class BookingHistoryController implements Initializable {
     public void backToPrevScene(ActionEvent event) throws IOException {
 
         Main.resetBookingList();
-        SceneCreator.launchScene("ManageBookingsScene.fxml", event);
+        SceneCreator.launchScene("ManageBookingsScene.fxml");
     }
 
     @FXML
@@ -171,7 +171,7 @@ public class BookingHistoryController implements Initializable {
                     if(deleteBookingValidator()){ // comparing booking's date with the current date
                         Main.modifyJSONFile("bookingsJSON.txt", selectedRowId, "status", "cancelled");
                         Main.resetBookingList();
-                        SceneCreator.launchScene("BookingHistoryScene.fxml", event);
+                        SceneCreator.launchScene("BookingHistoryScene.fxml");
                         alert.close();
                     }
                     else {

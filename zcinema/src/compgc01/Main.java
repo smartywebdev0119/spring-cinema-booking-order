@@ -45,7 +45,7 @@ public class Main extends Application {
 
         m = new Main();
 
-        //        playMusic("wonderful_world.mp3");
+        // playMusic("wonderful_world.mp3");
 
         // if files do not exist, create them using default values
         try {
@@ -168,7 +168,7 @@ public class Main extends Application {
     public static void createJSONFile(String type) {
 
         try {
-            // Creating JSON files
+            // creating JSON files
             JSONObject items = new JSONObject();
 
             if (type.equals("films")) {

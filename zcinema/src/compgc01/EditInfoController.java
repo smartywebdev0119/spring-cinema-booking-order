@@ -77,13 +77,13 @@ public class EditInfoController {
             Main.getCurrentUser().setEmail(updateEmail.getText());
         }
 
-        SceneCreator.launchScene("UserScene.fxml", event);
+        SceneCreator.launchScene("UserScene.fxml");
     }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("UserScene.fxml", event);
+        SceneCreator.launchScene("UserScene.fxml");
     }
 
     protected void personaliseScene() throws IOException {

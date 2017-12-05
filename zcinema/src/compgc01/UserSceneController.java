@@ -56,14 +56,14 @@ public class UserSceneController {
         Main.resetBookingList();
 
         // loading login stage
-        SceneCreator.launchScene("LoginScene.fxml", event);
+        SceneCreator.launchScene("LoginScene.fxml");
     }
 
     @FXML
     public void manageBookingsClick(ActionEvent event) throws IOException {
 
         // calling the scene from parent class and avoiding code duplication
-        SceneCreator.launchScene("ManageBookingsScene.fxml", event);
+        SceneCreator.launchScene("ManageBookingsScene.fxml");
 
         //		 IMPORTANT FOR LATER TO SHOW SEATS ALREADY BOOKED!!!
         //		 for(Node node : gridSeats.getChildren()) {
@@ -80,9 +80,9 @@ public class UserSceneController {
     public void manageMoviesClick(ActionEvent event) throws IOException {
 
         if (Main.isEmployee())
-            SceneCreator.launchScene("ManageFilmsScene.fxml", event);
+            SceneCreator.launchScene("ManageFilmsScene.fxml");
         else
-            SceneCreator.launchScene("ViewFilmsScene.fxml", event);
+            SceneCreator.launchScene("ViewFilmsScene.fxml");
     }
 
     @FXML
@@ -95,7 +95,7 @@ public class UserSceneController {
     @FXML
     public void editInfoClick(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("EditInfoScene.fxml", event);
+        SceneCreator.launchScene("EditInfoScene.fxml");
     }
 
     protected void personaliseScene() throws IOException {
@@ -137,7 +137,7 @@ public class UserSceneController {
             }
         });
 
-        SceneCreator.launchScene("UserScene.fxml", event);
+        SceneCreator.launchScene("UserScene.fxml");
         personaliseScene();
     }
 
