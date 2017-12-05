@@ -127,10 +127,10 @@ public class Main extends Application {
                 else if (file.contains("customers"))
                     customers.add( new Customer ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email"), Double.parseDouble(String.valueOf(item.get("accountBalance")))));
                 else if (file.contains("films"))
-                    films.add( new Film ((String) item.get("title"), (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), (String) item.get("time")));
+                    films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), (String) item.get("time")));
                 else if (file.contains("bookings"))
                     bookings.add(new BookingHistoryItem((String) item.get("status"), (String) item.get("username"),
-                            (String) item.get("firstName"), (String) item.get("lastName"),
+                            getCustomerByUsername((String) item.get("username")).getFirstName(), getCustomerByUsername((String) item.get("username")).getLastName(),
                             (String) item.get("film"), (String) item.get("date"),
                             (String) item.get("time"), (String) item.get("seat"), (String) (s)));
             }
@@ -290,6 +290,14 @@ public class Main extends Application {
         Main.employeeMode = employeeMode;
     }
 
+    public static Customer getCustomerByUsername(String username) {
+        for (Customer c : customers)
+            if (c.getUsername().equals(username))
+                return c;
+        
+        return null;
+    }
+    
     public static Parent getRoot() {
 
         return root;
