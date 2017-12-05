@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -38,10 +42,13 @@ public class ViewFilmsController implements Initializable {
     ImageView pic;
     @FXML
     Image image;
+    @FXML
+    String id;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+System.out.println(id);
+    
         try{    
             // getting folder path
             String path = URLDecoder.decode(Main.getPath() + "res/images/filmImages/", "UTF-8");
@@ -67,18 +74,24 @@ public class ViewFilmsController implements Initializable {
             int imageRow = 0;
 
             for (int i = 0; i < fileList.size(); i++) {
-                // System.out.println(fileList.get(i).getName());
+            	
+            	// creating id names for the pictures
+            	String idToCut = fileList.get(i).getName();
+            	String id = idToCut.substring(0, (idToCut.length() - 4));
+        	
+            	// System.out.println(fileList.get(i).getName());
                 image = new Image(fileList.get(i).toURI().toString());
                 pic = new ImageView();
                 pic.setFitWidth(160);
                 pic.setFitHeight(220);
                 pic.setImage(image);
+                pic.setId(id);
                 hb.getChildren().add(pic);
                 GridPane.setConstraints(pic, imageCol, imageRow, 1, 1, HPos.CENTER, VPos.CENTER);
                 // grid.add(pic, imageCol, imageRow);
                 grid.getChildren().addAll(pic);
+                
                 imageCol++;
-
                 // checking if all 4 images of a row have been filled in
                 if (imageCol > 3) {
                     // Reset Column
@@ -90,21 +103,42 @@ public class ViewFilmsController implements Initializable {
         }
         catch(Exception e) {
             e.printStackTrace();
-        }	
-    }
-
-    @FXML
-    void filmClick (ActionEvent event) throws IOException {
+        }
         
-        SceneCreator.launchScene("ManageBookingsScene.fxml", event);
+        // getting index id of clicked image
+        grid.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+        	for( Node node: grid.getChildren()) {
+
+                if( node instanceof ImageView) {
+                    if( node.getBoundsInParent().contains(e.getSceneX(),  e.getSceneY())) {
+                        id = node.getId();
+                    } 
+                }
+            }
+        	 System.out.println(id);
+         });
+    
+        
     }
 
+//    @FXML
+//    public void backToPrevScene(ActionEvent event) throws IOException {
+//        
+//        if (Main.isEmployee())
+//            SceneCreator.launchScene("ManageFilmsScene.fxml", event);
+//        else
+//            SceneCreator.launchScene("UserScene.fxml", event);           
+//    }
+    
+    // using this to test the ViewSelectedFilm page
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
-        
-        if (Main.isEmployee())
-            SceneCreator.launchScene("ManageFilmsScene.fxml", event);
-        else
-            SceneCreator.launchScene("UserScene.fxml", event);           
+
+        SceneCreator.launchScene("ViewSelectedFilm.fxml", event);
+    }
+    
+    @FXML
+    public String getId () {
+    	return id;
     }
 }

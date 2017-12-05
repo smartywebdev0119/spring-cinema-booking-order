@@ -245,6 +245,7 @@ public class ManageFilmsController {
     }
 }
 
+// FIX THIS : if image is not uploaded and all the rest is filled, there is an exception thrown in the console
 class InvalidFilmInputException extends Exception {
 
     private static final long serialVersionUID = 1L;
