@@ -44,7 +44,7 @@ public class BookingHistoryItem {
         return lastName.get();
     }
 
-    public String getFilm() {
+    public String getFilmTitle() {
 
         return film.get();
     }

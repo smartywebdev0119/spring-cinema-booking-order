@@ -51,27 +51,27 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <MaterialIconView fx:id="A1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <MaterialIconView fx:id="B1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                      	<MaterialIconView fx:id="C1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                 		<MaterialIconView fx:id="D1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-               			<MaterialIconView fx:id="E1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                       	<MaterialIconView fx:id="F1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-                       	<MaterialIconView fx:id="G1" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-                        <MaterialIconView fx:id="A2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="B2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="C2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="D2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="E2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="F2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="G2" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="A3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="B3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="C3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="D3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="E3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="F3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="G3" glyphName="EVENT_SEAT" onMouseClicked="#turnSeatRed" size="40" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="A1" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <MaterialIconView fx:id="A2" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                      	<MaterialIconView fx:id="A3" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                 		<MaterialIconView fx:id="A4" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+               			<MaterialIconView fx:id="A5" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                       	<MaterialIconView fx:id="A6" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+                       	<MaterialIconView fx:id="A7" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+                        <MaterialIconView fx:id="B1" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B2" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B3" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B4" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B5" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B6" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B7" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="C1" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C2" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C3" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C4" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C5" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C6" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C7" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="6" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <ImageView fitHeight="139.0" fitWidth="271.0" layoutX="101.0" layoutY="-45.0" pickOnBounds="true" preserveRatio="true">
@@ -79,25 +79,25 @@
                         <Image url="@../../../res/images/filmImages/inceptionPoster.jpg" />
                      </image>
                   </ImageView>
-                  <Text layoutX="59.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                  <Text layoutX="59.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
-                  <Text layoutX="59.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+                  <Text layoutX="59.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                  <Text layoutX="59.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B" />
+                  <Text layoutX="59.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
                </children>
             </AnchorPane>
-            <Text layoutX="291.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
-            <Text layoutX="337.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B" />
-            <Text layoutX="384.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-            <Text layoutX="429.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D" />
-            <Text layoutX="476.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E" />
-            <Text layoutX="523.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-            <Text layoutX="569.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="G" />
+            <Text layoutX="291.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+            <Text layoutX="337.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+            <Text layoutX="384.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+            <Text layoutX="429.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+            <Text layoutX="476.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
+            <Text layoutX="523.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" />
+            <Text layoutX="569.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="37.0" prefWidth="702.0">
          <children>
             <MenuBar prefHeight="35.0" prefWidth="702.0" style="-fx-min-width: 100%; -fx-background-color: #353238;" />
             <Text fill="WHITE" layoutX="18.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="Bookings" />
-            <Button fx:id="logOutButton" contentDisplay="TOP" graphicTextGap="0.0" layoutX="639.0" minHeight="21.0" mnemonicParsing="false" onAction="#backToPrevScene" prefHeight="34.0" prefWidth="57.0" style="-fx-background-color: none; -fx-label-padding: -10; -fx-font-size: 12;" text="Back" textAlignment="CENTER" textFill="#ebdfdf">
+            <Button fx:id="backButton" contentDisplay="TOP" graphicTextGap="0.0" layoutX="639.0" minHeight="21.0" mnemonicParsing="false" onAction="#backToPrevScene" prefHeight="34.0" prefWidth="57.0" style="-fx-background-color: none; -fx-label-padding: -10; -fx-font-size: 12;" text="Back" textAlignment="CENTER" textFill="#ebdfdf">
                <font>
                   <Font size="18.0" />
                </font>
@@ -111,12 +111,12 @@
          <children>
             <Separator layoutX="168.0" layoutY="9.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="9.0" />
             <Text layoutX="70.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movie" />
-            <ComboBox layoutX="18.0" layoutY="36.0" prefHeight="28.0" prefWidth="141.0" />
+            <ComboBox fx:id="filmDropDownList" layoutX="18.0" layoutY="36.0" onAction="#populateTimeDropDownList" prefHeight="28.0" prefWidth="141.0" />
             <Text layoutX="70.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
             <DatePicker layoutX="22.0" layoutY="100.0" prefHeight="26.0" prefWidth="133.0" />
             <Text layoutX="70.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
-            <ComboBox layoutX="18.0" layoutY="165.0" prefHeight="28.0" prefWidth="141.0" />
-            <Button layoutX="18.0" layoutY="309.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #353238;" text="Book Seat" textFill="WHITE">
+            <ComboBox fx:id="timeDropDownList" layoutX="18.0" layoutY="165.0" onAction="#populateSeats" prefHeight="28.0" prefWidth="141.0" />
+            <Button layoutX="18.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#bookSeat" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #353238;" text="Book Seat" textFill="WHITE">
                <graphic>
                   <MaterialIconView fill="WHITE" glyphName="EVENT_SEAT" size="20" />
                </graphic>
