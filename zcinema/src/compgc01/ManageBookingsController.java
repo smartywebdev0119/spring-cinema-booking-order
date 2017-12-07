@@ -129,7 +129,7 @@ public class ManageBookingsController {
     private void populateFilmDropDownList (ActionEvent event) throws IOException {
 
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (Film film : Main.getFilmList()) {
             if (datePicker.getValue().isAfter(LocalDate.parse(film.getStartDate(), formatter)) && datePicker.getValue().isBefore(LocalDate.parse(film.getStartDate(), formatter)))

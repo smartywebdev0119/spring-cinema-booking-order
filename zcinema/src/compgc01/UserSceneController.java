@@ -202,39 +202,16 @@ public class UserSceneController {
         return currentTime;
     }
     
-    
-    
     /////////////////////////////////////////////////////////////////////
-    
     @FXML
     void exportFilmList (ActionEvent e) {
-    	    	
-   
-   ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
-    	
-   for(BookingHistoryItem c : exportableList){
-	   
-	   System.out.println(c.getDate());
-	   System.out.println(c.getTime());
-	   System.out.println(c.getSeat());
-	   
-   }
-   
 
-    	
-    	
-    	
+        ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
+
+        for(BookingHistoryItem c : exportableList) {
+            System.out.println(c.getDate());
+            System.out.println(c.getTime());
+            System.out.println(c.getSeat());
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
