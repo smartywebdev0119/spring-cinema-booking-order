@@ -14,8 +14,6 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import org.json.simple.JSONObject;
-
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -30,7 +28,7 @@ import javafx.stage.FileChooser;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 04.12.2017
+ * @since 07.12.2017
  */
 public class UserSceneController {
 
@@ -203,36 +201,17 @@ public class UserSceneController {
 
         return currentTime;
     }
-    
+
     /////////////////////////////////////////////////////////////////////
     @FXML
     void exportFilmList (ActionEvent e) {
-<<<<<<< HEAD
-    	    	
-	JSONObject current = Main.readJSONFile("bookingsJSON.txt");
-	
-	ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
-	System.out.println(exportableList.get(0).getFilmTitle());;
-    	for(Object c : exportableList){
-    		
-    	}
-   
-    
- 
-   
 
-    	
-    	
-    	
-=======
+        Main.readJSONFile("bookingsJSON.txt");
 
         ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
-
-        for(BookingHistoryItem c : exportableList) {
-            System.out.println(c.getDate());
-            System.out.println(c.getTime());
-            System.out.println(c.getSeat());
+        System.out.println(exportableList.get(0).getFilmTitle());;
+        for(BookingHistoryItem c : exportableList){
+            c.getFilmTitle();
         }
->>>>>>> 26ca8d1d508e50ee40c05c09e83e40ecf434a841
     }
 }
