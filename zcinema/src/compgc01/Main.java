@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -37,10 +37,10 @@ public class Main extends Application {
     private static String selectedFilmTitle = "";
 
     // arrayLists to be populated with the information from the text files
-    static ArrayList<Employee> employees = new ArrayList<Employee>();
-    static ArrayList<Customer> customers = new ArrayList<Customer>();
-    static ArrayList<Film> films = new ArrayList<Film>();
-    static ArrayList<BookingHistoryItem> bookings = new ArrayList<BookingHistoryItem>();
+    static HashSet<Employee> employees = new HashSet<Employee>();
+    static HashSet<Customer> customers = new HashSet<Customer>();
+    static HashSet<Film> films = new HashSet<Film>();
+    static HashSet<BookingHistoryItem> bookings = new HashSet<BookingHistoryItem>();
 
     public static void main(String[] args) {
 
@@ -63,22 +63,22 @@ public class Main extends Application {
         launch(args);
     }
 
-    static ArrayList<Employee> getEmployeeList() {
+    static HashSet<Employee> getEmployeeList() {
 
         return employees;
     }
 
-    static ArrayList<Customer> getCustomerList() {
+    static HashSet<Customer> getCustomerList() {
 
         return customers;
     }
 
-    static ArrayList<Film> getFilmList() {
+    static HashSet<Film> getFilmList() {
 
         return films;
     }
 
-    static ArrayList<BookingHistoryItem> getBookingList() {
+    static HashSet<BookingHistoryItem> getBookingList() {
 
         return bookings;
     }

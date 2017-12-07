@@ -15,7 +15,7 @@ import javafx.scene.input.KeyEvent;
  * The controller for the Edit Info Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 07.12.2017
  */
 public class EditInfoController {
 
@@ -26,7 +26,7 @@ public class EditInfoController {
     @FXML
     Label firstNameLabelNew, lastNameLabelNew, titleLabelNew, emailLabelNew;
     @FXML
-    TextField updateFirstName, updateLastName, updateEmail, updatePassword, titleMovie;
+    TextField updateFirstName, updateLastName, updateEmail, updatePassword;
 
     @FXML
     void initialize() throws IOException {
@@ -75,6 +75,10 @@ public class EditInfoController {
         if (!updateEmail.getText().trim().isEmpty()) {
             Main.modifyJSONFile(userType + "sJSON.txt", Main.getCurrentUser().getUsername(), "email", updateEmail.getText());
             Main.getCurrentUser().setEmail(updateEmail.getText());
+        }
+        if (!updatePassword.getText().trim().isEmpty()) {
+            Main.modifyJSONFile(userType + "sJSON.txt", Main.getCurrentUser().getUsername(), "password", updatePassword.getText());
+            Main.getCurrentUser().setPassword(updatePassword.getText());
         }
 
         SceneCreator.launchScene("UserScene.fxml");

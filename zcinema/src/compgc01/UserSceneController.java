@@ -8,17 +8,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-
-import org.json.simple.JSONObject;
 
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -208,16 +203,28 @@ public class UserSceneController {
         return currentTime;
     }
 
-    /////////////////////////////////////////////////////////////////////
     @FXML
     void exportFilmList (ActionEvent e) throws FileNotFoundException {
 
+        Main.resetFilmList();
+        Main.resetBookingList();
+        
+        // reading the films and bookings from the JSON file to ensure we are working with the most recent version
+        // and there is no duplication
+        Main.readJSONFile("filmsJSON.txt");
         Main.readJSONFile("bookingsJSON.txt");
 
+        // clearing the export file, in case it exists from before
         PrintWriter pw = new PrintWriter(new FileOutputStream(
+                new File(Main.getPath() + "res/export.txt")));
+        pw.close();
+
+        // creating the printwriter using the append option now
+        pw = new PrintWriter(new FileOutputStream(
                 new File(Main.getPath() + "res/export.txt"), 
                 true));
 
+        // mapping film titles to a set of strings representing screening dates and times
         TreeMap<String, TreeSet<String>> map = new TreeMap<String, TreeSet<String>>();
 
         for (Film film: Main.getFilmList()) {
@@ -226,11 +233,12 @@ public class UserSceneController {
                     if (!map.containsKey(film.getTitle()))
                         map.put(booking.getFilm(), new TreeSet<String>());
 
-                    map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
+                        map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
                 }
             }
         }
 
+        // counting number of bookings for each screening (date and time) of each film
         for (String filmTitle : map.keySet()) {
             TreeSet<String> setOfDatesAndTimes = map.get(filmTitle);
             // System.out.println(filmTitle + ":" + setOfDatesAndTimes.size());
@@ -245,10 +253,11 @@ public class UserSceneController {
 
                 // System.out.println(numberOfBookingsAtSpecificDateAndTime);
 
+                // printing to export text file
                 pw.append("title: " + filmTitle + ", " + dateAndTime + ", bookings: " + numberOfBookingsAtSpecificDateAndTime + "\n");
             }
         }
-        
+
         pw.close();
     }
 }

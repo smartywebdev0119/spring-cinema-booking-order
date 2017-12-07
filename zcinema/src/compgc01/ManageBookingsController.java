@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
@@ -52,8 +53,6 @@ public class ManageBookingsController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-
 	}
     
    
@@ -79,7 +78,7 @@ public class ManageBookingsController implements Initializable {
     	
     	  JSONObject current = Main.readJSONFile("bookingsJSON.txt");
           
-          ArrayList<BookingHistoryItem> bookings = Main.getBookingList();
+          HashSet<BookingHistoryItem> bookings = Main.getBookingList();
 
           
           for(BookingHistoryItem c : bookings){
