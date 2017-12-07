@@ -207,32 +207,63 @@ public class UserSceneController {
     /////////////////////////////////////////////////////////////////////
     @FXML
     void exportFilmList (ActionEvent e) {
-<<<<<<< HEAD
     	    	
 	JSONObject current = Main.readJSONFile("bookingsJSON.txt");
 	
 	ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
-	System.out.println(exportableList.get(0).getFilmTitle());;
-    	for(Object c : exportableList){
-    		
-    	}
-   
-    
- 
-   
-
+	
     	
-    	
-    	
-=======
-
-        ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
-
-        for(BookingHistoryItem c : exportableList) {
-            System.out.println(c.getDate());
-            System.out.println(c.getTime());
-            System.out.println(c.getSeat());
-        }
->>>>>>> 26ca8d1d508e50ee40c05c09e83e40ecf434a841
+	
+	
+	System.out.println(Main.getPath());
+	PrintWriter write = null;
+	try {
+	  write = new PrintWriter(new OutputStreamWriter(
+	      new BufferedOutputStream(new FileOutputStream(Main.getPath() + "res/export.txt")), "UTF-8"));
+	  
+	  for(BookingHistoryItem c : exportableList){
+  		
+			write.println(String.format(c.getFilmTitle() + ", " + c.getDate() + ", " + c.getTime() + ", " + "whatever ", c));
+			
+  	}
+	
+	
+	} catch (UnsupportedEncodingException ef) {
+	  ef.printStackTrace();
+	} catch (FileNotFoundException ef) {
+	  ef.printStackTrace();
+	} finally {
+	  if(write != null) {
+		 write.flush();
+		 write.close();
+	  }
+	}
+	
+	
+	
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }
