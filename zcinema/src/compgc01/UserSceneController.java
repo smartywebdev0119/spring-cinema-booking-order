@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -208,51 +210,45 @@ public class UserSceneController {
 
     /////////////////////////////////////////////////////////////////////
     @FXML
-    void exportFilmList (ActionEvent e) {
+    void exportFilmList (ActionEvent e) throws FileNotFoundException {
 
         Main.readJSONFile("bookingsJSON.txt");
 
-        ArrayList <BookingHistoryItem> bookingList = Main.getBookingList();
-        HashMap<String, TreeSet<BookingHistoryItem>> map = new HashMap<String, TreeSet<BookingHistoryItem>>();
-        
-        // initializing
-        for (String s : map.keySet()) {
-           // TreeSet set = new TreeSet(new DateTimeComparator());
-            //map.put(s, )
-        }
-        
+        PrintWriter pw = new PrintWriter(new FileOutputStream(
+                new File(Main.getPath() + "res/export.txt"), 
+                true));
+
+        TreeMap<String, TreeSet<String>> map = new TreeMap<String, TreeSet<String>>();
+
         for (Film film: Main.getFilmList()) {
-            for (BookingHistoryItem booking : bookingList) {
+            for (BookingHistoryItem booking : Main.getBookingList()) {
                 if (film.getTitle().equals(booking.getFilm())) {
                     if (!map.containsKey(film.getTitle()))
-                        map.put(film.getTitle(), new TreeSet<BookingHistoryItem>());
+                        map.put(booking.getFilm(), new TreeSet<String>());
 
-                    map.get(film.getTitle()).add(booking);
+                    map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
                 }
             }
         }
-        
-        
-        System.out.println(Main.getPath());
-        PrintWriter write = null;
-        try {
-            write = new PrintWriter(new OutputStreamWriter(
-                    new BufferedOutputStream(new FileOutputStream(Main.getPath() + "res/export.txt")), "UTF-8"));
 
-            for(BookingHistoryItem c : bookingList){
+        for (String filmTitle : map.keySet()) {
+            TreeSet<String> setOfDatesAndTimes = map.get(filmTitle);
+            // System.out.println(filmTitle + ":" + setOfDatesAndTimes.size());
 
-                write.println(String.format(c.getFilm() + ", " + c.getDate() + ", " + c.getTime() + ", " + "whatever ", c));
+            for (String dateAndTime : setOfDatesAndTimes) {
+                int numberOfBookingsAtSpecificDateAndTime = 0;
 
-            }
-        } catch (UnsupportedEncodingException ef) {
-            ef.printStackTrace();
-        } catch (FileNotFoundException ef) {
-            ef.printStackTrace();
-        } finally {
-            if(write != null) {
-                write.flush();
-                write.close();
+                for (BookingHistoryItem booking : Main.getBookingList()) {
+                    if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime))
+                        numberOfBookingsAtSpecificDateAndTime++;
+                }
+
+                // System.out.println(numberOfBookingsAtSpecificDateAndTime);
+
+                pw.append("title: " + filmTitle + ", " + dateAndTime + ", bookings: " + numberOfBookingsAtSpecificDateAndTime + "\n");
             }
         }
+        
+        pw.close();
     }
 }
