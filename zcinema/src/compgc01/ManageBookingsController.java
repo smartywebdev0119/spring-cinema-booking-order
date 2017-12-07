@@ -1,18 +1,16 @@
 package compgc01;
 
 import java.io.*;
+import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -126,15 +124,16 @@ public class ManageBookingsController {
     }
 
     @FXML
-    private void populateFilmDropDownList (ActionEvent event) throws IOException {
+    private void populateFilmDropDownList (ActionEvent event) throws IOException, ParseException {
 
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (Film film : Main.getFilmList()) {
-            if (datePicker.getValue().isAfter(LocalDate.parse(film.getStartDate(), formatter)) && datePicker.getValue().isBefore(LocalDate.parse(film.getStartDate(), formatter)))
+            if (LocalDate.parse(film.getStartDate(), formatter).isBefore(datePicker.getValue()) && LocalDate.parse(film.getEndDate(), formatter).isAfter(datePicker.getValue()))
                 filmTitles.add(film.getTitle());
         }
+
         filmDropDownList.setItems(filmTitles);
     }
 

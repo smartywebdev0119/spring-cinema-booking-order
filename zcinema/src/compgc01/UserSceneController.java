@@ -30,7 +30,7 @@ import javafx.stage.FileChooser;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 04.12.2017
+ * @since 07.12.2017
  */
 public class UserSceneController {
 
@@ -203,7 +203,7 @@ public class UserSceneController {
 
         return currentTime;
     }
-    
+
     /////////////////////////////////////////////////////////////////////
     @FXML
     void exportFilmList (ActionEvent e) {
@@ -241,6 +241,7 @@ public class UserSceneController {
 	
 	
 	
+      
     }
     
     
