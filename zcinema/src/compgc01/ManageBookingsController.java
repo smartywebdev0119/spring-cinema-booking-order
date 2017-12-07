@@ -1,6 +1,9 @@
 package compgc01;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -12,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -19,7 +23,7 @@ import javafx.scene.layout.GridPane;
  * The controller for the Bookings Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 06.12.2017
+ * @since 07.12.2017
  */
 public class ManageBookingsController {
 
@@ -31,6 +35,8 @@ public class ManageBookingsController {
     GridPane gridSeats;
     @FXML
     Button backButton;
+    @FXML
+    DatePicker datePicker;
     @FXML
     ComboBox<String> filmDropDownList, timeDropDownList;
 
@@ -59,11 +65,12 @@ public class ManageBookingsController {
     @FXML
     private void bookSeat(MouseEvent e) {
 
-        ((Node) e.getSource()).setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
     }
 
     @FXML
     private void turnSeatRed(MouseEvent e) {
+
+        ((Node) e.getSource()).setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
 
         // Alert for booked seat
         /*
@@ -116,21 +123,21 @@ public class ManageBookingsController {
             System.out.println(newValue);
         });
          */
-
     }
 
     @FXML
     private void populateFilmDropDownList (ActionEvent event) throws IOException {
 
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         for (Film film : Main.getFilmList()) {
-            filmTitles.add(film.getTitle());
+            if (datePicker.getValue().isAfter(LocalDate.parse(film.getStartDate(), formatter)) && datePicker.getValue().isBefore(LocalDate.parse(film.getStartDate(), formatter)))
+                filmTitles.add(film.getTitle());
         }
         filmDropDownList.setItems(filmTitles);
-
     }
-    
+
     @FXML
     private void populateTimeDropDownList (ActionEvent event) throws IOException {
 
