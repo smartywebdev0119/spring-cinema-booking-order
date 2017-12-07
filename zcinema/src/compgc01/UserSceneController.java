@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +33,7 @@ import javafx.stage.FileChooser;
 public class UserSceneController {
 
     @FXML
-    Button logOutButton, manageMoviesButton, manageBookingsButton, sendEmailButton;
+    Button logOutButton, manageMoviesButton, manageBookingsButton, sendEmailButton, exportFilmList;
     @FXML
     Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
     @FXML
@@ -110,6 +111,7 @@ public class UserSceneController {
             windowTitleLabel.setText("Customer View");
             manageMoviesButton.setText("View Films");
             manageBookingsButton.setText("View Bookings");
+            exportFilmList.setVisible(false);
 
         }
 
@@ -199,4 +201,40 @@ public class UserSceneController {
 
         return currentTime;
     }
+    
+    
+    
+    /////////////////////////////////////////////////////////////////////
+    
+    @FXML
+    void exportFilmList (ActionEvent e) {
+    	    	
+   
+   ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
+    	
+   for(BookingHistoryItem c : exportableList){
+	   
+	   System.out.println(c.getDate());
+	   System.out.println(c.getTime());
+	   System.out.println(c.getSeat());
+	   
+   }
+   
+
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
