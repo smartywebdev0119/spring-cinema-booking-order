@@ -122,11 +122,11 @@
       </AnchorPane>
       <AnchorPane layoutY="34.0" prefHeight="378.0" prefWidth="157.0">
          <children>
-            <Separator layoutX="168.0" layoutY="9.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="9.0" />
+             <Separator layoutX="168.0" layoutY="9.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="9.0" />
             <Text layoutX="72.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Film" />
             <ComboBox fx:id="filmDropDownList" layoutX="15.0" layoutY="114.0" onAction="#populateTimeDropDownList" prefHeight="28.0" prefWidth="141.0" />
-            <Text layoutX="71.0" layoutY="27.0" onAction="#populateTimeDropDownList" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-            <DatePicker layoutX="15.0" layoutY="37.0" prefHeight="27.0" prefWidth="141.0" />
+            <Text layoutX="71.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+            <DatePicker layoutX="15.0" layoutY="37.0" onAction="#populateTimeDropDownList" prefHeight="27.0" prefWidth="141.0" />
             <Text layoutX="71.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
             <ComboBox fx:id="timeDropDownList" layoutX="15.0" layoutY="198.0" onAction="#populateSeats" prefHeight="28.0" prefWidth="141.0" />
             <Button layoutX="18.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#bookSeat" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #353238;" text="Book Seat" textFill="WHITE">

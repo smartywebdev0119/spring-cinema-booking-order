@@ -204,12 +204,10 @@ public class UserSceneController {
         return currentTime;
     }
     
-    
-    
     /////////////////////////////////////////////////////////////////////
-    
     @FXML
     void exportFilmList (ActionEvent e) {
+<<<<<<< HEAD
     	    	
 	JSONObject current = Main.readJSONFile("bookingsJSON.txt");
 	
@@ -226,17 +224,15 @@ public class UserSceneController {
     	
     	
     	
+=======
+
+        ArrayList <BookingHistoryItem> exportableList = Main.getBookingList();
+
+        for(BookingHistoryItem c : exportableList) {
+            System.out.println(c.getDate());
+            System.out.println(c.getTime());
+            System.out.println(c.getSeat());
+        }
+>>>>>>> 26ca8d1d508e50ee40c05c09e83e40ecf434a841
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

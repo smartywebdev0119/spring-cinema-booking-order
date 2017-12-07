@@ -37,10 +37,10 @@ public class Main extends Application {
     private static String selectedFilmTitle = "";
 
     // arrayLists to be populated with the information from the text files
-    private static ArrayList<Employee> employees = new ArrayList<Employee>();
-    private static ArrayList<Customer> customers = new ArrayList<Customer>();
-    private static ArrayList<Film> films = new ArrayList<Film>();
-    private static ArrayList<BookingHistoryItem> bookings = new ArrayList<BookingHistoryItem>();
+    static ArrayList<Employee> employees = new ArrayList<Employee>();
+    static ArrayList<Customer> customers = new ArrayList<Customer>();
+    static ArrayList<Film> films = new ArrayList<Film>();
+    static ArrayList<BookingHistoryItem> bookings = new ArrayList<BookingHistoryItem>();
 
     public static void main(String[] args) {
 
