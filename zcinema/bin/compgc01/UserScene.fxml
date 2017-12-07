@@ -54,11 +54,6 @@
       </AnchorPane>
       <AnchorPane layoutX="148.0" layoutY="31.0" prefHeight="371.0" prefWidth="551.0">
          <children>
-            <ImageView fitHeight="301.0" fitWidth="530.0" layoutX="22.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../res/images/backgroundImages/managebookings-01.jpg" />
-               </image>
-            </ImageView>
             <Button fx:id="manageMoviesButton" layoutX="43.0" layoutY="42.0" minWidth="30.0" mnemonicParsing="false" onAction="#manageMoviesClick" prefHeight="43.0" prefWidth="186.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Manage Films" textFill="WHITE">
                <graphic>
                   <MaterialIconView fill="WHITE" glyphName="MOVIE" size="20" />
@@ -74,6 +69,14 @@
                <font>
                   <Font size="14.0" />
                </font>
+            </Button>
+            <Button fx:id="exportFilmList" layoutX="43.0" layoutY="227.0" minWidth="30.0" mnemonicParsing="false" onAction="#exportFilmList" prefHeight="43.0" prefWidth="186.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Export Film List" textFill="WHITE" visible="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="FILE_EXPORT" size="20" />
+               </graphic>
             </Button>
          </children>
       </AnchorPane>
