@@ -1,15 +1,20 @@
 package compgc01;
 
 import java.io.*;
+import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import org.json.simple.JSONObject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,7 +28,7 @@ import javafx.scene.layout.GridPane;
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 07.12.2017
  */
-public class ManageBookingsController {
+public class ManageBookingsController implements Initializable {
 
     boolean gridSeatsStartVisibility = true;
     String selectedSeat = "";
@@ -38,12 +43,20 @@ public class ManageBookingsController {
     @FXML
     ComboBox<String> filmDropDownList, timeDropDownList;
 
-    @FXML
-    void initialize() throws IOException {
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+        
+    	
+    	try {
+			personaliseScene();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
 
-        personaliseScene();
-    }
-
+	}
+    
+   
     // getting the index of the seats
     @FXML
     private void getSeatIndex(MouseEvent e) {
@@ -63,6 +76,33 @@ public class ManageBookingsController {
     @FXML
     private void bookSeat(MouseEvent e) {
 
+    	
+    	  JSONObject current = Main.readJSONFile("bookingsJSON.txt");
+          
+          ArrayList<BookingHistoryItem> bookings = Main.getBookingList();
+
+          
+          for(BookingHistoryItem c : bookings){
+
+          	if(c.getDate().equals(datePicker.getValue().toString()) && 
+          	   c.getFilm().equals(filmDropDownList.getValue().toString()) &&
+          	   c.getTime().equals(timeDropDownList.getValue().toString())){
+          		
+          		System.out.println(c.getSeat());
+          		
+          	}
+          		
+          	
+          	
+          	
+          	
+          	
+          }
+    	
+    	
+    	
+    	
+    	
     }
 
     @FXML
