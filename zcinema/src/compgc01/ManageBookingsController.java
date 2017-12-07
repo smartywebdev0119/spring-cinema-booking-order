@@ -170,7 +170,7 @@ public class ManageBookingsController {
         // System.out.println(selectedFilm.getTime());
         ArrayList<String> bookedSeats = new ArrayList<String>();
         for (BookingHistoryItem booking : Main.getBookingList()) {
-            if (booking.getFilmTitle().equals(selectedFilm.getTitle()) && booking.getStatus().equals("booked")) {
+            if (booking.getFilm().equals(selectedFilm.getTitle()) && booking.getStatus().equals("booked")) {
                 String seat = booking.getSeat();
                 bookedSeats.add(seat);
             }

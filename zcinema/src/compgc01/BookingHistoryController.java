@@ -23,13 +23,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-/**
- * The controller for the Booking History Scene.
- * Implementing the interface Initializable so that the method initialize gets read at load time.
- * 
- * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 04.12.2017
- */
+// implementing the interface Initializable so that the method initialize gets read at load time
 public class BookingHistoryController implements Initializable {
 
     @FXML
@@ -171,7 +165,7 @@ public class BookingHistoryController implements Initializable {
                     if(deleteBookingValidator()){ // comparing booking's date with the current date
                         Main.modifyJSONFile("bookingsJSON.txt", selectedRowId, "status", "cancelled");
                         Main.resetBookingList();
-                        SceneCreator.launchScene("BookingHistoryScene.fxml");
+                        SceneCreator.launchScene("BookingHistory.fxml");
                         alert.close();
                     }
                     else {

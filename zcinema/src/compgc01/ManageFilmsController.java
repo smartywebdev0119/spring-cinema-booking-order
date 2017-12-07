@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +41,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 05.12.2017
+ * @since 07.12.2017
  */
 public class ManageFilmsController {
 
@@ -234,6 +235,8 @@ public class ManageFilmsController {
                     filmEndDate.getValue().equals("yyyy-mm-dd") || 
                     filmTime.getValue().equals("hh:mm"))
                 throw new InvalidFilmInputException("Please complete all fields!");
+            else if (filmStartDate.getValue().compareTo(LocalDate.now()) < 0)
+                throw new InvalidFilmInputException("Start date cannot be before today!");
             else if (filmStartDate.getValue().compareTo(filmEndDate.getValue()) > 0)
                 throw new InvalidFilmInputException("End date cannot be before start date!");
             else if (selectedImage == null)
@@ -245,7 +248,6 @@ public class ManageFilmsController {
     }
 }
 
-// FIX THIS : if image is not uploaded and all the rest is filled, there is an exception thrown in the console
 class InvalidFilmInputException extends Exception {
 
     private static final long serialVersionUID = 1L;

@@ -31,7 +31,7 @@
 				<TableColumn fx:id="status" prefWidth="70.4286168217659" text="Status" />
 				<TableColumn fx:id="firstName" prefWidth="108.25715637207031" text="First Name" />
 				<TableColumn fx:id="lastName" prefWidth="123.51396179199219" text="Last Name" />
-				<TableColumn fx:id="film" prefWidth="146.22805786132812" text="Movie" />
+				<TableColumn fx:id="film" prefWidth="146.22805786132812" text="Film" />
 				<TableColumn fx:id="date" prefWidth="91.42822265625" text="Date" />
 				<TableColumn fx:id="time" prefWidth="53.39996337890625" text="Time" />
 				<TableColumn fx:id="seat" prefWidth="52.60003662109375" text="Seat" />
