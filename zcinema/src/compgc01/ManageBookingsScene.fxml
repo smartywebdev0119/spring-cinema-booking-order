@@ -110,9 +110,9 @@
       <AnchorPane layoutY="34.0" prefHeight="378.0" prefWidth="157.0">
          <children>
             <Separator layoutX="168.0" layoutY="9.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="9.0" />
-            <Text layoutX="70.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movie" />
+            <Text layoutX="70.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Film" />
             <ComboBox fx:id="filmDropDownList" layoutX="18.0" layoutY="36.0" onAction="#populateTimeDropDownList" prefHeight="28.0" prefWidth="141.0" />
-            <Text layoutX="70.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+            <Text layoutX="70.0" layoutY="89.0" onAction="#populateTimeDropDownList" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
             <DatePicker layoutX="22.0" layoutY="100.0" prefHeight="26.0" prefWidth="133.0" />
             <Text layoutX="70.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
             <ComboBox fx:id="timeDropDownList" layoutX="18.0" layoutY="165.0" onAction="#populateSeats" prefHeight="28.0" prefWidth="141.0" />

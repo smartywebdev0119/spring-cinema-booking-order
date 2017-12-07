@@ -107,13 +107,6 @@ public class ManageBookingsController {
 
     private void personaliseScene() throws IOException {
 
-        ObservableList<String> filmTitles = FXCollections.observableArrayList();
-
-        for (Film film : Main.getFilmList()) {
-            filmTitles.add(film.getTitle());
-        }
-        filmDropDownList.setItems(filmTitles);
-
         ObservableList<String> filmScreeningTimes = FXCollections.observableArrayList("14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
         timeDropDownList.setItems(filmScreeningTimes);
@@ -126,6 +119,18 @@ public class ManageBookingsController {
 
     }
 
+    @FXML
+    private void populateFilmDropDownList (ActionEvent event) throws IOException {
+
+        ObservableList<String> filmTitles = FXCollections.observableArrayList();
+
+        for (Film film : Main.getFilmList()) {
+            filmTitles.add(film.getTitle());
+        }
+        filmDropDownList.setItems(filmTitles);
+
+    }
+    
     @FXML
     private void populateTimeDropDownList (ActionEvent event) throws IOException {
 
