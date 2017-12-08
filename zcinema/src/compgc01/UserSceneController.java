@@ -219,7 +219,6 @@ public class UserSceneController {
 
         // mapping film titles to a set of strings representing screening dates and times
         TreeMap<String, TreeSet<String>> map = new TreeMap<String, TreeSet<String>>();
-
         for (Film film: Main.getFilmList()) {
             for (BookingHistoryItem booking : Main.getBookingList()) {
                 if (film.getTitle().equals(booking.getFilm())) {
@@ -240,8 +239,9 @@ public class UserSceneController {
                 int numberOfBookingsAtSpecificDateAndTime = 0;
 
                 for (BookingHistoryItem booking : Main.getBookingList()) {
-                    if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime))
+                    if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime)){
                         numberOfBookingsAtSpecificDateAndTime++;
+                    System.out.println(booking.getFilm() + ": " + dateAndTime);}
                 }
 
                 // System.out.println(numberOfBookingsAtSpecificDateAndTime);
