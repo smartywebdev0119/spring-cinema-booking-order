@@ -74,8 +74,9 @@ public class BookingHistoryController implements Initializable {
         // length! Sort them by date istead!
         changeColor();
         
-        if (Main.isEmployee())
-            cancelBookingButton.setVisible(false);
+        // the employee should be able to delete a booking for a customer
+//        if (Main.isEmployee())
+//            cancelBookingButton.setVisible(false);
     }
 
     private void setTableColumns() {
