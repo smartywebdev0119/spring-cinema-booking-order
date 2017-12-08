@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -46,6 +47,10 @@ public class ManageBookingsController implements Initializable {
 	DatePicker datePicker;
 	@FXML
 	ComboBox<String> filmDropDownList, timeDropDownList;
+	@FXML
+	TextField bookedSeats, emptySeats, totalSeats;
+	@FXML
+	int bookedSeatsInt;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -56,13 +61,20 @@ public class ManageBookingsController implements Initializable {
 			e.printStackTrace();
 		}
 
+		// seat values  not editable plus total seats fixed at 18.
+		bookedSeats.setEditable(false);
+		emptySeats.setEditable(false);
+		totalSeats.setEditable(false);
+		totalSeats.setText("18");
 
+		//THIS MAKES THE HISTORY MESSED UP. FIND A WAY TO NOT CALL IT AND HAVE EVERYTHING WORK!
 		JSONObject current = Main.readJSONFile("bookingsJSON.txt");
-
-		HashSet<BookingHistoryItem> bookings = Main.getBookingList();
-
+		
 		// Action that is fired whenever the time is changed. 
 		timeDropDownList.setOnAction((event) -> {
+
+			// resetting the number of booked seats for every date, movie, and time
+			bookedSeatsInt = 0;
 
 			// setting everything to black every time the user changes movie
 			for (int i = 0; i < 18; i++) {
@@ -71,7 +83,7 @@ public class ManageBookingsController implements Initializable {
 			}
 
 			// this for loop spots the booked seats for a specific film, date, and time and turn them into grey
-			for (BookingHistoryItem c : bookings) {
+			for (BookingHistoryItem c : Main.getBookingList()) {
 				// making sure we do not include the cancelled bookings
 				if (c.getStatus().equals("booked")) {
 					// checking the bookings file film, date, and time with the user's choice
@@ -83,13 +95,17 @@ public class ManageBookingsController implements Initializable {
 							if (gridSeats.getChildren().get(i).getId().equals(c.getSeat())) {
 								gridSeats.getChildren().get(i).setStyle(
 										"-fx-fill:#c9b3b3; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
+								// getting the number of the booked seats
+								bookedSeatsInt++;
 							}
 						}
 
 					}
 				}
 			}
-
+			// setting the number of the booked seats and empty seats every time there is an action on the date
+			bookedSeats.setText(Integer.toString(bookedSeatsInt));
+			emptySeats.setText(Integer.toString(18 - bookedSeatsInt));
 		});
 
 	}
@@ -133,36 +149,6 @@ public class ManageBookingsController implements Initializable {
 						.setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
 			}
 		}
-	}
-
-	@FXML
-	private void turnSeatRed(MouseEvent e) {
-
-		// Alert for booked seat
-		/*
-		 * if(((Node) e.getSource()).getStyle().length() == 55){ Alert alert =
-		 * new Alert(AlertType.WARNING, "The seat " + ((Node)
-		 * e.getSource()).getId() + " is booked already!", ButtonType.OK);
-		 * alert.showAndWait(); if (alert.getResult() == ButtonType.OK) {
-		 * alert.close(); } }
-		 * 
-		 * for (Node node : gridSeats.getChildren()) { node.
-		 * setStyle("-fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-		 * }
-		 * 
-		 * if (((Node) e.getSource()).getStyle().length() == 55) { ((Node)
-		 * e.getSource()).
-		 * setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;"
-		 * ); } else { ((Node) e.getSource()).
-		 * setStyle("-fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-		 * }
-		 * 
-		 * // BOOKED SEATS COLORS CAN'T TURN BLACK!! // for(Integer id :
-		 * redFixedSeats){ // gridSeats.getChildren().get(id).
-		 * setStyle("-fx-fill:#c2a9a9; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;"
-		 * ); // }
-		 * 
-		 */
 	}
 
 	@FXML

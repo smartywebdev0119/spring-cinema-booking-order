@@ -23,11 +23,11 @@
       <AnchorPane layoutX="-1.0" layoutY="31.0" prefHeight="371.0" prefWidth="700.0">
          <children>
             <Label layoutX="537.0" layoutY="335.0" text="Total seats:" />
-            <TextField layoutX="618.0" layoutY="330.0" prefHeight="26.0" prefWidth="36.0" />
+            <TextField fx:id="totalSeats" layoutX="618.0" layoutY="330.0" prefHeight="26.0" prefWidth="36.0" />
             <Label layoutX="215.0" layoutY="335.0" text="Booked seats:" />
-            <TextField layoutX="312.0" layoutY="331.0" prefHeight="26.0" prefWidth="36.0" />
+            <TextField fx:id="bookedSeats" layoutX="312.0" layoutY="331.0" prefHeight="26.0" prefWidth="36.0" />
             <Label layoutX="378.0" layoutY="335.0" text="Empty seats:" />
-            <TextField layoutX="469.0" layoutY="331.0" prefHeight="26.0" prefWidth="36.0" />
+            <TextField fx:id="emptySeats" layoutX="469.0" layoutY="331.0" prefHeight="26.0" prefWidth="36.0" />
             <ImageView fitHeight="191.0" fitWidth="530.0" layoutX="173.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@./res/images/backgroundImages/curtains.png" />

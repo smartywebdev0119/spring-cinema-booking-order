@@ -50,11 +50,10 @@ public class BookingHistoryController implements Initializable {
     	
         setTableColumns();
         
-        // we read from the JSONfile in the previous page, being the ManageBookingsScene
-        // if we read from the JSONfile again here, we copy twice the data in the hashmap, as it is static!
-//        Main.readJSONFile("bookingsJSON.txt");
+        // This is called in the previous page to read the booked seats.
+       // Main.readJSONFile("bookingsJSON.txt");
+        
         // storing elements in the ObservableList
-
         if (Main.isEmployee()){
             populateTableList = FXCollections.observableArrayList(Main.getBookingList());
         }
