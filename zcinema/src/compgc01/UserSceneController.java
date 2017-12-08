@@ -239,10 +239,11 @@ public class UserSceneController {
                 int numberOfBookingsAtSpecificDateAndTime = 0;
 
                 for (BookingHistoryItem booking : Main.getBookingList()) {
+                	if(booking.getStatus().equals("booked")){
                     if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime)){
                         numberOfBookingsAtSpecificDateAndTime++;
                     System.out.println(booking.getFilm() + ": " + dateAndTime);}
-                }
+                }}
 
                 // System.out.println(numberOfBookingsAtSpecificDateAndTime);
 
