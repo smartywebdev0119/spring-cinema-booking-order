@@ -9,16 +9,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
-public class BookingSummaryController extends ManageBookingsController implements Initializable {
+public class BookingSummaryController implements Initializable {
 	
 	@FXML
-	Text nameSummary, filmSummary, dateSummary, timeSummary, seatSummary;
+	static Text nameSummary, filmSummary, dateSummary, timeSummary, seatSummary;
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		ManageBookingsController mbc = new ManageBookingsController();
+		
 		nameSummary.setText((Main.getCurrentUser().getFullName()));
+		
+//		filmSummary.setText(mbc.filmDropDownList.getValue().toString());
 //		filmSummary.setText(super.filmDropDownList.getValue().toString());
 //		dateSummary.setText(super.datePicker.getValue().toString());
 //		timeSummary.setText(super.timeDropDownList.getValue().toString());

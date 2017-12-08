@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 /**
  * The controller for the Login Scene.
@@ -24,6 +25,8 @@ public class MainController {
     PasswordField passwordBox;
     @FXML
     Button logInButton, logOutButton;
+    @FXML
+    Text wrongCredentials;
 
     @FXML
     public void exitButton(MouseEvent event) {
@@ -47,11 +50,15 @@ public class MainController {
                 Main.setCurrentUser(u);
                 if (u.getType().equals("employee")) {
                     Main.setEmployeeMode(true);
-                }
+                } else
+                	wrongCredentials.setVisible(true);
+                	
 
                 // loading user scene
                 SceneCreator.launchScene("UserScene.fxml");
             }
+            else
+            wrongCredentials.setVisible(true);
         }
     }
 }

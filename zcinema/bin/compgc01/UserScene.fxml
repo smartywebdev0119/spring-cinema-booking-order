@@ -54,7 +54,7 @@
       </AnchorPane>
       <AnchorPane id="background" layoutX="148.0" layoutY="31.0" prefHeight="371.0" prefWidth="551.0">
         <children>
-            <Button fx:id="manageFilmsButton" layoutX="43.0" layoutY="42.0" minWidth="30.0" mnemonicParsing="false" onAction="#manageMoviesClick" prefHeight="43.0" prefWidth="186.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Manage Films" textFill="WHITE">
+            <Button fx:id="manageFilmsButton" layoutX="24.0" layoutY="10.0" minWidth="30.0" mnemonicParsing="false" onAction="#manageMoviesClick" prefHeight="43.0" prefWidth="525.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Manage Films" textFill="WHITE">
                <graphic>
                   <MaterialIconView fill="WHITE" glyphName="MOVIE" size="20" />
                </graphic>
@@ -62,7 +62,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="manageBookingsButton" layoutX="343.0" layoutY="42.0" minWidth="30.0" mnemonicParsing="false" onAction="#manageBookingsClick" prefHeight="43.0" prefWidth="186.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Manage Bookings" textFill="WHITE">
+            <Button fx:id="manageBookingsButton" layoutX="24.0" layoutY="60.0" minWidth="30.0" mnemonicParsing="false" onAction="#manageBookingsClick" prefHeight="43.0" prefWidth="525.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Manage Bookings" textFill="WHITE">
                <graphic>
                   <MaterialIconView fill="WHITE" glyphName="ASSIGNMENT" size="20" />
                </graphic>
@@ -70,7 +70,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="exportFilmList" layoutX="43.0" layoutY="227.0" minWidth="30.0" mnemonicParsing="false" onAction="#exportFilmList" prefHeight="43.0" prefWidth="186.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Export Film List" textFill="WHITE" visible="true">
+            <Button fx:id="exportFilmList" layoutX="24.0" layoutY="110.0" minWidth="30.0" mnemonicParsing="false" onAction="#exportFilmList" prefHeight="43.0" prefWidth="525.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Export Film List" textFill="WHITE" visible="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -78,11 +78,6 @@
                   <MaterialDesignIconView fill="WHITE" glyphName="FILE_EXPORT" size="20" />
                </graphic>
             </Button>
-            <ImageView fitHeight="158.0" fitWidth="240.0" layoutX="312.0" layoutY="211.0">
-               <image>
-                  <Image url="@res/images/backgroundImages/ucllywood.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="57.0" prefWidth="702.0">
