@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import org.json.simple.JSONObject;
 
@@ -46,19 +47,23 @@ public class BookingHistoryController implements Initializable {
     // method that gets executed at load time
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+    	
         setTableColumns();
-        Main.readJSONFile("bookingsJSON.txt");
+        
+        // we read from the JSONfile in the previous page, being the ManageBookingsScene
+        // if we read from the JSONfile again here, we copy twice the data in the hashmap, as it is static!
+//        Main.readJSONFile("bookingsJSON.txt");
         // storing elements in the ObservableList
 
-        if (Main.isEmployee())
+        if (Main.isEmployee()){
             populateTableList = FXCollections.observableArrayList(Main.getBookingList());
+        }
         else {
             ArrayList<BookingHistoryItem> currentCustomerBookings = new ArrayList<BookingHistoryItem>();
             for (BookingHistoryItem booking : Main.getBookingList()) {
-                if (booking.getUsername().equals(Main.getCurrentUser().getUsername()))
+                if (booking.getUsername().equals(Main.getCurrentUser().getUsername())){
                     currentCustomerBookings.add(booking);
-            }
+            }}
             populateTableList = FXCollections.observableArrayList(currentCustomerBookings);
         }
 
