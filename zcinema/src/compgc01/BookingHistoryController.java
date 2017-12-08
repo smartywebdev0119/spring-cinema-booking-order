@@ -73,6 +73,9 @@ public class BookingHistoryController implements Initializable {
         // the rows of the list are automatically sorted by key value
         // length! Sort them by date istead!
         changeColor();
+        
+        if (Main.isEmployee())
+            cancelBookingButton.setVisible(false);
     }
 
     private void setTableColumns() {
