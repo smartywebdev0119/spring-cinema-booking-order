@@ -25,7 +25,9 @@ import javafx.stage.StageStyle;
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 05.12.2017
- * Uses open-source icons made by http://www.jensd.de/wordpress/.
+ * 
+ * Uses open-source JavaFX icons made by http://www.jensd.de/wordpress/
+ * and a .png icon made by https://thenounproject.com/term/csv-file/56841/.
  */
 public class Main extends Application {
 

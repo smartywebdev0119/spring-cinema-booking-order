@@ -38,7 +38,7 @@ import javafx.util.Pair;
 public class UserSceneController {
 
     @FXML
-    Button logOutButton, manageMoviesButton, manageBookingsButton, sendEmailButton, exportFilmList;
+    Button logOutButton, manageFilmsButton, manageBookingsButton, sendEmailButton, exportFilmList;
     @FXML
     Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
     @FXML
@@ -114,7 +114,7 @@ public class UserSceneController {
             titleLabel.setText("Customer");
 
             windowTitleLabel.setText("Customer View");
-            manageMoviesButton.setText("View Films");
+            manageFilmsButton.setText("View Films");
             manageBookingsButton.setText("View Bookings");
             exportFilmList.setVisible(false);
 
@@ -220,12 +220,12 @@ public class UserSceneController {
 
         // clearing the export file, in case it exists from before
         PrintWriter pw = new PrintWriter(new FileOutputStream(
-                new File(Main.getPath() + "res/export.csv")));
+                new File(Main.getPath() + "bookings.csv")));
         pw.close();
 
         // creating the printwriter using the append option now
         pw = new PrintWriter(new FileOutputStream(
-                new File(Main.getPath() + "res/export.csv"), 
+                new File(Main.getPath() + "bookings.csv"), 
                 true));
 
         // mapping film titles to a set of strings representing screening dates and times
@@ -267,7 +267,7 @@ public class UserSceneController {
         // creating a custom dialog to inform the user
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Successful Export!");
-        dialog.setHeaderText("Exported to 'export.csv' file.");
+        dialog.setHeaderText("Exported to 'bookings.csv' file.");
 
         // setting the icon
         // image credit: https://thenounproject.com/term/csv-file/56841/
