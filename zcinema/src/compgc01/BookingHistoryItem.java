@@ -3,9 +3,9 @@ package compgc01;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * A class represeting a booking history item as it appears to the customer.
+ * A class represeting a booking history item (a single booking).
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 08.12.2017
  */
 public class BookingHistoryItem {
 
@@ -23,7 +23,6 @@ public class BookingHistoryItem {
         this.seat = new SimpleStringProperty(price);
         this.idNumber = new SimpleStringProperty(idNumber);
         this.username = username;
-        // this.username = customer.getUsername();
     }
 
     public String getStatus() {

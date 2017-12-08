@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
  * The controller for the Login Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 08.12.2017
  */
 public class MainController {
 
@@ -49,7 +49,7 @@ public class MainController {
                     Main.setEmployeeMode(true);
                 }
 
-                // loading new scene
+                // loading user scene
                 SceneCreator.launchScene("UserScene.fxml");
             }
         }

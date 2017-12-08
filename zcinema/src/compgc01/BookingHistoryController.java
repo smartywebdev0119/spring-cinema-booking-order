@@ -23,7 +23,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-// implementing the interface Initializable so that the method initialize gets read at load time
+/**
+ * The controller for the Booking History Scene.
+ * Implementing the interface Initializable, so that the method initialize gets read at load time.
+ * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
+ * @since 08.12.2017
+ */
 public class BookingHistoryController implements Initializable {
 
     @FXML
@@ -48,6 +53,7 @@ public class BookingHistoryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         setTableColumns();
+        Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
         // storing elements in the ObservableList
 

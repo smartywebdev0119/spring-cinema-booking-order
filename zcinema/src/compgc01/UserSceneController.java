@@ -257,7 +257,7 @@ public class UserSceneController {
 
                 // System.out.println(numberOfBookingsAtSpecificDateAndTime);
 
-                // printing to export text file
+                // printing to export.csv file
                 pw.append("title: " + filmTitle + ", " + dateAndTime + ", booked seats: " + numberOfBookingsAtSpecificDateAndTime + ", available seats: " + (18 - numberOfBookingsAtSpecificDateAndTime) + "\n");
             }
         }
