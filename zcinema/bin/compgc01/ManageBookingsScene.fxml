@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,12 +21,9 @@
    <children>
       <AnchorPane layoutX="-1.0" layoutY="31.0" prefHeight="371.0" prefWidth="700.0">
          <children>
-            <Label layoutX="537.0" layoutY="335.0" text="Total seats:" />
-            <TextField fx:id="totalSeats" layoutX="618.0" layoutY="330.0" prefHeight="26.0" prefWidth="36.0" />
-            <Label layoutX="215.0" layoutY="335.0" text="Booked seats:" />
-            <TextField fx:id="bookedSeats" layoutX="312.0" layoutY="331.0" prefHeight="26.0" prefWidth="36.0" />
-            <Label layoutX="378.0" layoutY="335.0" text="Empty seats:" />
-            <TextField fx:id="emptySeats" layoutX="469.0" layoutY="331.0" prefHeight="26.0" prefWidth="36.0" />
+            <Label fx:id="totalSeatsLabel" layoutX="537.0" layoutY="335.0" text="Total seats: 18" />
+            <Label fx:id="bookedSeatsLabel" layoutX="215.0" layoutY="335.0" text="Booked seats: 0" />
+            <Label fx:id="availableSeatsLabel" layoutX="378.0" layoutY="335.0" text="Available seats: 18" />
             <ImageView fitHeight="191.0" fitWidth="530.0" layoutX="173.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@./res/images/backgroundImages/curtains.png" />
@@ -35,7 +31,7 @@
             </ImageView>
             <AnchorPane layoutX="195.0" layoutY="48.0" prefHeight="256.0" prefWidth="488.0">
                <children>
-                  <GridPane fx:id="gridSeats" alignment="CENTER" layoutX="61.0" layoutY="69.0" onMouseClicked="#getSeatIndex" prefHeight="165.0" prefWidth="363.0">
+                  <GridPane fx:id="gridSeats" alignment="CENTER" layoutX="61.0" layoutY="69.0" prefHeight="165.0" prefWidth="363.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="83.681396484375" minWidth="10.0" prefWidth="52.318603515625" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.35635375976562" minWidth="10.0" prefWidth="54.9779052734375" />
@@ -50,24 +46,24 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <MaterialIconView fx:id="A1" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" wrappingWidth="39.17034912109375" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <MaterialIconView fx:id="A2" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                      	<MaterialIconView fx:id="A3" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-               			<MaterialIconView fx:id="A4" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                       	<MaterialIconView fx:id="A5" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                       	<MaterialIconView fx:id="A6" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-                        <MaterialIconView fx:id="B1" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="B2" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="B3" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="B4" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="B5" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="B6" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                        <MaterialIconView fx:id="C1" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="C2" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="C3" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="C4" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="C5" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <MaterialIconView fx:id="C6" glyphName="EVENT_SEAT" onMouseClicked="#bookSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="A1" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" wrappingWidth="39.17034912109375" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <MaterialIconView fx:id="A2" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                      	<MaterialIconView fx:id="A3" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+               			<MaterialIconView fx:id="A4" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                       	<MaterialIconView fx:id="A5" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                       	<MaterialIconView fx:id="A6" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+                        <MaterialIconView fx:id="B1" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B2" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B3" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B4" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B5" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="B6" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <MaterialIconView fx:id="C1" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C2" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C3" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C4" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C5" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <MaterialIconView fx:id="C6" glyphName="EVENT_SEAT" onMouseClicked="#selectSeat" size="40" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <Text layoutX="37.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A" />

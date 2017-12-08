@@ -149,7 +149,15 @@ public class Main extends Application {
 
         try {
             JSONObject items = readJSONFile(file);
-            JSONObject itemToEdit = (JSONObject) items.get(identifier);
+            JSONObject itemToEdit = null;
+            
+            if (items.get(identifier) == null) {
+                itemToEdit = new JSONObject();
+                items.put(identifier, itemToEdit);
+            }
+            else
+                itemToEdit = (JSONObject) items.get(identifier);
+            
             itemToEdit.put(attribute, newValue);
 
             String path = URLDecoder.decode(getPath() + "res/" + file, "UTF-8");
