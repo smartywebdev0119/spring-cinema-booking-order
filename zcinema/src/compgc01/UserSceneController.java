@@ -20,16 +20,20 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.util.Pair;
 
 /**
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 07.12.2017
+ * @since 08.12.2017
  */
 public class UserSceneController {
 
@@ -204,11 +208,11 @@ public class UserSceneController {
     }
 
     @FXML
-    void exportFilmList (ActionEvent e) throws FileNotFoundException {
+    void exportFilmList (ActionEvent e) throws IOException {
 
         Main.resetFilmList();
         Main.resetBookingList();
-        
+
         // reading the films and bookings from the JSON file to ensure we are working with the most recent version
         // and there is no duplication
         Main.readJSONFile("filmsJSON.txt");
@@ -216,12 +220,12 @@ public class UserSceneController {
 
         // clearing the export file, in case it exists from before
         PrintWriter pw = new PrintWriter(new FileOutputStream(
-                new File(Main.getPath() + "res/export.txt")));
+                new File(Main.getPath() + "res/export.csv")));
         pw.close();
 
         // creating the printwriter using the append option now
         pw = new PrintWriter(new FileOutputStream(
-                new File(Main.getPath() + "res/export.txt"), 
+                new File(Main.getPath() + "res/export.csv"), 
                 true));
 
         // mapping film titles to a set of strings representing screening dates and times
@@ -233,7 +237,7 @@ public class UserSceneController {
                     if (!map.containsKey(film.getTitle()))
                         map.put(booking.getFilm(), new TreeSet<String>());
 
-                        map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
+                    map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
                 }
             }
         }
@@ -254,10 +258,27 @@ public class UserSceneController {
                 // System.out.println(numberOfBookingsAtSpecificDateAndTime);
 
                 // printing to export text file
-                pw.append("title: " + filmTitle + ", " + dateAndTime + ", bookings: " + numberOfBookingsAtSpecificDateAndTime + "\n");
+                pw.append("title: " + filmTitle + ", " + dateAndTime + ", booked seats: " + numberOfBookingsAtSpecificDateAndTime + ", available seats: " + (18 - numberOfBookingsAtSpecificDateAndTime) + "\n");
             }
         }
 
         pw.close();
+
+        // creating a custom dialog to inform the user
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Successful Export!");
+        dialog.setHeaderText("Exported to 'export.csv' file.");
+
+        // setting the icon
+        // image credit: https://thenounproject.com/term/csv-file/56841/
+        File file = new File(URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/csv.png", "UTF-8"));
+        Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+        dialog.setGraphic(new ImageView(img));
+
+        // setting the button type
+        ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType);
+
+        dialog.showAndWait();
     }
 }
