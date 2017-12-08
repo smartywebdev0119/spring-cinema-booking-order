@@ -2,13 +2,11 @@ package compgc01;
 
 import java.io.*;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import org.json.simple.JSONObject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,8 +32,8 @@ import javafx.scene.layout.GridPane;
  */
 public class ManageBookingsController implements Initializable {
 
-    int bookedSeatsCount = 0;
-    String selectedSeat = "";
+    int bookedSeatsCount;
+    ArrayList<String> selectedSeats;
 
     @FXML
     GridPane gridSeats;
@@ -59,6 +57,8 @@ public class ManageBookingsController implements Initializable {
 
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
+        bookedSeatsCount = 0;
+        selectedSeats = new ArrayList<String>();
 
         // getting the most recent version of the bookings file
         Main.resetBookingList();
@@ -106,6 +106,7 @@ public class ManageBookingsController implements Initializable {
 
     @FXML
     private void selectSeat(MouseEvent e) {
+
         // firing a pop up message if user clicks on already booked seat
         if (((Node) e.getSource()).getStyle()
                 .equals("-fx-fill:#c9b3b3; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
@@ -121,14 +122,13 @@ public class ManageBookingsController implements Initializable {
                     .equals("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
                 ((Node) e.getSource())
                 .setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-                selectedSeat = "";
+                selectedSeats.remove(((Node) e.getSource()).getId());
             }
             // turning seat red if it is black - selecting it
             else {
                 ((Node) e.getSource())
                 .setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-                selectedSeat = ((Node) e.getSource()).getId();
-                // System.out.println(selectedSeat);
+                selectedSeats.add(((Node) e.getSource()).getId());
             }
         }
     }
@@ -136,21 +136,25 @@ public class ManageBookingsController implements Initializable {
     @FXML
     private void bookSeat(MouseEvent e) {
 
-        if (selectedSeat.equals(""))
+        if (selectedSeats.size() == 0)
             return;
-        
-        String newBookingId = Integer.toString(Main.getBookingList().size() + 1);
-        // System.out.println(newBookingId);
-        
-        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "username", Main.getCurrentUser().getUsername());
-        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "date", datePicker.getValue().toString());
-        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "seat", selectedSeat);
-        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "time", timeDropDownList.getValue());
-        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "film", filmDropDownList.getValue());
-        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "status", "booked");
 
-        // Main.resetBookingList();
-        // Main.readJSONFile("bookingsJSON.txt");
+        // getting the latest booking id and incrementing by one
+        int newBookingId = Main.getBookingList().size() + 1;
+        // System.out.println(newBookingId);
+
+        for (int i = newBookingId; i < (newBookingId + selectedSeats.size()); i++) {
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Main.getCurrentUser().getUsername());
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "date", datePicker.getValue().toString());
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "seat", selectedSeats.get(i - newBookingId));
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "time", timeDropDownList.getValue());
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "film", filmDropDownList.getValue());
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "status", "booked");
+        }
+
+        selectedSeats.clear();
+        Main.resetBookingList();
+        Main.readJSONFile("bookingsJSON.txt");
     }
 
     @FXML
@@ -167,15 +171,6 @@ public class ManageBookingsController implements Initializable {
 
     private void personaliseScene() throws IOException {
 
-        // ObservableList<String> filmScreeningTimes = FXCollections.observableArrayList("14:00", "15:00", "16:00",
-        //		"17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00");
-        // timeDropDownList.setItems(filmScreeningTimes);
-
-        /*
-         * timeDropDownList.getSelectionModel().selectedItemProperty().
-         * addListener( (options, oldValue, newValue) -> {
-         * System.out.println(newValue); });
-         */
     }
 
     @FXML
@@ -197,20 +192,22 @@ public class ManageBookingsController implements Initializable {
     private void populateTimeDropDownList(ActionEvent event) throws IOException {
 
         Film selectedFilm = null;
-        String selectedFilmTitle = filmDropDownList.getValue();
+        String selectedFilmTitle = "";
 
-        if (selectedFilmTitle.equals(null))
-            return;
-
-        for (Film film : Main.getFilmList()) {
-            if (film.getTitle().equals(selectedFilmTitle)) {
-                selectedFilm = film;
-                break;
+        try {
+            selectedFilmTitle = filmDropDownList.getValue();
+            for (Film film : Main.getFilmList()) {
+                if (film.getTitle().equals(selectedFilmTitle)) {
+                    selectedFilm = film;
+                    break;
+                }
             }
-        }
 
-        timeDropDownList.setValue(selectedFilm.getTime());
-        // timeDropDownList.setEditable(false);
-        timeDropDownList.setDisable(true);
+            timeDropDownList.setValue(selectedFilm.getTime());
+            timeDropDownList.setDisable(true);
+        }
+        catch (NullPointerException ex) {
+            return;
+        }
     }
 }
