@@ -239,6 +239,7 @@ public class UserSceneController {
                 int numberOfBookingsAtSpecificDateAndTime = 0;
 
                 for (BookingHistoryItem booking : Main.getBookingList()) {
+
                     if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime) && !booking.getStatus().equals("cancelled")) {
                         numberOfBookingsAtSpecificDateAndTime++;
                     }

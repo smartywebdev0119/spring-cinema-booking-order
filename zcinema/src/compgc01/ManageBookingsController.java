@@ -12,8 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -23,6 +26,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * The controller for the Bookings Scene.
@@ -35,6 +40,8 @@ public class ManageBookingsController implements Initializable {
     int bookedSeatsCount;
     ArrayList<String> selectedSeats;
 
+    @FXML
+    static Stage stage;
     @FXML
     GridPane gridSeats;
     @FXML
@@ -140,7 +147,7 @@ public class ManageBookingsController implements Initializable {
     }
 
     @FXML
-    private void bookSeat(MouseEvent e) {
+    private void bookSeat(MouseEvent e) throws IOException {
 
         if (selectedSeats.size() == 0)
             return;
@@ -161,6 +168,20 @@ public class ManageBookingsController implements Initializable {
         selectedSeats.clear();
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
+        
+        /////////////
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BookingSummary.fxml"));
+        Parent root =(Parent) loader.load();
+        Scene scene = new Scene(root, 400, 400);
+    	stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+        ///////////////////
+    }
+    
+    static Stage getStage(){
+    	return stage;
     }
 
     @FXML
