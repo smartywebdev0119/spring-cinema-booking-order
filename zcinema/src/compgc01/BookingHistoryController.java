@@ -51,7 +51,7 @@ public class BookingHistoryController implements Initializable {
         setTableColumns();
         
         // This is called in the previous page to read the booked seats.
-       // Main.readJSONFile("bookingsJSON.txt");
+        Main.readJSONFile("bookingsJSON.txt");
         
         // storing elements in the ObservableList
         if (Main.isEmployee()){
@@ -169,7 +169,7 @@ public class BookingHistoryController implements Initializable {
                     if(deleteBookingValidator()){ // comparing booking's date with the current date
                         Main.modifyJSONFile("bookingsJSON.txt", selectedRowId, "status", "cancelled");
                         Main.resetBookingList();
-                        SceneCreator.launchScene("BookingHistory.fxml");
+                        SceneCreator.launchScene("BookingHistoryScene.fxml");
                         alert.close();
                     }
                     else {

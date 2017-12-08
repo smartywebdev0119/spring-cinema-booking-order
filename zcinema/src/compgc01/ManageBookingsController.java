@@ -35,9 +35,7 @@ import javafx.scene.layout.GridPane;
  */
 public class ManageBookingsController implements Initializable {
 
-	boolean gridSeatsStartVisibility = true;
 	String selectedSeat = "";
-	ArrayList<Integer> redFixedSeats = new ArrayList<Integer>(5);
 
 	@FXML
 	GridPane gridSeats;
@@ -67,8 +65,8 @@ public class ManageBookingsController implements Initializable {
 		totalSeats.setEditable(false);
 		totalSeats.setText("18");
 
-		//THIS MAKES THE HISTORY MESSED UP. FIND A WAY TO NOT CALL IT AND HAVE EVERYTHING WORK!
-		JSONObject current = Main.readJSONFile("bookingsJSON.txt");
+		//THIS MAKES THE HISTORY MESSED UP. FIND A WAY TO NOT KEEP LOADING THE ARRAY BOOKINGLIST
+		Main.readJSONFile("bookingsJSON.txt");
 		
 		// Action that is fired whenever the time is changed. 
 		timeDropDownList.setOnAction((event) -> {
