@@ -2,11 +2,10 @@ package compgc01;
 
 import java.io.*;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import org.json.simple.JSONObject;
@@ -23,7 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -35,202 +34,183 @@ import javafx.scene.layout.GridPane;
  */
 public class ManageBookingsController implements Initializable {
 
-	String selectedSeat = "";
+    int bookedSeatsCount = 0;
+    String selectedSeat = "";
 
-	@FXML
-	GridPane gridSeats;
-	@FXML
-	Button backButton;
-	@FXML
-	DatePicker datePicker;
-	@FXML
-	ComboBox<String> filmDropDownList, timeDropDownList;
-	@FXML
-	TextField bookedSeats, emptySeats, totalSeats;
-	@FXML
-	int bookedSeatsInt;
+    @FXML
+    GridPane gridSeats;
+    @FXML
+    Button backButton;
+    @FXML
+    DatePicker datePicker;
+    @FXML
+    ComboBox<String> filmDropDownList, timeDropDownList;
+    @FXML
+    Label bookedSeatsLabel, availableSeatsLabel, totalSeatsLabel;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-		try {
-			personaliseScene();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        try {
+            personaliseScene();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		// seat values  not editable plus total seats fixed at 18.
-		bookedSeats.setEditable(false);
-		emptySeats.setEditable(false);
-		totalSeats.setEditable(false);
-		totalSeats.setText("18");
+        // setting the total number of seats to a value of 18
+        totalSeatsLabel.setText("Total seats: 18");
 
-		Main.resetBookingList();
-		Main.readJSONFile("bookingsJSON.txt");
-		
-		// Action that is fired whenever the time is changed. 
-		timeDropDownList.setOnAction((event) -> {
+        // getting the most recent version of the bookings file
+        Main.resetBookingList();
+        Main.readJSONFile("bookingsJSON.txt");
 
-			// resetting the number of booked seats for every date, movie, and time
-			bookedSeatsInt = 0;
+        // action that is fired whenever the time is changed
+        timeDropDownList.setOnAction((event) -> {
 
-			// setting everything to black every time the user changes movie
-			for (int i = 0; i < 18; i++) {
-				gridSeats.getChildren().get(i)
-						.setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-			}
+            // resetting the number of booked seats for every date, film, and time
+            bookedSeatsCount = 0;
 
-			// this for loop spots the booked seats for a specific film, date, and time and turn them into grey
-			for (BookingHistoryItem c : Main.getBookingList()) {
-				// making sure we do not include the cancelled bookings
-				if (c.getStatus().equals("booked")) {
-					// checking the bookings file film, date, and time with the user's choice
-					if (c.getDate().equals(datePicker.getValue().toString())
-							&& c.getFilm().equals(filmDropDownList.getValue().toString())
-							&& c.getTime().equals(timeDropDownList.getValue().toString())) {
-						//turning the booked seats gray
-						for (int i = 0; i < 18; i++) {
-							if (gridSeats.getChildren().get(i).getId().equals(c.getSeat())) {
-								gridSeats.getChildren().get(i).setStyle(
-										"-fx-fill:#c9b3b3; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-								// getting the number of the booked seats
-								bookedSeatsInt++;
-							}
-						}
+            // resetting all seats to black every time the user selects a new screening time
+            for (int i = 0; i < 18; i++) {
+                gridSeats.getChildren().get(i)
+                .setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
+            }
 
-					}
-				}
-			}
-			// setting the number of the booked seats and empty seats every time there is an action on the date
-			bookedSeats.setText(Integer.toString(bookedSeatsInt));
-			emptySeats.setText(Integer.toString(18 - bookedSeatsInt));
-		});
+            // spotting the booked seats for a specific film, date, and time and turning their colour to grey
+            for (BookingHistoryItem booking : Main.getBookingList()) {
+                // making sure we do not include the cancelled bookings
+                if (booking.getStatus().equals("booked")) {
+                    // checking if the booking's film, date, and time match the user's choice
+                    if (booking.getDate().equals(datePicker.getValue().toString())
+                            && booking.getFilm().equals(filmDropDownList.getValue())
+                            && booking.getTime().equals(timeDropDownList.getValue())) {
+                        // turning the booked seat grey
+                        for (int i = 0; i < 18; i++) {
+                            if (gridSeats.getChildren().get(i).getId().equals(booking.getSeat())) {
+                                gridSeats.getChildren().get(i).setStyle(
+                                        "-fx-fill:#c9b3b3; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
+                                // incrementing the count of the booked seats
+                                bookedSeatsCount++;
+                            }
+                        }
+                    }
+                }
+            }
 
-	}
+            // setting the number of the booked seats and empty seats every time there is an action
+            // and the specific screening (film, date, and time) changes
+            bookedSeatsLabel.setText("Booked seats: " + bookedSeatsCount);
+            availableSeatsLabel.setText("Available seats: " + (18 - bookedSeatsCount));
+        });
+    }
 
-	// getting the index of a seat
-	@FXML
-	private void getSeatIndex(MouseEvent e) {
+    @FXML
+    private void selectSeat(MouseEvent e) {
+        // firing a pop up message if user clicks on already booked seat
+        if (((Node) e.getSource()).getStyle()
+                .equals("-fx-fill:#c9b3b3; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
+            Alert alert = new Alert(AlertType.WARNING,
+                    "The seat " + ((Node) e.getSource()).getId() + " is booked already!", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        } else {
+            // turning seat back to black if it is red - unselecting it
+            if (((Node) e.getSource()).getStyle()
+                    .equals("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
+                ((Node) e.getSource())
+                .setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
+                selectedSeat = "";
+            }
+            // turning seat red if it is black - selecting it
+            else {
+                ((Node) e.getSource())
+                .setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
+                selectedSeat = ((Node) e.getSource()).getId();
+                // System.out.println(selectedSeat);
+            }
+        }
+    }
 
-		try {
-			Node target = (Node) e.getTarget();
-			int colIndex = GridPane.getColumnIndex(target);
-			int rowIndex = GridPane.getRowIndex(target);
-			// System.out.print(rowIndex + ",");
-			// System.out.print(colIndex + "\n");
-			selectedSeat = "" + rowIndex + colIndex;
-		} catch (NullPointerException ex) {
-			System.out.println("Please click on a seat!");
-		}
-	}
+    @FXML
+    private void bookSeat(MouseEvent e) {
 
-	@FXML
-	private void bookSeat(MouseEvent e) {
-		// firing a pop up message if user clicks on already booked seat
-		if (((Node) e.getSource()).getStyle()
-				.equals("-fx-fill:#c9b3b3; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
-			Alert alert = new Alert(AlertType.WARNING,
-					"The seat " + ((Node) e.getSource()).getId() + " is booked already!", ButtonType.OK);
-			alert.showAndWait();
-			if (alert.getResult() == ButtonType.OK) {
-				alert.close();
-			}
-		} else {
-			// turning seat black if it is red
-			if (((Node) e.getSource()).getStyle()
-					.equals("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
-				((Node) e.getSource())
-						.setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-				// turning seat red if it is black
-			} else {
-				((Node) e.getSource())
-						.setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-			}
-		}
-	}
+        if (selectedSeat.equals(""))
+            return;
+        
+        String newBookingId = Integer.toString(Main.getBookingList().size() + 1);
+        // System.out.println(newBookingId);
+        
+        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "username", Main.getCurrentUser().getUsername());
+        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "date", datePicker.getValue().toString());
+        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "seat", selectedSeat);
+        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "time", timeDropDownList.getValue());
+        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "film", filmDropDownList.getValue());
+        Main.modifyJSONFile("bookingsJSON.txt", newBookingId, "status", "booked");
 
-	@FXML
-	private void showBookingHistoryOnClick(ActionEvent event) throws IOException {
+        // Main.resetBookingList();
+        // Main.readJSONFile("bookingsJSON.txt");
+    }
 
-		SceneCreator.launchScene("BookingHistoryScene.fxml");
-	}
+    @FXML
+    private void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-	@FXML
-	private void backToPrevScene(ActionEvent event) throws IOException {
+        SceneCreator.launchScene("BookingHistoryScene.fxml");
+    }
 
-		SceneCreator.launchScene("UserScene.fxml");
-	}
+    @FXML
+    private void backToPrevScene(ActionEvent event) throws IOException {
 
-	private void personaliseScene() throws IOException {
+        SceneCreator.launchScene("UserScene.fxml");
+    }
 
-		ObservableList<String> filmScreeningTimes = FXCollections.observableArrayList("14:00", "15:00", "16:00",
-				"17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00");
-		timeDropDownList.setItems(filmScreeningTimes);
+    private void personaliseScene() throws IOException {
 
-		/*
-		 * timeDropDownList.getSelectionModel().selectedItemProperty().
-		 * addListener( (options, oldValue, newValue) -> {
-		 * System.out.println(newValue); });
-		 */
-	}
+        // ObservableList<String> filmScreeningTimes = FXCollections.observableArrayList("14:00", "15:00", "16:00",
+        //		"17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00");
+        // timeDropDownList.setItems(filmScreeningTimes);
 
-	@FXML
-	private void populateFilmDropDownList(ActionEvent event) throws IOException, ParseException {
+        /*
+         * timeDropDownList.getSelectionModel().selectedItemProperty().
+         * addListener( (options, oldValue, newValue) -> {
+         * System.out.println(newValue); });
+         */
+    }
 
-		ObservableList<String> filmTitles = FXCollections.observableArrayList();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    @FXML
+    private void populateFilmDropDownList(ActionEvent event) throws IOException, ParseException {
 
-		for (Film film : Main.getFilmList()) {
-			if (LocalDate.parse(film.getStartDate(), formatter).isBefore(datePicker.getValue())
-					&& LocalDate.parse(film.getEndDate(), formatter).isAfter(datePicker.getValue()))
-				filmTitles.add(film.getTitle());
-		}
+        ObservableList<String> filmTitles = FXCollections.observableArrayList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-		filmDropDownList.setItems(filmTitles);
-	}
+        for (Film film : Main.getFilmList()) {
+            if (LocalDate.parse(film.getStartDate(), formatter).isBefore(datePicker.getValue())
+                    && LocalDate.parse(film.getEndDate(), formatter).isAfter(datePicker.getValue()))
+                filmTitles.add(film.getTitle());
+        }
 
-	@FXML
-	private void populateTimeDropDownList(ActionEvent event) throws IOException {
+        filmDropDownList.setItems(filmTitles);
+    }
 
-		Film selectedFilm = null;
-		String selectedFilmTitle = filmDropDownList.getValue();
-		for (Film film : Main.getFilmList()) {
-			if (film.getTitle().equals(selectedFilmTitle)) {
-				selectedFilm = film;
-				break;
-			}
-		}
+    @FXML
+    private void populateTimeDropDownList(ActionEvent event) throws IOException {
 
-		timeDropDownList.setValue(selectedFilm.getTime());
-		// timeDropDownList.setEditable(false);
-		timeDropDownList.setDisable(true);
-	}
+        Film selectedFilm = null;
+        String selectedFilmTitle = filmDropDownList.getValue();
 
-	// I THINK WE NO LONGER NEED THIS
+        if (selectedFilmTitle.equals(null))
+            return;
 
-	// @FXML
-	// private void populateSeats(ActionEvent event) throws IOException {
-	//
-	// Film selectedFilm = null;
-	// String selectedFilmTitle = filmDropDownList.getValue();
-	// for (Film film : Main.getFilmList()) {
-	// if (film.getTitle().equals(selectedFilmTitle)) {
-	// selectedFilm = film;
-	// break;
-	// }
-	// }
-	//
-	// // System.out.println(selectedFilm.getTitle());
-	// // System.out.println(selectedFilm.getTime());
-	// ArrayList<String> bookedSeats = new ArrayList<String>();
-	// for (BookingHistoryItem booking : Main.getBookingList()) {
-	// if (booking.getFilm().equals(selectedFilm.getTitle()) &&
-	// booking.getStatus().equals("booked")) {
-	// String seat = booking.getSeat();
-	// bookedSeats.add(seat);
-	// }
-	// }
-	// }
+        for (Film film : Main.getFilmList()) {
+            if (film.getTitle().equals(selectedFilmTitle)) {
+                selectedFilm = film;
+                break;
+            }
+        }
 
-
+        timeDropDownList.setValue(selectedFilm.getTime());
+        // timeDropDownList.setEditable(false);
+        timeDropDownList.setDisable(true);
+    }
 }
