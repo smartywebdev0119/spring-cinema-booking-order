@@ -25,7 +25,6 @@
 				</Button>
 			</children>
 		</AnchorPane>
-		<AnchorPane layoutY="34.0" prefHeight="378.0" prefWidth="157.0" />
 		<TableView fx:id="table" layoutY="34.0" onMouseClicked="#getRowId" prefHeight="338.0" prefWidth="700.0">
 			<columns>
 				<TableColumn fx:id="status" prefWidth="70.4286168217659" text="Status" />

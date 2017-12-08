@@ -90,7 +90,6 @@ public class BookingHistoryController implements Initializable {
 
     @FXML
     public boolean deleteBookingValidator() {
-
         // getting current date
         LocalDate currentDate = LocalDate.now(); // for reference
 
@@ -171,7 +170,7 @@ public class BookingHistoryController implements Initializable {
                     if(deleteBookingValidator()){ // comparing booking's date with the current date
                         Main.modifyJSONFile("bookingsJSON.txt", selectedRowId, "status", "cancelled");
                         Main.resetBookingList();
-                        SceneCreator.launchScene("BookingHistory.fxml");
+                        SceneCreator.launchScene("BookingHistoryScene.fxml");
                         alert.close();
                     }
                     else {
