@@ -239,15 +239,14 @@ public class UserSceneController {
                 int numberOfBookingsAtSpecificDateAndTime = 0;
 
                 for (BookingHistoryItem booking : Main.getBookingList()) {
-                    if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime)){
+                    if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime) && !booking.getStatus().equals("cancelled")) {
                         numberOfBookingsAtSpecificDateAndTime++;
-                    System.out.println(booking.getFilm() + ": " + dateAndTime);}
+                    }
+
+                    // System.out.println(numberOfBookingsAtSpecificDateAndTime);
                 }
-
-                // System.out.println(numberOfBookingsAtSpecificDateAndTime);
-
                 // printing to export.csv file
-                pw.append("title: " + filmTitle + ", " + dateAndTime + ", booked seats: " + numberOfBookingsAtSpecificDateAndTime + ", available seats: " + (18 - numberOfBookingsAtSpecificDateAndTime) + "\n");
+                pw.append("title: " + filmTitle + ", " + dateAndTime + ", booked seats: " + numberOfBookingsAtSpecificDateAndTime + ", available seats: " + (18 - numberOfBookingsAtSpecificDateAndTime) + "\n");    
             }
         }
 

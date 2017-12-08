@@ -64,6 +64,12 @@ public class ManageBookingsController implements Initializable {
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
 
+        if (!Main.isEmployee()) {
+            bookedSeatsLabel.setVisible(false);
+            availableSeatsLabel.setVisible(false);
+            totalSeatsLabel.setVisible(false);
+        }
+        
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
