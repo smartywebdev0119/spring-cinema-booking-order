@@ -61,7 +61,7 @@ public class UserSceneController {
         Main.resetFilmList();
         Main.resetBookingList();
 
-        // loading login stage
+        // loading login scene
         SceneCreator.launchScene("LoginScene.fxml");
     }
 
@@ -70,18 +70,8 @@ public class UserSceneController {
 
         // calling the scene from parent class and avoiding code duplication
         SceneCreator.launchScene("ManageBookingsScene.fxml");
-
-        //		 IMPORTANT FOR LATER TO SHOW SEATS ALREADY BOOKED!!!
-        //		 for(Node node : gridSeats.getChildren()) {
-        //			 if(node.getStyle().length() > 55){
-        //				 String getId = node.getId();
-        //				 System.out.println(getId);
-        //				 redFixedSeats.add(getId);
-        //			 }
-        //		 }
     }
 
-    // NEED TO CREATE VIEW ALL FILMS SCENE FOR CUSTOMERS
     @FXML
     public void manageMoviesClick(ActionEvent event) throws IOException {
 
@@ -139,13 +129,12 @@ public class UserSceneController {
         Platform.runLater(() -> {
             try {
                 changeImage();
+                SceneCreator.launchScene("UserScene.fxml");
+                personaliseScene();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-
-        SceneCreator.launchScene("UserScene.fxml");
-        personaliseScene();
     }
 
     protected void changeImage() throws IOException {
