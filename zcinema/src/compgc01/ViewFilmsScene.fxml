@@ -9,13 +9,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compgc01.ViewFilmsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compgc01.ViewFilmsController">
    <children>
       <AnchorPane prefHeight="37.0" prefWidth="702.0" style="-fx-background-color: black;">
          <children>
-            <ScrollPane fx:id="scrollPane" layoutY="32.0" prefHeight="368.0" prefWidth="703.0">
+            <ScrollPane fx:id="scrollPane" layoutX="1.0" layoutY="32.0" prefHeight="368.0" prefWidth="703.0" style="-fx-background-color: black;">
                <content>
-                  <GridPane fx:id="grid" style="-fx-background-color: black;" />
+                  <AnchorPane prefHeight="368.0" prefWidth="639.0" style="-fx-background-color: black;">
+                     <children>
+                        <GridPane fx:id="grid" layoutX="2.0" prefHeight="367.0" prefWidth="683.0" style="-fx-background-color: black;" />
+                     </children>
+                  </AnchorPane>
                </content>
             </ScrollPane>
          </children>

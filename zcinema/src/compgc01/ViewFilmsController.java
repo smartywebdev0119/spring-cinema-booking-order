@@ -30,7 +30,7 @@ public class ViewFilmsController implements Initializable {
 
     ArrayList<File> fileList = new ArrayList<File>();
     HBox hb = new HBox();
-
+    
     @FXML
     ScrollPane scrollPane;
     @FXML
@@ -57,6 +57,9 @@ public class ViewFilmsController implements Initializable {
                 if (!file.toString().contains("DS_Store"))
                     fileList.add(file);
             }
+
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
 
             // gridpane settings
             // setting exterior grid padding
