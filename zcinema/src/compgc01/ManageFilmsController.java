@@ -11,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,7 +53,7 @@ public class ManageFilmsController {
     @FXML
     Button backButton;
     @FXML
-    Text newFilmTitle, newFilmDescription, newFilmStartDate, newFilmEndDate, newFilmTime, newFilmTime1, newFilmTime2;
+    Text newFilmTitle, newFilmDescription, newFilmStartDate, newFilmEndDate, newFilmTime1, newFilmTime2, newFilmTime3;
     @FXML
     TextArea filmDescription;
     @FXML
@@ -60,22 +61,21 @@ public class ManageFilmsController {
     @FXML
     TextField filmTitle;
     @FXML
-    ComboBox<String> filmTime, filmTime1, filmTime2;
+    ComboBox<String> filmTime1, filmTime2, filmTime3;
     @FXML
     ImageView uploadedFilmPoster;
 
     @FXML
     void initialize() throws IOException {
 
-        ObservableList<String> obsList = FXCollections.observableArrayList("14:00", "15:00", "16:00", "17:00", "18:00",
-                "19:00", "20:00", "21:00", "22:00", "23:00");
-        filmTime.setItems(obsList);
+        ObservableList<String> obsList = FXCollections.observableArrayList("13:00", "14:00", "15:00", "16:00", "17:00", "18:00",
+                "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00");
         filmTime1.setItems(obsList);
         filmTime2.setItems(obsList);
+        filmTime3.setItems(obsList);
         File file = new File(URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/DefaultFilmPoster.png", "UTF-8"));
         Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-        uploadedFilmPoster.setImage(img);    
-        
+        uploadedFilmPoster.setImage(img);
     }
 
     @FXML
@@ -100,14 +100,14 @@ public class ManageFilmsController {
         case "filmEndDate":
             newFilmEndDate.setText(filmEndDate.getValue().toString());
             break;
-        case "filmTime":
-            newFilmTime.setText(filmTime.getValue().toString());
-            break;
         case "filmTime1":
             newFilmTime1.setText(filmTime1.getValue().toString());
             break;
         case "filmTime2":
             newFilmTime2.setText(filmTime2.getValue().toString());
+            break;
+        case "filmTime3":
+            newFilmTime3.setText(filmTime3.getValue().toString());
             break;
         }
     }
@@ -183,7 +183,9 @@ public class ManageFilmsController {
             filmToAdd.put("description", filmDescription.getText());
             filmToAdd.put("startDate", newFilmStartDate.getText());
             filmToAdd.put("endDate", newFilmEndDate.getText());
-            filmToAdd.put("time", newFilmTime.getText());
+            filmToAdd.put("time1", newFilmTime1.getText());
+            filmToAdd.put("time2", newFilmTime2.getText());
+            filmToAdd.put("time3", newFilmTime3.getText());
             films.put(filmTitle.getText(), filmToAdd);
             // System.out.println(films.toJSONString());
 
@@ -202,7 +204,7 @@ public class ManageFilmsController {
             Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             // confirmation alert to inform the employee of the newly added film
             Alert alert = new Alert(AlertType.INFORMATION,
-                    "The Film " + filmTitle.getText() + " has been added!", ButtonType.OK);
+                    "The film " + filmTitle.getText() + " has been added!", ButtonType.OK);
             alert.showAndWait();
 
             // reloading film list to include the recently added film, and restoring all fields to empty
@@ -214,7 +216,9 @@ public class ManageFilmsController {
                 filmTitle.setText("");
                 filmStartDate.setPromptText("yyyy-mm-dd");
                 filmEndDate.setPromptText("yyyy-mm-dd");
-                filmTime.setPromptText("hh:mm");
+                filmTime1.setPromptText("hh:mm");
+                filmTime2.setPromptText("hh:mm");
+                filmTime3.setPromptText("hh:mm");
                 alert.close();
             }
         } catch (FileNotFoundException e) {
@@ -247,7 +251,9 @@ public class ManageFilmsController {
                     filmDescription.getText().equals("") || 
                     filmStartDate.getValue().equals("yyyy-mm-dd") || 
                     filmEndDate.getValue().equals("yyyy-mm-dd") || 
-                    filmTime.getValue().equals("hh:mm"))
+                    (filmTime1.getValue().equals("hh:mm") && 
+                            filmTime2.getValue().equals("hh:mm") && 
+                            filmTime3.getValue().equals("hh:mm")))
                 throw new InvalidFilmInputException("Please complete all fields!");
             else if (filmStartDate.getValue().compareTo(LocalDate.now()) < 0)
                 throw new InvalidFilmInputException("Start date cannot be before today!");
@@ -274,8 +280,9 @@ public class ManageFilmsController {
                     // System.out.println("endDate loop: " + endDateFilms);
 
                     // ... and the time overlaps as well
-                    if(c.getTime().equals(filmTime.getValue())){
-                        throw new InvalidFilmInputException("Your film screening dates and time overlap with those already stored!");
+                    String[] times = c.getTimes();
+                    if(Arrays.asList(times).contains(filmTime1.getValue()) || Arrays.asList(times).contains(filmTime2.getValue()) || Arrays.asList(times).contains(filmTime3.getValue())) {
+                        throw new InvalidFilmInputException("Your film screening dates and times overlap with those already stored!");
                     }
                 }
             }

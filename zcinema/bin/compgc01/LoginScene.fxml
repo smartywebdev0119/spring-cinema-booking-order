@@ -41,6 +41,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <Text fx:id="wrongCredentials" fill="RED" layoutX="439.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username or Password incorrect" visible="false" wrappingWidth="206.1403411185588"/>
+      <Text fx:id="wrongCredentials" fill="RED" layoutX="439.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username or password incorrect!" visible="false" wrappingWidth="206.1403411185588"/>
    </children>
 </AnchorPane>

@@ -3,75 +3,76 @@ package compgc01;
 /**
  * A class represeting a film.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 02.12.2017
+ * @since 09.12.2017
  */
 public class Film {
 
     private String title = "Default Title", description = "Default Description",
-            startDate = "yyyy-mm-dd", endDate = "yyyy-mm-dd", time = "hh:mm";
+            startDate = "yyyy-mm-dd", endDate = "yyyy-mm-dd";
+    private String[] times = {"hh:mm", "hh:mm", "hh:mm"};
 
-    public Film(String title, String description, String startDate, String endDate, String time) {
+    Film(String title, String description, String startDate, String endDate, String[] times) {
 
-        if (!title.isEmpty() && !description.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty() && !time.isEmpty())
+        if (!title.isEmpty() && !description.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty() && !(times.length == 0))
             this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.time = time;
+        this.times = times;
     }
 
-    public String getTitle() {
+    String getTitle() {
 
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
 
         if (!title.isEmpty())
             this.title = title;
     }
 
-    public String getDescription() {
+    String getDescription() {
 
         return description;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
 
         if (!description.isEmpty())
             this.description = description;
     }
 
-    public String getStartDate() {
+    String getStartDate() {
 
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    void setStartDate(String startDate) {
 
         if (!startDate.isEmpty())
             this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    String getEndDate() {
 
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    void setEndDate(String endDate) {
 
         if (!endDate.isEmpty())
             this.endDate = endDate;
     }
 
-    public String getTime() {
+    String[] getTimes() {
 
-        return time;
+        return times;
     }
 
-    public void setTime(String time) {
+    void setTimes(String[] times) {
 
-        if (!time.isEmpty())
-            this.time = time;
+        if (!(times.length == 0))
+            this.times = times;
     }
 }

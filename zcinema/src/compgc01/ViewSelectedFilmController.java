@@ -60,7 +60,7 @@ public class ViewSelectedFilmController implements Initializable {
         description.setText(selectedFilm.getDescription());
         startDate.setText(selectedFilm.getStartDate());
         endDate.setText(selectedFilm.getEndDate());
-        time.setText(selectedFilm.getTime());
+        time.setText(selectedFilm.getTimes()[0] + ", " + selectedFilm.getTimes()[1] + ", " + selectedFilm.getTimes()[2]);
         
         if (!Main.isEmployee())
             deleteFilmButton.setVisible(false);

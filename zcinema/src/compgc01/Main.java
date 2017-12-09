@@ -129,8 +129,10 @@ public class Main extends Application {
                     employees.add( new Employee ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email")));
                 else if (file.contains("customers"))
                     customers.add( new Customer ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email"), Double.parseDouble(String.valueOf(item.get("accountBalance")))));
-                else if (file.contains("films"))
-                    films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), (String) item.get("time")));
+                else if (file.contains("films")) {
+                    String[] times = {(String) item.get("time1"), (String) item.get("time2"), (String) item.get("time3")};
+                    films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), times));
+                }
                 else if (file.contains("bookings"))
                     bookings.add(new BookingHistoryItem((String) item.get("status"), (String) item.get("username"),
                             getCustomerByUsername((String) item.get("username")).getFirstName(), getCustomerByUsername((String) item.get("username")).getLastName(),

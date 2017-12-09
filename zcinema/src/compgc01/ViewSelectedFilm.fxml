@@ -37,32 +37,32 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="303.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:">
+      <Text fill="WHITE" layoutX="275.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="304.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:">
+      <Text fill="WHITE" layoutX="275.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="startDate" fill="WHITE" layoutX="364.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dd-mm-yyyy">
+      <Text fx:id="startDate" fill="WHITE" layoutX="338.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dd-mm-yyyy">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="endDate" fill="WHITE" layoutX="344.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dd-mm-yyyy">
+      <Text fx:id="endDate" fill="WHITE" layoutX="338.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dd-mm-yyyy">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="304.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:">
+      <Text fill="WHITE" layoutX="275.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Times:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="time" fill="WHITE" layoutX="364.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HH:mm">
+      <Text fx:id="time" fill="WHITE" layoutX="338.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HH:mm">
          <font>
             <Font size="18.0" />
          </font>

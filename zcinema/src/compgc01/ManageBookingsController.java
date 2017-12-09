@@ -58,7 +58,7 @@ public class ManageBookingsController implements Initializable {
 
         // setting the date to the current one in the default time-zone of the system
         datePicker.setValue(LocalDate.now());
-        
+
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
         bookedSeatsCount = 0;
@@ -73,7 +73,7 @@ public class ManageBookingsController implements Initializable {
             availableSeatsLabel.setVisible(false);
             totalSeatsLabel.setVisible(false);
         }
-        
+
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
@@ -170,20 +170,20 @@ public class ManageBookingsController implements Initializable {
         selectedSeats.clear();
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
-        
+
         /////////////
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BookingSummaryScene.fxml"));
         Parent root =(Parent) loader.load();
         Scene scene = new Scene(root, 400, 400);
-    	stage = new Stage();
+        stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
-        ///////////////////
     }
-    
-    static Stage getStage(){
-    	return stage;
+
+    static Stage getStage() {
+        
+        return stage;
     }
 
     @FXML
@@ -230,15 +230,10 @@ public class ManageBookingsController implements Initializable {
 
         try {
             selectedFilmTitle = filmDropDownList.getValue();
-            for (Film film : Main.getFilmList()) {
-                if (film.getTitle().equals(selectedFilmTitle)) {
-                    selectedFilm = film;
-                    break;
-                }
-            }
+            selectedFilm = Main.getFilmByTitle(selectedFilmTitle);
 
-            timeDropDownList.setValue(selectedFilm.getTime());
-            timeDropDownList.setDisable(true);
+            ObservableList<String> timesList = FXCollections.observableArrayList(selectedFilm.getTimes());
+            timeDropDownList.setItems(timesList);
         }
         catch (NullPointerException ex) {
             return;
