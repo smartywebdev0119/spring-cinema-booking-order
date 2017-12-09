@@ -68,7 +68,11 @@ public class ViewFilmsController implements Initializable {
             grid.setVgap(10);
             // grid.setGridLinesVisible(true);
 
-            int rows = (fileList.size() / 4) + 1;
+         
+//            ??? this line messes up the order of the movies in the grid
+//            	int rows = (fileList.size() / 4) + 1;
+            	int rows = 4;
+            	
             int columns = 4;
             int imageIndex = 0;
 
@@ -76,6 +80,7 @@ public class ViewFilmsController implements Initializable {
                 for (int j = 0; j < rows; j++) {
                     if (imageIndex < fileList.size()) {
                         addImage(imageIndex, j, i);
+                        System.out.println("row: " + i + "column: " + j);
                         imageIndex++;
                     }
                 }
