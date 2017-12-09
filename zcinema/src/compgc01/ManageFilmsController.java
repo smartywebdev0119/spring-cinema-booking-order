@@ -52,7 +52,7 @@ public class ManageFilmsController {
     @FXML
     Button backButton;
     @FXML
-    Text newFilmTitle, newFilmDescription, newFilmStartDate, newFilmEndDate, newFilmTime;
+    Text newFilmTitle, newFilmDescription, newFilmStartDate, newFilmEndDate, newFilmTime, newFilmTime1, newFilmTime2;
     @FXML
     TextArea filmDescription;
     @FXML
@@ -60,7 +60,7 @@ public class ManageFilmsController {
     @FXML
     TextField filmTitle;
     @FXML
-    ComboBox<String> filmTime;
+    ComboBox<String> filmTime, filmTime1, filmTime2;
     @FXML
     ImageView uploadedFilmPoster;
 
@@ -70,9 +70,13 @@ public class ManageFilmsController {
         ObservableList<String> obsList = FXCollections.observableArrayList("14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
         filmTime.setItems(obsList);
+        filmTime1.setItems(obsList);
+        filmTime2.setItems(obsList);
         File file = new File(URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/DefaultFilmPoster.png", "UTF-8"));
         Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-        uploadedFilmPoster.setImage(img);    }
+        uploadedFilmPoster.setImage(img);    
+        
+    }
 
     @FXML
     public void launchViewFilms(ActionEvent event) throws IOException {
@@ -98,6 +102,12 @@ public class ManageFilmsController {
             break;
         case "filmTime":
             newFilmTime.setText(filmTime.getValue().toString());
+            break;
+        case "filmTime1":
+            newFilmTime1.setText(filmTime1.getValue().toString());
+            break;
+        case "filmTime2":
+            newFilmTime2.setText(filmTime2.getValue().toString());
             break;
         }
     }

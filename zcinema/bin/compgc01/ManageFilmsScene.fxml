@@ -46,6 +46,8 @@
                   <Image url="@../../../res/images/filmImages/defaultFilmPoster.png" />
                </image>
             </ImageView>
+            <Text fx:id="newFilmTime1" layoutX="425.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm" />
+            <Text fx:id="newFilmTime2" layoutX="425.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hh:mm" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="37.0" prefWidth="702.0">
@@ -72,11 +74,11 @@
             <Text layoutX="9.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
             <DatePicker fx:id="filmStartDate" layoutX="86.0" layoutY="221.0" onAction="#updateDateAndTime" prefHeight="28.0" prefWidth="127.0" promptText="yyyy-mm-dd" />
             <Text layoutX="45.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-            <ComboBox fx:id="filmTime" layoutX="85.0" layoutY="268.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="91.0" promptText="hh:mm" />
+            <ComboBox fx:id="filmTime" layoutX="78.0" layoutY="268.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="89.0" promptText="hh:mm" />
             <Text layoutX="50.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
             <Text layoutX="87.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" />
             <Text layoutX="212.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" />
-            <Text layoutX="43.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" />
+            <Text layoutX="36.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" />
             <TextField fx:id="filmTitle" layoutX="89.0" layoutY="87.0" onKeyPressed="#updateFilmText" onKeyReleased="#updateFilmText" prefHeight="27.0" prefWidth="254.0" promptText="Enter film title here..." />
             <TextArea fx:id="filmDescription" layoutX="89.0" layoutY="128.0" onKeyPressed="#updateFilmText" onKeyReleased="#updateFilmText" prefHeight="58.0" prefWidth="254.0" promptText="Enter film description here..." />
             <Button layoutX="88.0" layoutY="41.0" mnemonicParsing="false" onAction="#uploadImageClick" prefHeight="30.0" prefWidth="254.0" style="-fx-background-color: #353238;" text="Upload Photo" textFill="WHITE">
@@ -91,6 +93,8 @@
             </Button>
             <Text layoutX="39.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
             <DatePicker fx:id="filmEndDate" layoutX="216.0" layoutY="221.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="127.0" promptText="yyyy-mm-dd" />
+            <ComboBox fx:id="filmTime1" layoutX="169.0" layoutY="268.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="89.0" promptText="hh:mm" />
+            <ComboBox fx:id="filmTime2" layoutX="260.0" layoutY="268.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="89.0" promptText="hh:mm" />
          </children>
       </AnchorPane>
    </children>
