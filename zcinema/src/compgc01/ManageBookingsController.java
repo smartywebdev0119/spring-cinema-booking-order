@@ -170,7 +170,7 @@ public class ManageBookingsController implements Initializable {
         Main.readJSONFile("bookingsJSON.txt");
         
         /////////////
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BookingSummary.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BookingSummaryScene.fxml"));
         Parent root =(Parent) loader.load();
         Scene scene = new Scene(root, 400, 400);
     	stage = new Stage();

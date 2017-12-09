@@ -18,10 +18,8 @@ public class BookingSummaryController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		ManageBookingsController mbc = new ManageBookingsController();
 		
-		nameSummary.setText((Main.getCurrentUser().getFullName()));
-		
+//		nameSummary.setText((Main.getCurrentUser().getFullName()));		
 //		filmSummary.setText(mbc.filmDropDownList.getValue().toString());
 //		filmSummary.setText(super.filmDropDownList.getValue().toString());
 //		dateSummary.setText(super.datePicker.getValue().toString());

@@ -8,7 +8,13 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,7 +158,7 @@ public class ManageFilmsController {
 
     @SuppressWarnings("unchecked")
     @FXML
-    public void storeFilmInfo(ActionEvent event) {
+    public void storeFilmInfo(ActionEvent event) throws ParseException {
 
         try {
             /*
@@ -226,7 +232,7 @@ public class ManageFilmsController {
 
     // custom exception to be thrown if at least one field is empty or if end date is before start date
     @SuppressWarnings("unlikely-arg-type")
-    void validateFilmInput() throws InvalidFilmInputException {
+    void validateFilmInput() throws InvalidFilmInputException, ParseException {
 
         try {
             if (filmTitle.getText().equals("") || 
@@ -237,10 +243,35 @@ public class ManageFilmsController {
                 throw new InvalidFilmInputException("Please complete all fields!");
             else if (filmStartDate.getValue().compareTo(LocalDate.now()) < 0)
                 throw new InvalidFilmInputException("Start date cannot be before today!");
+            else if (filmStartDate.getValue().compareTo(filmEndDate.getValue()) == 0)
+                throw new InvalidFilmInputException("Screenings cannot start and end on the same day!");
             else if (filmStartDate.getValue().compareTo(filmEndDate.getValue()) > 0)
                 throw new InvalidFilmInputException("End date cannot be before start date!");
             else if (selectedImage == null)
                 throw new InvalidFilmInputException("Please add the film poster!");
+           ///////////
+            // looping through the films to find date and time conflicts
+            for(Film c : Main.getFilmList()){
+
+            	// converting movie start and end dates to LocalDate for comparison 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate startDateFilms = LocalDate.parse(c.getStartDate(), formatter);
+                LocalDate endDateFilms = LocalDate.parse(c.getEndDate(), formatter);
+
+                // if the dates overlap...
+            	if(!(filmStartDate.getValue().compareTo(endDateFilms) >= 0 ||
+            	  filmEndDate.getValue().compareTo(startDateFilms) <= 0)){
+                	
+            		System.out.println("startDate loop: " + startDateFilms);
+                	System.out.println("endDate loop: " + endDateFilms);
+                	
+                	// .. and the time overlaps as well...
+            		if(c.getTime().equals(filmTime.getValue())){
+                        throw new InvalidFilmInputException("Your movie dates and time overlap with those already stored!");
+            		}
+            	}
+            }
+          ///////////
         }
         catch (NullPointerException e) {
             throw new InvalidFilmInputException("Please complete all fields!");
