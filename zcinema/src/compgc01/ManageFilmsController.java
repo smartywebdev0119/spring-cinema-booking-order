@@ -259,8 +259,8 @@ public class ManageFilmsController {
                 LocalDate endDateFilms = LocalDate.parse(c.getEndDate(), formatter);
 
                 // if the dates overlap...
-            	if(!(filmStartDate.getValue().compareTo(endDateFilms) >= 0 ||
-            	  filmEndDate.getValue().compareTo(startDateFilms) <= 0)){
+            	if(!(filmStartDate.getValue().compareTo(endDateFilms) > 0 ||
+            	  filmEndDate.getValue().compareTo(startDateFilms) < 0)){
                 	
             		System.out.println("startDate loop: " + startDateFilms);
                 	System.out.println("endDate loop: " + endDateFilms);
