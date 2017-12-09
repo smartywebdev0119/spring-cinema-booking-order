@@ -309,6 +309,16 @@ public class Main extends Application {
         return null;
     }
     
+    static Film getFilmByTitle (String title) {
+
+        for (Film film : Main.getFilmList()) {
+            if (film.getTitle().equals(title))
+                return film;
+        }
+        
+        return null;
+    }
+    
     static Parent getRoot() {
 
         return root;

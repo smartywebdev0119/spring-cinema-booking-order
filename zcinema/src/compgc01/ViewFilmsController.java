@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
  * The controller for the View Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 05.12.2017
+ * @since 09.12.2017
  */
 public class ViewFilmsController implements Initializable {
 
@@ -47,16 +47,14 @@ public class ViewFilmsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        // System.out.println(id);
-
-        try{
+        try {
             // getting folder path
             String path = URLDecoder.decode(Main.getPath() + "res/images/filmImages/", "UTF-8");
             // creating file object passing in the constructor the folder path
             File folder = new File(path);
             // pushing single path files in the array filelist1
             for (File file : folder.listFiles()) {
-                if (!file.toString().contains("defaultFilmPoster.png") && !file.toString().contains("DS_Store"))
+                if (!file.toString().contains("DS_Store"))
                     fileList.add(file);
             }
 
@@ -68,19 +66,14 @@ public class ViewFilmsController implements Initializable {
             grid.setVgap(10);
             // grid.setGridLinesVisible(true);
 
-         
-//            ??? this line messes up the order of the movies in the grid
-//            	int rows = (fileList.size() / 4) + 1;
-            	int rows = 4;
-            	
+            int rows = (fileList.size() / 4) + 1;
             int columns = 4;
             int imageIndex = 0;
 
-            for (int i = 0 ; i < columns; i++) {
-                for (int j = 0; j < rows; j++) {
+            for (int i = 0 ; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
                     if (imageIndex < fileList.size()) {
                         addImage(imageIndex, j, i);
-                        System.out.println("row: " + i + "column: " + j);
                         imageIndex++;
                     }
                 }

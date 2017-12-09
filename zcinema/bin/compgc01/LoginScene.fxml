@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="402.0" fitWidth="698.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../res/images/backgroundImages/backgroundLogin-01.png" />
+            <Image url="@res/images/backgroundImages/newBackgroundLoginScene.png" />
          </image>
       </ImageView>
       <Label layoutX="660.0" layoutY="15.0" onMouseClicked="#exitButton" text="X">

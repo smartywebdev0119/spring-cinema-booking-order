@@ -33,7 +33,7 @@ import javafx.stage.StageStyle;
  * The controller for the Bookings Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 08.12.2017
+ * @since 09.12.2017
  */
 public class ManageBookingsController implements Initializable {
 
@@ -56,12 +56,9 @@ public class ManageBookingsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        try {
-            personaliseScene();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        // setting the date to the current one in the default time-zone of the system
+        datePicker.setValue(LocalDate.now());
+        
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
         bookedSeatsCount = 0;
@@ -146,6 +143,11 @@ public class ManageBookingsController implements Initializable {
         }
     }
 
+    /**
+     * Method that gets called when a customer clicks on the book seat button to make a booking.
+     * @param e Mouse event representing a click on the book seat button
+     * @throws IOException Exception to be thrown if there is a problem with storing the booking in the JSON text files
+     */
     @FXML
     private void bookSeat(MouseEvent e) throws IOException {
 
@@ -196,12 +198,13 @@ public class ManageBookingsController implements Initializable {
         SceneCreator.launchScene("UserScene.fxml");
     }
 
-    private void personaliseScene() throws IOException {
-
-    }
-
+    /**
+     * Method that gets called when a date is selected from the date picker.
+     * @param event Action event representing a selection in the date picker
+     * @throws ParseException Exception to be thrown if the parsing of film start and end dates to LacalDate objects fails
+     */
     @FXML
-    private void populateFilmDropDownList(ActionEvent event) throws IOException, ParseException {
+    private void populateFilmDropDownList(ActionEvent event) throws ParseException {
 
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -215,8 +218,12 @@ public class ManageBookingsController implements Initializable {
         filmDropDownList.setItems(filmTitles);
     }
 
+    /**
+     * Method that gets called when a film is selected from the drop-down list.
+     * @param event Action event representing a selection in the films' drop-down list
+     */
     @FXML
-    private void populateTimeDropDownList(ActionEvent event) throws IOException {
+    private void populateTimeDropDownList(ActionEvent event) {
 
         Film selectedFilm = null;
         String selectedFilmTitle = "";

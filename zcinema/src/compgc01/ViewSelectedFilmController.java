@@ -39,7 +39,7 @@ public class ViewSelectedFilmController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {		
         
-        selectedFilm = getFilmByTitle(Main.getSelectedFilmTitle());
+        selectedFilm = Main.getFilmByTitle(Main.getSelectedFilmTitle());
         // System.out.println(Main.getSelectedFilmTitle());
         try {
             String path = URLDecoder.decode(Main.getPath() + "res/images/filmImages/", "UTF-8");
@@ -54,16 +54,6 @@ public class ViewSelectedFilmController implements Initializable {
         startDate.setText(selectedFilm.getStartDate());
         endDate.setText(selectedFilm.getEndDate());
         time.setText(selectedFilm.getTime());
-    }
-
-    private Film getFilmByTitle (String title) {
-
-        for (Film film : Main.getFilmList()) {
-            if (film.getTitle().equals(title))
-                return film;
-        }
-        
-        return null;
     }
     
     @FXML

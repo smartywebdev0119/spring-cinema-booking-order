@@ -8,13 +8,9 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +43,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 07.12.2017
+ * @since 09.12.2017
  */
 public class ManageFilmsController {
 
@@ -74,7 +70,7 @@ public class ManageFilmsController {
         ObservableList<String> obsList = FXCollections.observableArrayList("14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
         filmTime.setItems(obsList);
-        File file = new File(URLDecoder.decode(Main.getPath() + "res/images/filmImages/DefaultFilmPoster.png", "UTF-8"));
+        File file = new File(URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/DefaultFilmPoster.png", "UTF-8"));
         Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
         uploadedFilmPoster.setImage(img);    }
 
@@ -171,7 +167,7 @@ public class ManageFilmsController {
 
             validateFilmInput();
 
-            // Creating JSON files
+            // creating JSON objects
             JSONObject films = Main.readJSONFile("filmsJSON.txt");
             JSONObject filmToAdd = new JSONObject();
             filmToAdd.put("description", filmDescription.getText());
@@ -199,16 +195,18 @@ public class ManageFilmsController {
                     "The Film " + filmTitle.getText() + " has been added!", ButtonType.OK);
             alert.showAndWait();
 
-            // close alert on click and restore all fields to empty
+            // reloading film list to include the recently added film, and restoring all fields to empty
+            // and closing alert on click
             if (alert.getResult() == ButtonType.OK) {
-                alert.close();
+                Main.resetFilmList();
+                Main.readJSONFile("filmsJSON.txt");
                 filmDescription.setText("");
                 filmTitle.setText("");
                 filmStartDate.setPromptText("yyyy-mm-dd");
                 filmEndDate.setPromptText("yyyy-mm-dd");
                 filmTime.setPromptText("hh:mm");
+                alert.close();
             }
-            // SceneCreator.launchScene("UserScene.fxml", event);
         } catch (FileNotFoundException e) {
             Alert alert = new Alert(AlertType.WARNING, "File Not Found!", ButtonType.OK);
             alert.showAndWait();
@@ -249,29 +247,28 @@ public class ManageFilmsController {
                 throw new InvalidFilmInputException("End date cannot be before start date!");
             else if (selectedImage == null)
                 throw new InvalidFilmInputException("Please add the film poster!");
-           ///////////
-            // looping through the films to find date and time conflicts
-            for(Film c : Main.getFilmList()){
 
-            	// converting movie start and end dates to LocalDate for comparison 
+            // looping through the films to find date and time conflicts
+            for (Film c : Main.getFilmList()){
+
+                // converting movie start and end dates to LocalDate for comparison
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate startDateFilms = LocalDate.parse(c.getStartDate(), formatter);
                 LocalDate endDateFilms = LocalDate.parse(c.getEndDate(), formatter);
 
-                // if the dates overlap...
-            	if(!(filmStartDate.getValue().compareTo(endDateFilms) > 0 ||
-            	  filmEndDate.getValue().compareTo(startDateFilms) < 0)){
-                	
-            		System.out.println("startDate loop: " + startDateFilms);
-                	System.out.println("endDate loop: " + endDateFilms);
-                	
-                	// .. and the time overlaps as well...
-            		if(c.getTime().equals(filmTime.getValue())){
-                        throw new InvalidFilmInputException("Your movie dates and time overlap with those already stored!");
-            		}
-            	}
+                // if the dates overlap
+                if (!(filmStartDate.getValue().compareTo(endDateFilms) > 0 ||
+                        filmEndDate.getValue().compareTo(startDateFilms) < 0)) {
+
+                    // System.out.println("startDate loop: " + startDateFilms);
+                    // System.out.println("endDate loop: " + endDateFilms);
+
+                    // ... and the time overlaps as well
+                    if(c.getTime().equals(filmTime.getValue())){
+                        throw new InvalidFilmInputException("Your film screening dates and time overlap with those already stored!");
+                    }
+                }
             }
-          ///////////
         }
         catch (NullPointerException e) {
             throw new InvalidFilmInputException("Please complete all fields!");
