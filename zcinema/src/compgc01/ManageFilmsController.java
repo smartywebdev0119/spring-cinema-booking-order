@@ -269,13 +269,19 @@ public class ManageFilmsController {
 				throw new InvalidFilmInputException("Screenings cannot start and end on the same day!");
 			else if (filmStartDate.getValue().compareTo(filmEndDate.getValue()) > 0)
 				throw new InvalidFilmInputException("End date cannot be before start date!");
-
 			 else if ((filmTime1.getValue().equals(filmTime2.getValue()) ||
 					   filmTime1.getValue().equals(filmTime3.getValue()) ||
 					   filmTime2.getValue().equals(filmTime3.getValue())) &&
 					 !(filmTime1.getValue().equals("hh:mm") &&
-					   filmTime2.getValue().equals("hh:mm")))
+					   filmTime2.getValue().equals("hh:mm"))){
 			 throw new InvalidFilmInputException("You cannot choose the same screening time more than once!");
+			 }
+
+			// checking that the title of the movie is unique
+			for(Film c : Main.getFilmList()){
+				if(c.getTitle().equals(filmTitle.getText()))
+					throw new InvalidFilmInputException("The title " + filmTitle.getText() + " belongs to another scheduled movie!");
+			}
 
 			// looping through the films to find date and time conflicts
 			for (Film c : Main.getFilmList()) {
