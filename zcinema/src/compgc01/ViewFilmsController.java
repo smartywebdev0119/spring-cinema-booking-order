@@ -75,7 +75,8 @@ public class ViewFilmsController implements Initializable {
             for (int i = 0 ; i < columns; i++) {
                 for (int j = 0; j < rows; j++) {
                     if (imageIndex < fileList.size()) {
-                        addImage(imageIndex, i, j);
+                    	System.out.println(i + " " + j);
+                        addImage(imageIndex, j, i);
                         imageIndex++;
                     }
                 }
