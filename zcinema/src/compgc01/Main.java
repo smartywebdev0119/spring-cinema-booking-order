@@ -24,7 +24,7 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 05.12.2017
+ * @since 09.12.2017
  * 
  * Uses open-source JavaFX icons made by http://www.jensd.de/wordpress/
  * and a .png icon made by https://thenounproject.com/term/csv-file/56841/.
@@ -149,16 +149,23 @@ public class Main extends Application {
 
         try {
             JSONObject items = readJSONFile(file);
-            JSONObject itemToEdit = null;
-            
-            if (items.get(identifier) == null) {
-                itemToEdit = new JSONObject();
-                items.put(identifier, itemToEdit);
+
+            if (newValue.equals("delete")) {
+                items.remove(identifier);
+                // System.out.println(items.toJSONString());
             }
-            else
-                itemToEdit = (JSONObject) items.get(identifier);
-            
-            itemToEdit.put(attribute, newValue);
+            else {
+                JSONObject itemToEdit = null;
+
+                if (items.get(identifier) == null) {
+                    itemToEdit = new JSONObject();
+                    items.put(identifier, itemToEdit);
+                }
+                else
+                    itemToEdit = (JSONObject) items.get(identifier);
+
+                itemToEdit.put(attribute, newValue);
+            }
 
             String path = URLDecoder.decode(getPath() + "res/" + file, "UTF-8");
             // System.out.println(path);
@@ -305,20 +312,20 @@ public class Main extends Application {
         for (Customer c : customers)
             if (c.getUsername().equals(username))
                 return c;
-        
+
         return null;
     }
-    
+
     static Film getFilmByTitle (String title) {
 
         for (Film film : Main.getFilmList()) {
             if (film.getTitle().equals(title))
                 return film;
         }
-        
+
         return null;
     }
-    
+
     static Parent getRoot() {
 
         return root;
@@ -343,12 +350,12 @@ public class Main extends Application {
 
         Main.selectedFilmTitle = selectedFilmTitle;
     }
-    
+
     static String getSelectedFilmTitle () {
 
         return selectedFilmTitle;
     }
-    
+
     @Override
     public void start(Stage primaryStage) {
 

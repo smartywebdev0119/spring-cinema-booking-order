@@ -24,7 +24,7 @@
       </Button>
       <ImageView fx:id="selectedFilmPoster" fitHeight="297.0" fitWidth="193.0" layoutX="44.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../res/images/filmImages/Titanic.jpg" />
+            <Image url="@../../../res/images/backgroundImages/DefaultFilmPoster.png" />
          </image>
       </ImageView>
       <Text fx:id="title" fill="WHITE" layoutX="297.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MOVIE TITLE" wrappingWidth="353.2851527631283">
@@ -68,5 +68,6 @@
          </font>
       </Text>
       <Button fx:id="bookButton" layoutX="530.0" layoutY="320.0" mnemonicParsing="false" onAction="#goToBookingScene" prefHeight="40.0" prefWidth="126.0" style="-fx-background-color: white;" text="Book Now" />
+      <Button fx:id="deleteFilmButton" layoutX="530.0" layoutY="255.0" mnemonicParsing="false" onAction="#deleteFilm" prefHeight="40.0" prefWidth="126.0" style="-fx-background-color: white;" text="Delete Film" />
    </children>
 </AnchorPane>
