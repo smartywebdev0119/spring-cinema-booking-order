@@ -12,11 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -27,7 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * The controller for the Bookings Scene.
@@ -38,7 +34,6 @@ import javafx.stage.StageStyle;
 public class ManageBookingsController implements Initializable {
 
     int bookedSeatsCount;
-    ArrayList<String> selectedSeats;
 
     @FXML
     static Stage stage;
@@ -62,7 +57,7 @@ public class ManageBookingsController implements Initializable {
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
         bookedSeatsCount = 0;
-        selectedSeats = new ArrayList<String>();
+        Main.setSelectedSeats(new ArrayList<String>());
 
         // getting the most recent version of the bookings file
         Main.resetBookingList();
@@ -77,6 +72,8 @@ public class ManageBookingsController implements Initializable {
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
+            Main.setSelectedTime(timeDropDownList.getValue());
+            
             // resetting the number of booked seats for every date, film, and time
             bookedSeatsCount = 0;
 
@@ -132,13 +129,13 @@ public class ManageBookingsController implements Initializable {
                     .equals("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;")) {
                 ((Node) e.getSource())
                 .setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-                selectedSeats.remove(((Node) e.getSource()).getId());
+                Main.getSelectedSeats().remove(((Node) e.getSource()).getId());
             }
             // turning seat red if it is black - selecting it
             else {
                 ((Node) e.getSource())
                 .setStyle("-fx-fill:red; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
-                selectedSeats.add(((Node) e.getSource()).getId());
+                Main.getSelectedSeats().add(((Node) e.getSource()).getId());
             }
         }
     }
@@ -151,34 +148,27 @@ public class ManageBookingsController implements Initializable {
     @FXML
     private void bookSeat(MouseEvent e) throws IOException {
 
-        if (selectedSeats.size() == 0)
+        if (Main.getSelectedSeats().size() == 0)
             return;
 
         // getting the latest booking id and incrementing by one
         int newBookingId = Main.getBookingList().size() + 1;
         // System.out.println(newBookingId);
 
-        for (int i = newBookingId; i < (newBookingId + selectedSeats.size()); i++) {
+        for (int i = newBookingId; i < (newBookingId + Main.getSelectedSeats().size()); i++) {
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Main.getCurrentUser().getUsername());
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "date", datePicker.getValue().toString());
-            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "seat", selectedSeats.get(i - newBookingId));
+            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "seat", Main.getSelectedSeats().get(i - newBookingId));
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "time", timeDropDownList.getValue());
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "film", filmDropDownList.getValue());
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "status", "booked");
         }
 
-        selectedSeats.clear();
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
 
-        /////////////
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BookingSummaryScene.fxml"));
-        Parent root =(Parent) loader.load();
-        Scene scene = new Scene(root, 400, 400);
-        stage = new Stage();
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+       SceneCreator.launchScene("BookingSummaryScene.fxml");
+       Main.getStage().centerOnScreen();
     }
 
     static Stage getStage() {
@@ -206,6 +196,8 @@ public class ManageBookingsController implements Initializable {
     @FXML
     private void populateFilmDropDownList(ActionEvent event) throws ParseException {
 
+        Main.setSelectedDate(datePicker.getValue().toString());
+        
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -227,12 +219,9 @@ public class ManageBookingsController implements Initializable {
     @FXML
     private void populateTimeDropDownList(ActionEvent event) {
 
-        Film selectedFilm = null;
-        String selectedFilmTitle = "";
-
         try {
-            selectedFilmTitle = filmDropDownList.getValue();
-            selectedFilm = Main.getFilmByTitle(selectedFilmTitle);
+            Main.setSelectedFilmTitle(filmDropDownList.getValue());
+            Film selectedFilm = Main.getFilmByTitle(Main.getSelectedFilmTitle());
 
             ObservableList<String> timesList = FXCollections.observableArrayList(selectedFilm.getTimes());
             timeDropDownList.setItems(timesList);

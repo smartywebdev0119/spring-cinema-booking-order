@@ -34,8 +34,8 @@
             <Text fx:id="filmSummary" layoutX="156.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             <Text fx:id="dateSummary" layoutX="156.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             <Text fx:id="timeSummary" layoutX="156.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="117.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seat:" />
-            <Text fx:id="seatSummary" layoutX="156.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="58.9814453125" />
+            <Text layoutX="112.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seats:" />
+            <Text fx:id="seatSummary" layoutX="156.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="58.9814453125" />
             <ToggleButton fx:id="closeButton" layoutX="107.0" layoutY="338.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="44.0" prefWidth="186.0" style="-fx-background-color: white;" text="Close">
                <font>
                   <Font size="14.0" />
