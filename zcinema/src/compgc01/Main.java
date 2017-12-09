@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.json.simple.JSONObject;
@@ -38,12 +39,13 @@ import javafx.stage.StageStyle;
  */
 public class Main extends Application {
 
-    private static Parent root;
-    private static Stage primaryStage;
+    static Parent root;
+    static Stage primaryStage;
     static Main m = null;
     static User currentUser;
-    private static Boolean employeeMode = false;
-    private static String selectedFilmTitle = "";
+    static Boolean employeeMode = false;
+    static String selectedFilmTitle = "", selectedDate = "", selectedTime = "";
+    static ArrayList<String> selectedSeats;
 
     // arrayLists to be populated with the information from the text files
     static HashSet<Employee> employees = new HashSet<Employee>();
@@ -325,7 +327,7 @@ public class Main extends Application {
         return null;
     }
 
-    static Film getFilmByTitle (String title) {
+    static Film getFilmByTitle(String title) {
 
         for (Film film : Main.getFilmList()) {
             if (film.getTitle().equals(title))
@@ -335,6 +337,46 @@ public class Main extends Application {
         return null;
     }
 
+    static void setSelectedFilmTitle(String selectedFilmTitle) {
+
+        Main.selectedFilmTitle = selectedFilmTitle;
+    }
+
+    static String getSelectedFilmTitle() {
+
+        return selectedFilmTitle;
+    }
+
+    static void setSelectedDate(String selectedDate) {
+
+        Main.selectedDate = selectedDate;
+    }
+
+    static String getSelectedDate() {
+
+        return selectedDate;
+    }
+
+    static void setSelectedTime(String selectedTime) {
+
+        Main.selectedTime = selectedTime;
+    }
+
+    static String getSelectedTime() {
+
+        return selectedTime;
+    }
+    
+    static void setSelectedSeats(ArrayList<String> selectedSeats) {
+
+        Main.selectedSeats = selectedSeats;
+    }
+
+    static ArrayList<String> getSelectedSeats() {
+
+        return selectedSeats;
+    }
+    
     static Parent getRoot() {
 
         return root;
@@ -353,16 +395,6 @@ public class Main extends Application {
     static void setStage(Stage stage) {
 
         Main.primaryStage = stage;
-    }
-
-    static void setSelectedFilmTitle (String selectedFilmTitle) {
-
-        Main.selectedFilmTitle = selectedFilmTitle;
-    }
-
-    static String getSelectedFilmTitle () {
-
-        return selectedFilmTitle;
     }
 
     @Override

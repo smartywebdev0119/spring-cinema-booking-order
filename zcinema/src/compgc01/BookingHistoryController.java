@@ -55,8 +55,8 @@ public class BookingHistoryController implements Initializable {
         setTableColumns();
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
-        // storing elements in the ObservableList
-
+        
+        // storing elements in the observable list
         if (Main.isEmployee())
             populateTableList = FXCollections.observableArrayList(Main.getBookingList());
         else {
@@ -68,15 +68,11 @@ public class BookingHistoryController implements Initializable {
             populateTableList = FXCollections.observableArrayList(currentCustomerBookings);
         }
 
-        // populating the table with the elements stored in ObservableList
+        // populating the table with the elements stored in observable list
         table.getItems().addAll(populateTableList);
         // the rows of the list are automatically sorted by key value
         // length! Sort them by date istead!
         changeColor();
-        
-        // the employee should be able to delete a booking for a customer
-//        if (Main.isEmployee())
-//            cancelBookingButton.setVisible(false);
     }
 
     private void setTableColumns() {
@@ -115,7 +111,7 @@ public class BookingHistoryController implements Initializable {
     @FXML
     void changeColor() {
 
-        // Inspired by https://stackoverflow.com/questions/30889732/javafx-tableview-change-row-color-based-on-column-value
+        // inspired by https://stackoverflow.com/questions/30889732/javafx-tableview-change-row-color-based-on-column-value
         table.setRowFactory(row -> {
             return new TableRow<BookingHistoryItem>() {
                 @Override

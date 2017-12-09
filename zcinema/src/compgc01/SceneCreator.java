@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 /**
  * Class that creates new scenes.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 03.12.2017
+ * @since 09.12.2017
  */
 public class SceneCreator {
 

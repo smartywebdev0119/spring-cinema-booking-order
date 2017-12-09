@@ -7,33 +7,32 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
 
 public class BookingSummaryController implements Initializable {
-	
-	@FXML
-	static Text nameSummary, filmSummary, dateSummary, timeSummary, seatSummary;
-	
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
 
-		
-//		nameSummary.setText((Main.getCurrentUser().getFullName()));		
-//		filmSummary.setText(mbc.filmDropDownList.getValue().toString());
-//		filmSummary.setText(super.filmDropDownList.getValue().toString());
-//		dateSummary.setText(super.datePicker.getValue().toString());
-//		timeSummary.setText(super.timeDropDownList.getValue().toString());
-//		seatSummary.setText(selectedSeats.get(0).toString());	
-	}
+    @FXML
+    Text nameSummary, filmSummary, dateSummary, timeSummary, seatSummary;
+    @FXML
+    ToggleButton closeButton;
 
-	@FXML
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        nameSummary.setText((Main.getCurrentUser().getFullName()));		
+        filmSummary.setText(Main.getSelectedFilmTitle());
+        dateSummary.setText(Main.getSelectedDate());
+        timeSummary.setText(Main.getSelectedTime());
+        for (int i = 0; i < Main.getSelectedSeats().size(); i++) {
+            seatSummary.setText(seatSummary.getText() + Main.getSelectedSeats().get(i) + " ");
+        }
+    }
+
+    @FXML
     private void closeStage(ActionEvent event) throws IOException {
-		ManageBookingsController.getStage().close();
-        SceneCreator.launchScene("ManageBookingsScene.fxml");
-	}
 
-	
-	
-	
+        SceneCreator.launchScene("ManageBookingsScene.fxml");
+        Main.getStage().centerOnScreen();
+    }
 }
