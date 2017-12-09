@@ -210,8 +210,10 @@ public class ManageBookingsController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (Film film : Main.getFilmList()) {
-            if (LocalDate.parse(film.getStartDate(), formatter).isBefore(datePicker.getValue())
-                    && LocalDate.parse(film.getEndDate(), formatter).isAfter(datePicker.getValue()))
+            if ((LocalDate.parse(film.getStartDate(), formatter).isBefore(datePicker.getValue()) ||
+                    LocalDate.parse(film.getStartDate(), formatter).equals(datePicker.getValue()))
+                    && (LocalDate.parse(film.getEndDate(), formatter).isAfter(datePicker.getValue()) ||
+                            LocalDate.parse(film.getEndDate(), formatter).equals(datePicker.getValue())))
                 filmTitles.add(film.getTitle());
         }
 

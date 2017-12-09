@@ -26,8 +26,15 @@ import javafx.stage.StageStyle;
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 09.12.2017
  * 
- * Uses open-source JavaFX icons made by http://www.jensd.de/wordpress/
- * and a .png icon made by https://thenounproject.com/term/csv-file/56841/.
+ * References:
+ * JSON library by https://code.google.com/archive/p/json-simple/,
+ * JavaFX icons made by http://www.jensd.de/wordpress/ for the buttons,
+ * dummy film posters and text from http://www.imdb.com/,
+ * a .png icon showing a .csv file made by https://thenounproject.com/term/csv-file/56841/,
+ * UCLlywood sign inspired by the original Hollywood one at http://www.clker.com/cliparts/A/z/5/z/y/H/hollywood-sign-md.png,
+ * default film poster by http://comicbook.com/,
+ * default user icon by https://www.whatsapp.com/,
+ * and all other images adapted from originals at https://www.freepik.com/.
  */
 public class Main extends Application {
 
