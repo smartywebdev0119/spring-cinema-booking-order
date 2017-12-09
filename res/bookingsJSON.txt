@@ -1,1 +1,1 @@
-{"1":{"date":"2018-01-02","seat":"A1","time":"19:00","film":"The Revenant","username":"lucio","status":"booked"}}
+{"1":{"date":"2018-01-02","seat":"A1","time":"19:00","film":"The Revenant","username":"lucio","status":"booked"},"2":{"date":"2018-01-02","seat":"A2","time":"19:00","film":"The Revenant","username":"lucio","status":"cancelled"},"3":{"date":"2018-01-02","seat":"C6","time":"19:00","film":"The Revenant","username":"lucio","status":"booked"},"4":{"date":"2018-01-02","seat":"C3","time":"17:00","film":"Pighi","username":"lucio","status":"booked"}}

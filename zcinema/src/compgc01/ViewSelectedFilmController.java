@@ -44,7 +44,10 @@ public class ViewSelectedFilmController implements Initializable {
     Button backButton, bookButton, deleteFilmButton;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {		
+    public void initialize(URL location, ResourceBundle resources) {	
+    	
+    	if(Main.isEmployee())
+    		bookButton.setText("Go to Bookings");
 
         selectedFilm = Main.getFilmByTitle(Main.getSelectedFilmTitle());
         // System.out.println(Main.getSelectedFilmTitle());

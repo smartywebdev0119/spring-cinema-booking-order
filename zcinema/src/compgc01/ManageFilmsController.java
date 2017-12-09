@@ -282,7 +282,7 @@ public class ManageFilmsController {
                     // ... and the time overlaps as well
                     String[] times = c.getTimes();
                     if(Arrays.asList(times).contains(filmTime1.getValue()) || Arrays.asList(times).contains(filmTime2.getValue()) || Arrays.asList(times).contains(filmTime3.getValue())) {
-                        throw new InvalidFilmInputException("Your film screening dates and times overlap with those already stored!");
+                        throw new InvalidFilmInputException("For your chosen dates, you cannot have the following screening times: " + Arrays.toString(times).substring(1).replaceFirst("]", "") + ", as they overlap with already scheduled films");
                     }
                 }
             }
