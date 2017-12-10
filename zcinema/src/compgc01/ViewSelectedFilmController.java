@@ -27,7 +27,7 @@ public class ViewSelectedFilmController implements Initializable {
 
     Film selectedFilm = null;
     File imgFile = null;
-    
+
     @FXML
     ImageView selectedFilmPoster;
     @FXML
@@ -45,9 +45,9 @@ public class ViewSelectedFilmController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {	
-    	
-    	if(Main.isEmployee())
-    		bookButton.setText("Go to Bookings");
+
+        if(Main.isEmployee())
+            bookButton.setText("Go to Bookings");
 
         selectedFilm = Main.getFilmByTitle(Main.getSelectedFilmTitle());
         // System.out.println(Main.getSelectedFilmTitle());
@@ -63,8 +63,14 @@ public class ViewSelectedFilmController implements Initializable {
         description.setText(selectedFilm.getDescription());
         startDate.setText(selectedFilm.getStartDate());
         endDate.setText(selectedFilm.getEndDate());
-        time.setText(selectedFilm.getTimes()[0] + ", " + selectedFilm.getTimes()[1] + ", " + selectedFilm.getTimes()[2]);
-        
+
+        String displayedTimes = "";
+        for (int i = 0; i < selectedFilm.getTimes().length; i++) {
+            if (!selectedFilm.getTimes()[i].equals("hh:mm"))
+                displayedTimes += selectedFilm.getTimes()[i] + ", ";
+        }
+        time.setText(displayedTimes.substring(0, displayedTimes.length() - 2));
+
         if (!Main.isEmployee())
             deleteFilmButton.setVisible(false);
     }
@@ -74,10 +80,10 @@ public class ViewSelectedFilmController implements Initializable {
 
         Main.modifyJSONFile("filmsJSON.txt", selectedFilm.getTitle(), "", "delete");
         imgFile.delete();
-        
+
         Main.resetFilmList();
         Main.readJSONFile("filmsJSON.txt");
-        
+
         backToPrevScene(event);
     }
 
