@@ -2,6 +2,7 @@ package compgc01;
 
 import java.io.*;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -51,12 +52,10 @@ public class ManageBookingsController implements Initializable {
     @FXML
     Text customer;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        if(!Main.isEmployee()){
+        if(!Main.isEmployee()) {
             customerDropDownList.setVisible(false); 
             customer.setVisible(false);
         }
@@ -89,10 +88,7 @@ public class ManageBookingsController implements Initializable {
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
-
             try {
-
-
                 datePicker.getValue().equals(null);
 
                 Main.getSelectedSeats().clear();
@@ -135,7 +131,7 @@ public class ManageBookingsController implements Initializable {
                 bookedSeatsLabel.setText("Booked seats: " + bookedSeatsCount);
                 availableSeatsLabel.setText("Available seats: " + (18 - bookedSeatsCount));
 
-            } catch (NullPointerException ex){
+            } catch (NullPointerException ex) {
                 ex.getStackTrace();
             }
 
@@ -175,9 +171,10 @@ public class ManageBookingsController implements Initializable {
      * Method that gets called when a customer clicks on the book seat button to make a booking.
      * @param e Mouse event representing a click on the book seat button
      * @throws IOException Exception to be thrown if there is a problem with storing the booking in the JSON text files
+     * @throws GeneralSecurityException Exception to be thrown if encryption fails
      */
     @FXML
-    private void bookSeat(MouseEvent e) throws IOException {
+    private void bookSeat(MouseEvent e) throws IOException, GeneralSecurityException {
 
         if (Main.getSelectedSeats().size() == 0){
             throwAlert();
@@ -210,9 +207,9 @@ public class ManageBookingsController implements Initializable {
             for (int i = newBookingId; i < (newBookingId + Main.getSelectedSeats().size()); i++) {
 
                 if(Main.isEmployee())
-                    Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", customerDropDownList.getValue());
+                    Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Encryption.encrypt(customerDropDownList.getValue()));
                 else
-                    Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Main.getCurrentUser().getUsername());
+                    Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Encryption.encrypt(Main.getCurrentUser().getUsername()));
 
                 Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "date", datePicker.getValue().toString());
                 Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "seat", Main.getSelectedSeats().get(i - newBookingId));

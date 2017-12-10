@@ -147,11 +147,13 @@ public class Main extends Application {
                     String[] times = {(String) item.get("time1"), (String) item.get("time2"), (String) item.get("time3")};
                     films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), times));
                 }
-                else if (file.contains("bookings"))
-                    bookings.add(new BookingHistoryItem((String) item.get("status"), (String) item.get("username"),
-                            getCustomerByUsername((String) item.get("username")).getFirstName(), getCustomerByUsername((String) item.get("username")).getLastName(),
+                else if (file.contains("bookings")) {
+                    String customerUsername = Encryption.decrypt((String) item.get("username"));
+                    bookings.add(new BookingHistoryItem((String) item.get("status"), customerUsername,
+                            getCustomerByUsername(customerUsername).getFirstName(), getCustomerByUsername(customerUsername).getLastName(),
                             (String) item.get("film"), (String) item.get("date"),
                             (String) item.get("time"), (String) item.get("seat"), (String) (s)));
+                }
             }
         }
         catch (Exception ex) {
