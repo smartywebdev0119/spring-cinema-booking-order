@@ -147,10 +147,22 @@ public class ManageBookingsController implements Initializable {
      */
     @FXML
     private void bookSeat(MouseEvent e) throws IOException {
+    	
+    	if (Main.getSelectedSeats().size() == 0){
+	        throwAlert();
+    		return;
+    	}
 
-        if (Main.getSelectedSeats().size() == 0)
-            return;
-
+    	try {
+        	datePicker.getValue().equals(null);
+        	filmDropDownList.getValue().equals(null);
+        	timeDropDownList.getValue().equals(null);
+        
+    	} catch(NullPointerException ex){    		
+    	     throwAlert();
+     		return;
+    	}
+        
         // getting the latest booking id and incrementing by one
         int newBookingId = Main.getBookingList().size() + 1;
         // System.out.println(newBookingId);
@@ -196,7 +208,8 @@ public class ManageBookingsController implements Initializable {
     @FXML
     private void populateFilmDropDownList(ActionEvent event) throws ParseException {
 
-        Main.setSelectedDate(datePicker.getValue().toString());
+      try {
+    	Main.setSelectedDate(datePicker.getValue().toString());
 
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -210,6 +223,10 @@ public class ManageBookingsController implements Initializable {
         }
 
         filmDropDownList.setItems(filmTitles);
+      }
+      catch(NullPointerException e) {
+    	  e.getMessage();
+      }
     }
 
     /**
@@ -236,5 +253,14 @@ public class ManageBookingsController implements Initializable {
         catch (NullPointerException ex) {
             return;
         }
+    }
+    
+    @FXML
+    private void throwAlert() {
+    	 Alert alert = new Alert(AlertType.INFORMATION, "Please, make sure all fields are selected", ButtonType.OK);
+         alert.showAndWait();
+         if(alert.getResult() == ButtonType.OK){
+         	alert.close();
+         }
     }
 }
