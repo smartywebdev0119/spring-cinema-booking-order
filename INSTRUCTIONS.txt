@@ -1,0 +1,12 @@
+Log in as employee
+username: filip
+password: e
+or
+username: lucio
+password: e
+
+Log in as customer
+username: ghita
+password: c
+
+UCL MediaCentral video link
