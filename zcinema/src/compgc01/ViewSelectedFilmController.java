@@ -12,7 +12,10 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -78,6 +81,10 @@ public class ViewSelectedFilmController implements Initializable {
     @FXML
     public void deleteFilm(ActionEvent event) throws IOException {
 
+    	Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to delete this movie?", ButtonType.NO, ButtonType.YES);
+    	alert.showAndWait();
+    	
+    	if(alert.getResult() == ButtonType.YES){
         Main.modifyJSONFile("filmsJSON.txt", selectedFilm.getTitle(), "", "delete");
         imgFile.delete();
 
@@ -85,6 +92,10 @@ public class ViewSelectedFilmController implements Initializable {
         Main.readJSONFile("filmsJSON.txt");
 
         backToPrevScene(event);
+    	}
+    	else {
+    		return;
+    	}
     }
 
     @FXML
