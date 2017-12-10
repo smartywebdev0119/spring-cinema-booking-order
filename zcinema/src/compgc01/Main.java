@@ -59,7 +59,7 @@ public class Main extends Application {
     public static void main(String[] args) throws Exception {
 
         m = new Main();
-        
+
         // playMusic("wonderful_world.mp3");
 
         // if files do not exist, create them using default values
@@ -203,29 +203,29 @@ public class Main extends Application {
 
         try {
             // creating JSON files
+            String path = getPath();
             JSONObject items = new JSONObject();
 
             if (type.equals("films")) {
+                path = URLDecoder.decode(path + "res/filmsJSON.txt", "UTF-8");
                 JSONObject titanic = new JSONObject();
                 titanic.put("title", "Titanic");
                 titanic.put("description", "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.");
-                titanic.put("startDate", "2017-12-08");
-                titanic.put("endDate", "2017-12-14");
-                titanic.put("time", "20:00");
+                titanic.put("startDate", "2018-01-05");
+                titanic.put("endDate", "2018-01-18");
+                titanic.put("time1", "20:00");
+                titanic.put("time2", "19:00");
+                titanic.put("time3", "hh:mm");
                 items.put("Titanic", titanic);
             }
-            else {
+            else if (type.equals("employees")) {
+                path = URLDecoder.decode(path + "res/employeesJSON.txt", "UTF-8");
                 JSONObject filip = new JSONObject();
                 filip.put("username", "filip");
                 filip.put("firstName", "Filippos");
                 filip.put("lastName", "Zofakis");
                 filip.put("email", "filippos.zofakis.17@ucl.ac.uk");
-                if (type.equals("employees"))
-                    filip.put("password", "e");
-                else {
-                    filip.put("password", "c");
-                    filip.put("accountBalance", 1000);
-                }
+                filip.put("password", "7i9PJ1dS0EBoR+4o3d/4vA==:EZA7h3K6VcDp2semSDTTNw==");
                 items.put("filip", filip);
 
                 JSONObject lucio = new JSONObject();
@@ -233,39 +233,22 @@ public class Main extends Application {
                 lucio.put("firstName", "Lucio");
                 lucio.put("lastName", "D'Alessandro");
                 lucio.put("email", "lucio.d'alessandro.17@ucl.ac.uk");
-                if (type.equals("employees"))
-                    lucio.put("password", "e");
-                else {
-                    lucio.put("password", "c");
-                    lucio.put("accountBalance", 1000);
-                }
+                lucio.put("password", "7i9PJ1dS0EBoR+4o3d/4vA==:EZA7h3K6VcDp2semSDTTNw==");
                 items.put("lucio", lucio);
-
+            }
+            else if (type.equals("customers")) {
+                path = URLDecoder.decode(path + "res/customersJSON.txt", "UTF-8");
                 JSONObject ghita = new JSONObject();
                 ghita.put("username", "ghita");
                 ghita.put("firstName", "Ghita");
                 ghita.put("lastName", "K Mostefaoui");
                 ghita.put("email", "g.kouadri@ucl.ac.uk");
-                if (type.equals("employees"))
-                    ghita.put("password", "e");
-                else {
-                    ghita.put("password", "c");
-                    ghita.put("accountBalance", 1000000);
-                }
-                items.put("ghita", ghita);            
+                ghita.put("password", "q3Rx9TDQw4CwZFywJn1fbQ==:2HInWI4MrvDSmHY1plRKEA==");
+                ghita.put("accountBalance", 1000000);
+                items.put("ghita", ghita);
             }
 
             // System.out.println(items.toJSONString());
-
-            String path = getPath();
-
-            if (type.equals("employees"))
-                path = URLDecoder.decode(path + "res/employeesJSON.txt", "UTF-8");
-            else if (type.equals("customers"))
-                path = URLDecoder.decode(path + "res/customersJSON.txt", "UTF-8");
-            else if (type.equals("films"))
-                // System.out.println(path);
-                path = URLDecoder.decode(path + "res/filmsJSON.txt", "UTF-8");
 
             File file = new File(path);
             PrintWriter writer = new PrintWriter(file);
@@ -371,7 +354,7 @@ public class Main extends Application {
 
         return selectedTime;
     }
-    
+
     static void setSelectedSeats(ArrayList<String> selectedSeats) {
 
         Main.selectedSeats = selectedSeats;
@@ -381,7 +364,7 @@ public class Main extends Application {
 
         return selectedSeats;
     }
-    
+
     static Parent getRoot() {
 
         return root;
