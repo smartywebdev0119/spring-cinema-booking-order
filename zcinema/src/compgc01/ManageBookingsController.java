@@ -53,7 +53,13 @@ public class ManageBookingsController implements Initializable {
 
         // setting the date to the current one in the default time-zone of the system
         datePicker.setValue(LocalDate.now());
-
+        try {
+            populateFilmDropDownList(new ActionEvent());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        populateTimeDropDownList(new ActionEvent());
+        
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
         bookedSeatsCount = 0;
@@ -72,8 +78,12 @@ public class ManageBookingsController implements Initializable {
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
-            Main.setSelectedTime(timeDropDownList.getValue());
+           try {
+        	
+           	datePicker.getValue().equals(null);
 
+           	Main.setSelectedTime(timeDropDownList.getValue());
+            
             // resetting the number of booked seats for every date, film, and time
             bookedSeatsCount = 0;
 
@@ -83,6 +93,7 @@ public class ManageBookingsController implements Initializable {
                 .setStyle("-fx-fill:black; -fx-font-family: 'Material Icons'; -fx-font-size: 40.0;");
             }
 
+          
             // spotting the booked seats for a specific film, date, and time and turning their colour to grey
             for (BookingHistoryItem booking : Main.getBookingList()) {
                 // making sure we do not include the cancelled bookings
@@ -108,7 +119,12 @@ public class ManageBookingsController implements Initializable {
             // and the specific screening (film, date, and time) changes
             bookedSeatsLabel.setText("Booked seats: " + bookedSeatsCount);
             availableSeatsLabel.setText("Available seats: " + (18 - bookedSeatsCount));
-        });
+       
+           } catch (NullPointerException ex){
+        	   ex.getStackTrace();
+           }
+           
+           });
     }
 
     @FXML
