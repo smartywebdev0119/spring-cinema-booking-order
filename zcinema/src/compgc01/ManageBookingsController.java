@@ -187,9 +187,9 @@ public class ManageBookingsController implements Initializable {
         	datePicker.getValue().equals(null);
         	filmDropDownList.getValue().equals(null);
         	timeDropDownList.getValue().equals(null);
+        	if(Main.isEmployee())
         	customerDropDownList.getValue().equals(null);
         	
-        
     	} catch(NullPointerException ex){    		
     	     throwAlert();
      		return;
