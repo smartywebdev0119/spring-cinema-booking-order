@@ -36,7 +36,8 @@ public class SendEmail {
                     InternetAddress.parse(recipient));
             message.setSubject("Booking Confirmation");
             message.setText("Dear " + Main.getCurrentUser().getFirstName() + ",\n\n" +
-                    "Please find your ticket attached to this email.\nLooking forward to seeing you on " + Main.getSelectedDate() + "!");
+                    "your booking for the film " + Main.getSelectedFilmTitle() + " has been confirmed.\n\nLooking forward to seeing you on " + Main.getSelectedDate() +
+                    ", at " + Main.getSelectedTime() + "!\n\nYours,\nUCL Cinema");
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

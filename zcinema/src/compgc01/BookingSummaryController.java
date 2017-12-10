@@ -15,7 +15,7 @@ public class BookingSummaryController implements Initializable {
     @FXML
     Text nameSummary, filmSummary, dateSummary, timeSummary, seatSummary;
     @FXML
-    ToggleButton closeButton;
+    ToggleButton closeButton, emailButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,8 +38,9 @@ public class BookingSummaryController implements Initializable {
 
 
     @FXML
-    private void printTicket(ActionEvent event) {
+    private void emailReminder(ActionEvent event) {
 
-        SendEmail.sendEmail(Main.getCurrentUser().getEmail());
+        // SendEmail.sendEmail(Main.getCurrentUser().getEmail());
+        SendEmail.sendEmail("lucio.d'alessandro.17@ucl.ac.uk");
     }
 }

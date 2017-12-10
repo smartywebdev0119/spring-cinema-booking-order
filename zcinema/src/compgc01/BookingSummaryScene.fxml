@@ -13,7 +13,7 @@
          <children>
             <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../res/images/backgroundImages/bookingSummary-01.png" />
+                  <Image url="@res/images/backgroundImages/bookingSummary-01.png" />
                </image>
             </ImageView>
             <Text layoutX="109.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
@@ -22,12 +22,12 @@
             <Text layoutX="116.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" />
             <ImageView fitHeight="99.0" fitWidth="113.0" layoutX="192.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../res/images/backgroundImages/drink-01.png" />
+                  <Image url="@res/images/backgroundImages/drink-01.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="52.0" fitWidth="249.0" layoutX="79.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../res/images/backgroundImages/bookedSuccessfully-01.png" />
+                  <Image url="@res/images/backgroundImages/bookedSuccessfully-01.png" />
                </image>
             </ImageView>
             <Text fx:id="nameSummary" layoutX="156.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
@@ -41,7 +41,7 @@
                   <Font size="14.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="printButton" layoutX="85.0" layoutY="342.0" mnemonicParsing="false" onAction="#printTicket" prefHeight="44.0" prefWidth="99.0" style="-fx-background-color: white;" text="Print">
+            <ToggleButton fx:id="emailButton" layoutX="85.0" layoutY="342.0" mnemonicParsing="false" onAction="#emailReminder" prefHeight="44.0" prefWidth="99.0" style="-fx-background-color: white;" text="Email">
                <font>
                   <Font size="14.0" />
                </font>
