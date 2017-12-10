@@ -23,6 +23,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -44,12 +45,21 @@ public class ManageBookingsController implements Initializable {
     @FXML
     DatePicker datePicker;
     @FXML
-    ComboBox<String> filmDropDownList, timeDropDownList;
+    ComboBox<String> filmDropDownList, timeDropDownList, customerDropDownList;
     @FXML
     Label bookedSeatsLabel, availableSeatsLabel, totalSeatsLabel;
+    @FXML
+    Text customer;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	
+    	
+    	if(!Main.isEmployee()){
+    		customerDropDownList.setVisible(false); 
+    		customer.setVisible(false);
+    	}
 
         // setting the date to the current one in the default time-zone of the system
         datePicker.setValue(LocalDate.now());
@@ -59,6 +69,7 @@ public class ManageBookingsController implements Initializable {
             e.printStackTrace();
         }
         populateTimeDropDownList(new ActionEvent());
+        populateUserDropDownList(new ActionEvent());
         
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
@@ -172,25 +183,40 @@ public class ManageBookingsController implements Initializable {
 	        throwAlert();
     		return;
     	}
-
     	try {
         	datePicker.getValue().equals(null);
         	filmDropDownList.getValue().equals(null);
         	timeDropDownList.getValue().equals(null);
+        	customerDropDownList.getValue().equals(null);
+        	
         
     	} catch(NullPointerException ex){    		
     	     throwAlert();
      		return;
-
     	}
+    	
         
+    	Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to proceed with the booking?", ButtonType.NO, ButtonType.YES);
+    	alert.showAndWait();
+    	
+    	if(alert.getResult() == ButtonType.NO) {
+    		alert.close();
+    		return;
+    	}
+    	else {
         // getting the latest booking id and incrementing by one
         int newBookingId = Main.getBookingList().size() + 1;
         // System.out.println(newBookingId);
+//        System.out.println(customerDropDownList.getValue());
 
         for (int i = newBookingId; i < (newBookingId + Main.getSelectedSeats().size()); i++) {
-            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Main.getCurrentUser().getUsername());
-            Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "date", datePicker.getValue().toString());
+        	////////////////////////////
+        	if(Main.isEmployee())
+               Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", customerDropDownList.getValue());
+        	else
+        		Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "username", Main.getCurrentUser().getUsername());
+           /////////////////////////////
+        	Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "date", datePicker.getValue().toString());
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "seat", Main.getSelectedSeats().get(i - newBookingId));
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "time", timeDropDownList.getValue());
             Main.modifyJSONFile("bookingsJSON.txt", Integer.toString(i), "film", filmDropDownList.getValue());
@@ -199,9 +225,20 @@ public class ManageBookingsController implements Initializable {
 
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
-
+        
+        if(!Main.isEmployee()){
         SceneCreator.launchScene("BookingSummaryScene.fxml");
         Main.getStage().centerOnScreen();
+        } else {
+            Alert alert1 = new Alert(AlertType.INFORMATION, "Your have completed the booking for " + customerDropDownList.getValue(), ButtonType.OK);
+        	alert1.showAndWait();
+        	if(alert1.getResult() == ButtonType.OK) {
+        		alert1.close();
+        		SceneCreator.launchScene("ManageBookingsScene.fxml");
+        	}
+        }
+    	}
+    	
     }
 
     static Stage getStage() {
@@ -273,6 +310,20 @@ public class ManageBookingsController implements Initializable {
         }
         catch (NullPointerException ex) {
             return;
+        }
+    }
+    
+    @FXML
+    private void populateUserDropDownList(ActionEvent event) {
+
+        try {
+            ObservableList<String> customersList = FXCollections.observableArrayList();
+            for(Customer c : Main.getCustomerList()){
+            	customersList.add(c.getUsername());
+            }
+            customerDropDownList.setItems(customersList);
+        } catch(NullPointerException e) {
+        	return;
         }
     }
     
