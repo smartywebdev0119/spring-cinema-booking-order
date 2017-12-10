@@ -85,7 +85,7 @@ public class UserSceneController {
     public void sendEmailClick(ActionEvent event) throws IOException {
 
         Main m = Main.getMainApplication();
-        m.getHostServices().showDocument("mailto:" + Main.getCurrentUser().getEmail());
+        m.getHostServices().showDocument("mailto:" + "uclcinemaapp@gmail.com");
     }
 
     @FXML

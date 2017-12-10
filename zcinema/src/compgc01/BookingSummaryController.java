@@ -38,7 +38,8 @@ public class BookingSummaryController implements Initializable {
 
 
     @FXML
-    private void printTicker(ActionEvent event) {
+    private void printTicket(ActionEvent event) {
 
+        SendEmail.sendEmail("lucio.d'alessandro.17@ucl.ac.uk");
     }
 }
