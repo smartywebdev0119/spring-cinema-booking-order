@@ -161,6 +161,7 @@ public class ManageBookingsController implements Initializable {
     	} catch(NullPointerException ex){    		
     	     throwAlert();
      		return;
+
     	}
         
         // getting the latest booking id and incrementing by one
