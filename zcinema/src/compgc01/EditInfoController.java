@@ -1,6 +1,7 @@
 package compgc01;
 
 import java.io.*;
+import java.security.GeneralSecurityException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class EditInfoController {
 
     @FXML
     void initialize() throws IOException {
-        
+
         personaliseScene();
     }
 
@@ -60,7 +61,7 @@ public class EditInfoController {
     }
 
     @FXML
-    public void saveClick(ActionEvent event) throws IOException {
+    public void saveClick(ActionEvent event) throws IOException, GeneralSecurityException {
 
         String userType = Main.getCurrentUser().getType();
 
@@ -77,7 +78,8 @@ public class EditInfoController {
             Main.getCurrentUser().setEmail(updateEmail.getText());
         }
         if (!updatePassword.getText().trim().isEmpty()) {
-            Main.modifyJSONFile(userType + "sJSON.txt", Main.getCurrentUser().getUsername(), "password", updatePassword.getText());
+            String encryptedPassword = Encryption.encrypt(updatePassword.getText());
+            Main.modifyJSONFile(userType + "sJSON.txt", Main.getCurrentUser().getUsername(), "password", encryptedPassword);
             Main.getCurrentUser().setPassword(updatePassword.getText());
         }
 
