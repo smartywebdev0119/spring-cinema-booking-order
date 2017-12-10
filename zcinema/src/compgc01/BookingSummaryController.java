@@ -20,6 +20,8 @@ public class BookingSummaryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    	closeButton.setDisable(true);
+    	
         nameSummary.setText((Main.getCurrentUser().getFullName()));		
         filmSummary.setText(Main.getSelectedFilmTitle());
         dateSummary.setText(Main.getSelectedDate());
@@ -34,5 +36,14 @@ public class BookingSummaryController implements Initializable {
 
         SceneCreator.launchScene("ManageBookingsScene.fxml");
         Main.getStage().centerOnScreen();
+    }
+    
+    
+    @FXML
+    private void printTicker(ActionEvent event) {
+    
+    
+    	closeButton.setDisable(false);
+
     }
 }

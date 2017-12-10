@@ -36,7 +36,12 @@
             <Text fx:id="timeSummary" layoutX="156.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             <Text layoutX="112.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seats:" />
             <Text fx:id="seatSummary" layoutX="156.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="58.9814453125" />
-            <ToggleButton fx:id="closeButton" layoutX="107.0" layoutY="338.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="44.0" prefWidth="186.0" style="-fx-background-color: white;" text="Close">
+            <ToggleButton fx:id="closeButton" layoutX="219.0" layoutY="342.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="44.0" prefWidth="99.0" style="-fx-background-color: white;" text="Close">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="printButton" layoutX="85.0" layoutY="342.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" style="-fx-background-color: white;" text="Print">
                <font>
                   <Font size="14.0" />
                </font>
