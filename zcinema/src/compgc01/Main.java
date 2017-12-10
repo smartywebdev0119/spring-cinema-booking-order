@@ -25,10 +25,12 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 09.12.2017
+ * @since 10.12.2017
  * 
  * References:
  * JSON library by https://code.google.com/archive/p/json-simple/,
+ * JavaMail library by http://www.oracle.com/technetwork/java/index-138643.html,
+ * sendEmail class adapted from https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/,
  * JavaFX icons made by http://www.jensd.de/wordpress/ for the buttons,
  * dummy film posters and text from http://www.imdb.com/,
  * a .png icon showing a .csv file made by https://thenounproject.com/term/csv-file/56841/,

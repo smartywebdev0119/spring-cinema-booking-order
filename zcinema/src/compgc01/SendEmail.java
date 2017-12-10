@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
-    
+
     static void sendEmail(String recipient) {
 
         final String username = "uclcinemaapp@gmail.com";
@@ -36,8 +36,7 @@ public class SendEmail {
                     InternetAddress.parse(recipient));
             message.setSubject("Booking Confirmation");
             message.setText("Dear " + Main.getCurrentUser().getFirstName() + ",\n\n" +
-                    "We can now send emails too!");
-                    // "Please find your ticket attached to this email.\nLooking forward to seeing you on " + Main.getSelectedDate());
+                    "Please find your ticket attached to this email.\nLooking forward to seeing you on " + Main.getSelectedDate() + "!");
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
