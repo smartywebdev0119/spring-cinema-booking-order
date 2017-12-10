@@ -148,7 +148,7 @@ public class UserSceneController {
             if (selectedImage == null)
                 return;
             else if( ImageIO.read(selectedImage) == null) {
-                Alert alert = new Alert(AlertType.WARNING, "Please upload an image in JPG or PNG format!", ButtonType.OK);
+                Alert alert = new Alert(AlertType.WARNING, "Please upload an image in PNG, JPG, or GIF format!", ButtonType.OK);
                 alert.showAndWait();
                 if(alert.getResult() == ButtonType.OK) {
                     return;
