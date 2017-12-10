@@ -1,1 +1,1 @@
-{"1":{"date":"2017-12-20","seat":"C1","time":"hh:mm","film":"sgsdfgdfsg","username":"lucio","status":"booked"},"2":{"date":"2017-12-12","seat":"C1","time":"01:00","film":"sgsdfgdfsg","username":"lucio","status":"booked"}}
+{}
