@@ -78,9 +78,13 @@ public class ManageBookingsController implements Initializable {
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
+
            try {
         	
+         
            	datePicker.getValue().equals(null);
+            
+           	Main.getSelectedSeats().clear();
 
            	Main.setSelectedTime(timeDropDownList.getValue());
             
