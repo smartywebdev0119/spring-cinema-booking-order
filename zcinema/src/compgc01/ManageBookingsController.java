@@ -53,7 +53,13 @@ public class ManageBookingsController implements Initializable {
 
         // setting the date to the current one in the default time-zone of the system
         datePicker.setValue(LocalDate.now());
-
+        try {
+            populateFilmDropDownList(new ActionEvent());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        populateTimeDropDownList(new ActionEvent());
+        
         // setting the total number of seats to a value of 18
         totalSeatsLabel.setText("Total seats: 18");
         bookedSeatsCount = 0;
