@@ -1,6 +1,7 @@
 package compgc01;
 
 import java.io.*;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -30,35 +31,35 @@ public class MainController {
 
     @FXML
     public void exitButton(MouseEvent event) {
-        
+
         System.exit(0);
     }
 
     @FXML
-    public void loginClick(ActionEvent event) throws IOException {
+    public void loginClick(ActionEvent event) throws IOException, GeneralSecurityException {
 
         Main.readJSONFile("employeesJSON.txt");
         Main.readJSONFile("customersJSON.txt");
         Main.readJSONFile("filmsJSON.txt");
-        
+
         ArrayList<User> users = new ArrayList<User>();
         users.addAll(Main.getEmployeeList());
         users.addAll(Main.getCustomerList());
 
         for (User u : users) {
-            if (usernameBox.getText().equals(u.getUsername()) && passwordBox.getText().equals(u.getPassword())) {
+            if (usernameBox.getText().equals(u.getUsername()) && passwordBox.getText().equals(Encryption.decrypt(u.getPassword()))) {
                 Main.setCurrentUser(u);
                 if (u.getType().equals("employee")) {
                     Main.setEmployeeMode(true);
                 } else
-                	wrongCredentials.setVisible(true);
-                	
+                    wrongCredentials.setVisible(true);
+
 
                 // loading user scene
                 SceneCreator.launchScene("UserScene.fxml");
             }
             else
-            wrongCredentials.setVisible(true);
+                wrongCredentials.setVisible(true);
         }
     }
 }

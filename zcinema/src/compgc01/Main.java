@@ -31,6 +31,7 @@ import javafx.stage.StageStyle;
  * JSON library by https://code.google.com/archive/p/json-simple/,
  * JavaMail library by http://www.oracle.com/technetwork/java/index-138643.html,
  * sendEmail class adapted from https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/,
+ * Encryption class adapted from Johaness Brodwall's example in https://stackoverflow.com/questions/1132567/encrypt-password-in-configuration-files,
  * JavaFX icons made by http://www.jensd.de/wordpress/ for the buttons,
  * dummy film posters and text from http://www.imdb.com/,
  * a .png icon showing a .csv file made by https://thenounproject.com/term/csv-file/56841/,
@@ -55,10 +56,10 @@ public class Main extends Application {
     static HashSet<Film> films = new HashSet<Film>();
     static HashSet<BookingHistoryItem> bookings = new HashSet<BookingHistoryItem>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         m = new Main();
-
+        
         // playMusic("wonderful_world.mp3");
 
         // if files do not exist, create them using default values
@@ -72,6 +73,8 @@ public class Main extends Application {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        Encryption.setKey();
 
         launch(args);
     }
