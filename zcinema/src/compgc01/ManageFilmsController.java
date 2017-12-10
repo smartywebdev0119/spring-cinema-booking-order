@@ -161,12 +161,12 @@ public class ManageFilmsController {
             // checking that input file is not null and handling the exception
             if (selectedImage == null)
                 return;
-            if(!(selectedImage.getName().contains(".jpg") || selectedImage.getName().contains(".png"))){
-            	Alert alert = new Alert(AlertType.WARNING, "You can only upload JPG or PNG format", ButtonType.OK);
-            	alert.showAndWait();
-            	if(alert.getResult() == ButtonType.OK){
-            		return;
-            	}
+            else if( ImageIO.read(selectedImage) == null) {
+                Alert alert = new Alert(AlertType.WARNING, "Please upload an image in JPG or PNG format!", ButtonType.OK);
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.OK) {
+                    return;
+                }
             }
             else {
                 Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);

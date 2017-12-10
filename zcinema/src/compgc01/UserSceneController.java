@@ -19,11 +19,13 @@ import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -141,19 +143,26 @@ public class UserSceneController {
 
         try {
             FileChooser fc = new FileChooser();
-            File selectedFile = fc.showOpenDialog(null);
+            File selectedImage = fc.showOpenDialog(null);
             // checking that input file is not null and handling the exception
-            if (selectedFile == null)
+            if (selectedImage == null)
                 return;
+            else if( ImageIO.read(selectedImage) == null) {
+                Alert alert = new Alert(AlertType.WARNING, "Please upload an image in JPG or PNG format!", ButtonType.OK);
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.OK) {
+                    return;
+                }
+            }
             else {
-                Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedFile), null);
+                Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);
 
                 uploadedUserIcon.setImage(img);
 
                 String folderPath = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
                 File uploads = new File(folderPath);
                 File file = new File(uploads, Main.getCurrentUser().getUsername() + ".png");
-                InputStream input = Files.newInputStream(selectedFile.toPath());
+                InputStream input = Files.newInputStream(selectedImage.toPath());
                 Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (FileNotFoundException ex) {
