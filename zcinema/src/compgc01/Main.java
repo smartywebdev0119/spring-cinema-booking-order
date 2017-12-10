@@ -140,9 +140,9 @@ public class Main extends Application {
                 JSONObject item = (JSONObject) items.get(s);
 
                 if (file.contains("employees"))
-                    employees.add( new Employee ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email")));
+                    employees.add( new Employee ((String) item.get("firstName"), (String) item.get("lastName"), Encryption.decrypt((String) item.get("username")), Encryption.decrypt((String) item.get("password")), (String) item.get("email")));
                 else if (file.contains("customers"))
-                    customers.add( new Customer ((String) item.get("firstName"), (String) item.get("lastName"), (String) item.get("username"), (String) item.get("password"), (String) item.get("email"), Double.parseDouble(String.valueOf(item.get("accountBalance")))));
+                    customers.add( new Customer ((String) item.get("firstName"), (String) item.get("lastName"), Encryption.decrypt((String) item.get("username")), Encryption.decrypt((String) item.get("password")), (String) item.get("email"), Double.parseDouble(String.valueOf(item.get("accountBalance")))));
                 else if (file.contains("films")) {
                     String[] times = {(String) item.get("time1"), (String) item.get("time2"), (String) item.get("time3")};
                     films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), times));

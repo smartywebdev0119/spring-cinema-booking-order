@@ -47,7 +47,7 @@ public class MainController {
         users.addAll(Main.getCustomerList());
 
         for (User u : users) {
-            if (usernameBox.getText().equals(u.getUsername()) && passwordBox.getText().equals(Encryption.decrypt(u.getPassword()))) {
+            if (usernameBox.getText().equals(u.getUsername()) && passwordBox.getText().equals(u.getPassword())) {
                 Main.setCurrentUser(u);
                 if (u.getType().equals("employee")) {
                     Main.setEmployeeMode(true);
