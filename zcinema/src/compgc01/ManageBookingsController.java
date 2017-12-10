@@ -78,6 +78,7 @@ public class ManageBookingsController implements Initializable {
         // action that is fired whenever the time is changed
         timeDropDownList.setOnAction((event) -> {
 
+            Main.getSelectedSeats().clear();
             Main.setSelectedTime(timeDropDownList.getValue());
 
             // resetting the number of booked seats for every date, film, and time
