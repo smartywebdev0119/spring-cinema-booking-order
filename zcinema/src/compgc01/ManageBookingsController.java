@@ -73,7 +73,7 @@ public class ManageBookingsController implements Initializable {
         timeDropDownList.setOnAction((event) -> {
 
             Main.setSelectedTime(timeDropDownList.getValue());
-            
+
             // resetting the number of booked seats for every date, film, and time
             bookedSeatsCount = 0;
 
@@ -167,12 +167,12 @@ public class ManageBookingsController implements Initializable {
         Main.resetBookingList();
         Main.readJSONFile("bookingsJSON.txt");
 
-       SceneCreator.launchScene("BookingSummaryScene.fxml");
-       Main.getStage().centerOnScreen();
+        SceneCreator.launchScene("BookingSummaryScene.fxml");
+        Main.getStage().centerOnScreen();
     }
 
     static Stage getStage() {
-        
+
         return stage;
     }
 
@@ -197,7 +197,7 @@ public class ManageBookingsController implements Initializable {
     private void populateFilmDropDownList(ActionEvent event) throws ParseException {
 
         Main.setSelectedDate(datePicker.getValue().toString());
-        
+
         ObservableList<String> filmTitles = FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -224,6 +224,13 @@ public class ManageBookingsController implements Initializable {
             Film selectedFilm = Main.getFilmByTitle(Main.getSelectedFilmTitle());
 
             ObservableList<String> timesList = FXCollections.observableArrayList(selectedFilm.getTimes());
+            for (int i = 0; i< timesList.size(); i++) {
+                if (timesList.get(i).equals("hh:mm")) {
+                    timesList.remove(i);
+                    i--;
+                }
+            }
+
             timeDropDownList.setItems(timesList);
         }
         catch (NullPointerException ex) {
