@@ -8,5 +8,7 @@ password: e
 Log in as customer
 username: ghita
 password: c
+or password: santa
+for customer christmas mode
 
 UCL MediaCentral video link

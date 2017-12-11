@@ -8,7 +8,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 
 /**
@@ -53,6 +56,15 @@ public class BookingSummaryController implements Initializable {
     private void emailReminder(ActionEvent event) {
 
         // SendEmail.sendEmail(Main.getCurrentUser().getEmail());
-        SendEmail.sendEmail("lucio.d'alessandro.17@ucl.ac.uk");
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like a confirmation to be emailed to you?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            SendEmail.sendEmail("lucio.d'alessandro.17@ucl.ac.uk");
+            alert.close();
+        }
+        else {
+            alert.close();
+            return;
+        }
     }
 }
