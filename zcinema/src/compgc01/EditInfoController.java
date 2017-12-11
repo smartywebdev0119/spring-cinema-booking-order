@@ -2,11 +2,15 @@ package compgc01;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -42,8 +46,6 @@ public class EditInfoController {
         if (field.getText().length() > 30)
             field.setEditable(false);
 
-        // Pattern.matches("[A-Za-z]*", (CharSequence) updateName);
-
         if (e.getCode().equals(KeyCode.BACK_SPACE))
             field.setEditable(true);
 
@@ -73,9 +75,15 @@ public class EditInfoController {
             Main.modifyJSONFile(userType + "sJSON.txt", Main.getCurrentUser().getUsername(), "lastName", updateLastName.getText());
             Main.getCurrentUser().setLastName(updateLastName.getText());
         }
-        if (!updateEmail.getText().trim().isEmpty()) {
+        if (!updateEmail.getText().trim().isEmpty() && emailValidator()) {
             Main.modifyJSONFile(userType + "sJSON.txt", Main.getCurrentUser().getUsername(), "email", updateEmail.getText());
             Main.getCurrentUser().setEmail(updateEmail.getText());
+        } else {
+        	Alert alert = new Alert(AlertType.WARNING, "The email must be of this format: \"example01@ucl.com\"", ButtonType.OK);
+        	alert.showAndWait();
+        	if(alert.getResult() == ButtonType.OK){
+        		return;
+        	}
         }
         if (!updatePassword.getText().trim().isEmpty()) {
             String encryptedPassword = Encryption.encrypt(updatePassword.getText());
@@ -103,5 +111,10 @@ public class EditInfoController {
         }
         emailLabel.setText(Main.getCurrentUser().getEmail());
         titleLabelNew.setText(titleLabel.getText());
+    }
+    
+    @FXML
+    boolean emailValidator () {
+    	return Pattern.matches("[A-Za-z0-9]+([/@])[A-Za-z0-9]+[/.][A-Za-z]+", (CharSequence) updateEmail.getText());
     }
 }
