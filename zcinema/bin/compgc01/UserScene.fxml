@@ -54,11 +54,11 @@
       </AnchorPane>
       <AnchorPane id="background" layoutX="148.0" layoutY="31.0" prefHeight="371.0" prefWidth="551.0">
         <children>
-            <ImageView fitHeight="400.0" fitWidth="532.0" layoutX="21.0" layoutY="-30.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="400.0" fitWidth="532.0" layoutX="21.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@res/images/backgroundImages/christmas-02.png" />
+                  <Image url="@res/images/backgroundImages/backgroundUserScene-02.png" />
                </image>
-            </ImageView>
+            </ImageView> 
             <Button fx:id="manageFilmsButton" layoutX="24.0" layoutY="275.0" minWidth="30.0" mnemonicParsing="false" onAction="#manageMoviesClick" prefHeight="43.0" prefWidth="525.0" style="-fx-background-color: #353238; -fx-min-width: 40;" text="Manage Films" textFill="WHITE">
                <graphic>
                   <MaterialIconView fill="WHITE" glyphName="MOVIE" size="20" />
