@@ -9,6 +9,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * A class that allows the sending of emails to customers of our application.
+ * Uses the JavaMail library by http://www.oracle.com/technetwork/java/index-138643.html
+ * and is adapted from the example at https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/.
+ *
+ * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
+ * @since 12.12.2017
+ */
 public class SendEmail {
 
     static void sendEmail(String recipient) {

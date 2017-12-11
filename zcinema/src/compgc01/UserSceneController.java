@@ -31,7 +31,7 @@ import javafx.util.Pair;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 10.12.2017
+ * @since 12.12.2017
  */
 public class UserSceneController {
 
@@ -40,12 +40,25 @@ public class UserSceneController {
     @FXML
     Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
     @FXML
-    ImageView uploadedUserIcon;
+    ImageView userSceneBackground, uploadedUserIcon;
 
     @FXML
     void initialize() throws IOException{
 
         personaliseScene();
+
+        String path = URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/", "UTF-8");
+
+        if (Main.isChristmasSeason() && !Main.isEmployee()) {
+            File file = new File(path + "christmas-02.png");
+            Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+            userSceneBackground.setImage(img);
+        }
+        else {
+            File file = new File(path + "backgroundUserScene-02.png");
+            Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+            userSceneBackground.setImage(img);
+        }
     }
 
     @FXML

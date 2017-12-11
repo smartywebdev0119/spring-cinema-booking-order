@@ -25,7 +25,7 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application, Cine UCL.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 11.12.2017
+ * @since 12.12.2017
  * 
  * References:
  * JSON library by https://code.google.com/archive/p/json-simple/,
@@ -47,7 +47,7 @@ public class Main extends Application {
     static Stage primaryStage;
     static Main m = null;
     static User currentUser;
-    static Boolean employeeMode = false;
+    static Boolean employeeMode = false, christmasSeason = false;
     static String selectedFilmTitle = "", selectedDate = "", selectedTime = "";
     static ArrayList<String> selectedSeats;
 
@@ -309,6 +309,16 @@ public class Main extends Application {
     static void setEmployeeMode(boolean employeeMode) {
 
         Main.employeeMode = employeeMode;
+    }
+
+    static boolean isChristmasSeason() {
+
+        return christmasSeason;
+    }
+
+    static void setChristmasSeason(boolean christmasSeason) {
+
+        Main.christmasSeason = christmasSeason;
     }
 
     static Customer getCustomerByUsername(String username) {

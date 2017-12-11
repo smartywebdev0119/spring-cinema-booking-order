@@ -14,6 +14,13 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * A class that encrypts selected resources of our cinema booking management application, such as usernames and passwords.
+ * Adapted from Johaness Brodwall's example in https://stackoverflow.com/questions/1132567/encrypt-password-in-configuration-files.
+ *
+ * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
+ * @since 12.12.2017
+ */
 public class Encryption {
 
     static byte[] salt = new String("12345678").getBytes();

@@ -54,7 +54,7 @@
       </AnchorPane>
       <AnchorPane id="background" layoutX="148.0" layoutY="31.0" prefHeight="371.0" prefWidth="551.0">
         <children>
-         <ImageView fitHeight="400.0" fitWidth="532.0" layoutX="21.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="userSceneBackground" fitHeight="400.0" fitWidth="532.0" layoutX="21.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@res/images/backgroundImages/backgroundUserScene-02.png" />
                </image>
