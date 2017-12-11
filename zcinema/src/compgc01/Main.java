@@ -22,10 +22,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * The main class for our cinema booking management application.
+ * The main class for our cinema booking management application, Cine UCL.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 10.12.2017
+ * @since 11.12.2017
  * 
  * References:
  * JSON library by https://code.google.com/archive/p/json-simple/,
@@ -145,7 +145,7 @@ public class Main extends Application {
                     customers.add( new Customer ((String) item.get("firstName"), (String) item.get("lastName"), Encryption.decrypt((String) item.get("username")), Encryption.decrypt((String) item.get("password")), (String) item.get("email"), Double.parseDouble(String.valueOf(item.get("accountBalance")))));
                 else if (file.contains("films")) {
                     String[] times = {(String) item.get("time1"), (String) item.get("time2"), (String) item.get("time3")};
-                    films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("startDate"), (String) item.get("endDate"), times));
+                    films.add( new Film ((String) s, (String) item.get("description"), (String) item.get("trailer"), (String) item.get("startDate"), (String) item.get("endDate"), times));
                 }
                 else if (file.contains("bookings")) {
                     String customerUsername = Encryption.decrypt((String) item.get("username"));
@@ -213,6 +213,7 @@ public class Main extends Application {
                 JSONObject titanic = new JSONObject();
                 titanic.put("title", "Titanic");
                 titanic.put("description", "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.");
+                titanic.put("trailer", "https://www.youtube.com/watch?v=2e-eXJ6HgkQ");
                 titanic.put("startDate", "2018-01-05");
                 titanic.put("endDate", "2018-01-18");
                 titanic.put("time1", "20:00");

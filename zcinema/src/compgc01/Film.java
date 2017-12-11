@@ -3,19 +3,20 @@ package compgc01;
 /**
  * A class represeting a film.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 09.12.2017
+ * @since 11.12.2017
  */
 public class Film {
 
-    private String title = "Default Title", description = "Default Description",
+    private String title = "Default Title", description = "Default Description", trailer = "Default Trailer",
             startDate = "yyyy-mm-dd", endDate = "yyyy-mm-dd";
     private String[] times = {"hh:mm", "hh:mm", "hh:mm"};
 
-    Film(String title, String description, String startDate, String endDate, String[] times) {
+    Film(String title, String description, String trailer, String startDate, String endDate, String[] times) {
 
-        if (!title.isEmpty() && !description.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty() && !(times.length == 0))
+        if (!title.isEmpty() && !description.isEmpty() && !trailer.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty() && !(times.length == 0))
             this.title = title;
         this.description = description;
+        this.trailer = trailer;
         this.startDate = startDate;
         this.endDate = endDate;
         this.times = times;
@@ -43,6 +44,17 @@ public class Film {
             this.description = description;
     }
 
+    String getTrailer() {
+
+        return trailer;
+    }
+
+    void setTrailer(String trailer) {
+
+        if (!trailer.isEmpty())
+            this.trailer = trailer;
+    }
+    
     String getStartDate() {
 
         return startDate;

@@ -27,14 +27,14 @@ import javafx.scene.text.Text;
  * The controller for the View Selected Film Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 09.12.2017
+ * @since 11.12.2017
  */
 public class ViewSelectedFilmController implements Initializable {
 
     Film selectedFilm = null;
     File imgFile = null;
-
-    Desktop d = Desktop.getDesktop();
+    Desktop desktop = Desktop.getDesktop();
+    
     @FXML
     ImageView selectedFilmPoster;
     @FXML
@@ -80,44 +80,38 @@ public class ViewSelectedFilmController implements Initializable {
 
         if (!Main.isEmployee())
             deleteFilmButton.setVisible(false);
-        
-        
-        
-//        selectedFilmPoster.setOnMouseClicked((event) -> {
-//
-//        	try {
-//        		for(Film c : Main.getFilmList()){
-////				if(c.getTitle().equals(title.getText()))
-////					d.browse(new URI(c.getTrailer()));
-//        		}
-//        			
-//			} catch (IOException | URISyntaxException e) {
-//			}
-//			
-//        	
-//        });
-	
-        
+
+
+        selectedFilmPoster.setOnMouseClicked((event) -> {
+
+            try {
+                for (Film film : Main.getFilmList()) {
+                    if(film.getTitle().equals(title.getText()))
+                        desktop.browse(new URI(film.getTrailer()));
+                }
+            } catch (IOException | URISyntaxException e) {
+            }
+        });
     }
 
     @FXML
     public void deleteFilm(ActionEvent event) throws IOException {
 
-    	Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to delete this movie?", ButtonType.NO, ButtonType.YES);
-    	alert.showAndWait();
-    	
-    	if(alert.getResult() == ButtonType.YES){
-        Main.modifyJSONFile("filmsJSON.txt", selectedFilm.getTitle(), "", "delete");
-        imgFile.delete();
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to delete this movie?", ButtonType.NO, ButtonType.YES);
+        alert.showAndWait();
 
-        Main.resetFilmList();
-        Main.readJSONFile("filmsJSON.txt");
+        if(alert.getResult() == ButtonType.YES){
+            Main.modifyJSONFile("filmsJSON.txt", selectedFilm.getTitle(), "", "delete");
+            imgFile.delete();
 
-        backToPrevScene(event);
-    	}
-    	else {
-    		return;
-    	}
+            Main.resetFilmList();
+            Main.readJSONFile("filmsJSON.txt");
+
+            backToPrevScene(event);
+        }
+        else {
+            return;
+        }
     }
 
     @FXML

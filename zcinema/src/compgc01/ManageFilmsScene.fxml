@@ -91,8 +91,8 @@
             <ComboBox fx:id="filmTime1" layoutX="89.0" layoutY="271.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="85.0" promptText="hh:mm" />
             <ComboBox fx:id="filmTime2" layoutX="178.0" layoutY="271.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="85.0" promptText="hh:mm" />
             <ComboBox fx:id="filmTime3" layoutX="267.0" layoutY="271.0" onAction="#updateDateAndTime" onKeyReleased="#updateFilmText" prefHeight="28.0" prefWidth="85.0" promptText="hh:mm" />
-            <Text layoutX="16.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trailer link:" />
-            <TextField fx:id="filmTrailer" layoutX="93.0" layoutY="55.0" onKeyPressed="#updateFilmText" onKeyReleased="#updateFilmText" prefHeight="27.0" prefWidth="259.0" promptText="Optional" />
+            <Text layoutX="42.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trailer:" />
+            <TextField fx:id="filmTrailer" layoutX="93.0" layoutY="55.0" onKeyPressed="#updateFilmText" onKeyReleased="#updateFilmText" prefHeight="27.0" prefWidth="259.0" promptText="Enter video link here..." />
            </children>
       </AnchorPane>
    </children>

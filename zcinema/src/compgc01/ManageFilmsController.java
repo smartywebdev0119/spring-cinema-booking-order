@@ -44,7 +44,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 09.12.2017
+ * @since 11.12.2017
  */
 public class ManageFilmsController {
 
@@ -59,7 +59,7 @@ public class ManageFilmsController {
     @FXML
     DatePicker filmStartDate, filmEndDate;
     @FXML
-    TextField filmTitle;
+    TextField filmTitle, filmTrailer;
     @FXML
     ComboBox<String> filmTime1, filmTime2, filmTime3;
     @FXML
@@ -161,7 +161,7 @@ public class ManageFilmsController {
             // checking that input file is not null and handling the exception
             if (selectedImage == null)
                 return;
-            else if( ImageIO.read(selectedImage) == null) {
+            else if (ImageIO.read(selectedImage) == null) {
                 Alert alert = new Alert(AlertType.WARNING, "Please upload an image in JPG or PNG format!", ButtonType.OK);
                 alert.showAndWait();
                 if(alert.getResult() == ButtonType.OK) {
@@ -188,6 +188,7 @@ public class ManageFilmsController {
             JSONObject films = Main.readJSONFile("filmsJSON.txt");
             JSONObject filmToAdd = new JSONObject();
             filmToAdd.put("description", filmDescription.getText());
+            filmToAdd.put("trailer", filmTrailer.getText());
             filmToAdd.put("startDate", newFilmStartDate.getText());
             filmToAdd.put("endDate", newFilmEndDate.getText());
             filmToAdd.put("time1", newFilmTime1.getText());
@@ -220,6 +221,7 @@ public class ManageFilmsController {
             if (alert.getResult() == ButtonType.OK) {
                 Main.resetFilmList();
                 Main.readJSONFile("filmsJSON.txt");
+                filmDescription.setText("");
                 filmDescription.setText("");
                 filmTitle.setText("");
                 filmStartDate.setPromptText("yyyy-mm-dd");
@@ -258,6 +260,7 @@ public class ManageFilmsController {
         try {
             if (filmTitle.getText().equals("") || 
                     filmDescription.getText().equals("") || 
+                    filmTrailer.getText().equals("") || 
                     filmStartDate.getValue().equals("yyyy-mm-dd") || 
                     filmEndDate.getValue().equals("yyyy-mm-dd")) 
                 throw new InvalidFilmInputException("Please complete all fields!");
@@ -271,8 +274,8 @@ public class ManageFilmsController {
                 throw new InvalidFilmInputException("End date cannot be before start date!");
 
             // checking that the title of the movie is unique
-            for(Film c : Main.getFilmList()) {
-                if(c.getTitle().equals(filmTitle.getText()))
+            for (Film c : Main.getFilmList()) {
+                if (c.getTitle().equals(filmTitle.getText()))
                     throw new InvalidFilmInputException("The title " + filmTitle.getText() + " belongs to another scheduled movie!");
             }
 
