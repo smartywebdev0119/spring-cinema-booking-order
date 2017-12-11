@@ -259,7 +259,9 @@ public class ManageBookingsController implements Initializable {
      */
     @FXML
     private void populateFilmDropDownList(ActionEvent event) throws ParseException {
-
+    	
+    	Main.resetFilmList();
+    	Main.readJSONFile("filmsJSON.txt");
         try {
             Main.setSelectedDate(datePicker.getValue().toString());
 

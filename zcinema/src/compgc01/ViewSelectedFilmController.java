@@ -1,7 +1,10 @@
 package compgc01;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ResourceBundle;
@@ -31,6 +34,7 @@ public class ViewSelectedFilmController implements Initializable {
     Film selectedFilm = null;
     File imgFile = null;
 
+    Desktop d = Desktop.getDesktop();
     @FXML
     ImageView selectedFilmPoster;
     @FXML
@@ -76,6 +80,20 @@ public class ViewSelectedFilmController implements Initializable {
 
         if (!Main.isEmployee())
             deleteFilmButton.setVisible(false);
+        
+        
+        
+        selectedFilmPoster.setOnMouseClicked((event) -> {
+
+        	try {
+				d.browse(new URI("http://facebook.com"));
+			} catch (IOException | URISyntaxException e) {
+			}
+			
+        	
+        });
+	
+        
     }
 
     @FXML
