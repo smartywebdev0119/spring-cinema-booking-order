@@ -86,7 +86,11 @@ public class ViewSelectedFilmController implements Initializable {
         selectedFilmPoster.setOnMouseClicked((event) -> {
 
         	try {
-				d.browse(new URI("http://facebook.com"));
+        		for(Film c : Main.getFilmList()){
+				if(c.getTitle().equals(title.getText()))
+//					d.browse(new URI(c.getTrailer()));
+        		}
+        			
 			} catch (IOException | URISyntaxException e) {
 			}
 			
