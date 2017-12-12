@@ -44,8 +44,8 @@ public class SendEmail {
                     InternetAddress.parse(recipient));
             message.setSubject("Booking Confirmation");
             message.setText("Dear " + Main.getCurrentUser().getFirstName() + ",\n\n" +
-                    "your booking for the film " + Main.getSelectedFilmTitle() + " has been confirmed.\n\nLooking forward to seeing you on " + Main.getSelectedDate() +
-                    ", at " + Main.getSelectedTime() + "!\n\nYours,\nUCL Cinema");
+                    "Your booking for the film " + Main.getSelectedFilmTitle() + " has been confirmed. Please, keep this email as proof of your booking.\n\nLooking forward to seeing you on " + Main.getSelectedDate() +
+                    ", at " + Main.getSelectedTime() + "!\n\nStay Awesome!,\nUCL Cinema");
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

@@ -1,7 +1,7 @@
 package compgc01;
 
 /**
- * A class representing a customer
+ * A class whose objects represent customers
  * that inherits from user.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 07.11.2017

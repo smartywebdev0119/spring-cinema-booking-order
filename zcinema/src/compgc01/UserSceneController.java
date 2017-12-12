@@ -113,12 +113,10 @@ public class UserSceneController {
 
         if (!Main.isEmployee()) {
             titleLabel.setText("Customer");
-
             windowTitleLabel.setText("Customer View");
             manageFilmsButton.setText("View Films");
             manageBookingsButton.setText("View Bookings");
             exportFilmList.setVisible(false);
-
         }
 
         String path = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
@@ -180,6 +178,12 @@ public class UserSceneController {
         }
     }
 
+    /**
+	 * This method allows the employee to export a list of films for which any kind of activity has been perfomed such as
+	 * booking a seat or delete a seat.
+	 * @param ActionEvent e
+	 * @throws IOException
+	 */
     @FXML
     void exportFilmList (ActionEvent e) throws IOException {
 

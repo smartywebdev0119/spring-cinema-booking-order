@@ -35,6 +35,11 @@ public class MainController {
         System.exit(0);
     }
 
+    /**
+	 * A method that handles the login procedure for all kinds of users
+	 * @param ActionEvent event
+	 * @throws IOException, GeneralSecurityException
+	 */
     @FXML
     public void loginClick(ActionEvent event) throws IOException, GeneralSecurityException {
 

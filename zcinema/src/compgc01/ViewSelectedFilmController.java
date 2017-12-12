@@ -94,6 +94,11 @@ public class ViewSelectedFilmController implements Initializable {
         });
     }
 
+    
+    /**
+	 * Extra feature that allows the user to delete a movie from the list
+	 * @param ActionEvent event
+	 */
     @FXML
     public void deleteFilm(ActionEvent event) throws IOException {
 

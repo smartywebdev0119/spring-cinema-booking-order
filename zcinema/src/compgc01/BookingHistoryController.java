@@ -2,6 +2,7 @@ package compgc01;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,6 +76,9 @@ public class BookingHistoryController implements Initializable {
         changeColor();
     }
 
+    /**
+	 * This method creates eight columns to be used for the TableView in the bookingHistoryScene
+	 */
     private void setTableColumns() {
 
         // specifying how to populate the columns of the table
@@ -88,6 +92,9 @@ public class BookingHistoryController implements Initializable {
         idNumber.setCellValueFactory(new PropertyValueFactory<BookingHistoryItem, String>("idNumber"));
     }
 
+    /**
+	 * This method checks whether a booking can be deleted by reading today's date and the booking date.
+	 */
     @FXML
     public boolean deleteBookingValidator() {
         // getting current date
@@ -108,6 +115,9 @@ public class BookingHistoryController implements Initializable {
         return dateComparison > 0 ? true : false;
     }
 
+    /**
+	 * This method changes the color of the row, when a booking is deleted.
+	 */
     @FXML
     void changeColor() {
 
@@ -154,10 +164,17 @@ public class BookingHistoryController implements Initializable {
     }
 
     boolean isSelectedRowValid(String selectedRowId) {
-
         return selectedRowId != null ? true : false;
     }
 
+    
+    
+    /**
+	 * The following method allows the employee or customer to delete a booking. Alerts are set to pop up to 
+	 * make sure the users do not accidentally click on the button
+	 * @param ActionEvent event
+	 * @throws IOException
+	 */
     @FXML
     void deleteBooking(ActionEvent event) throws IOException {
 

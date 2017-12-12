@@ -57,6 +57,13 @@ public class Main extends Application {
     static HashSet<Film> films = new HashSet<Film>();
     static HashSet<BookingHistoryItem> bookings = new HashSet<BookingHistoryItem>();
 
+    
+    /**
+	 * The main method. It checks whether the designed files exist. If not, it generates them.
+	 * Then, the first scene is launched.
+	 * @param String [] args
+	 * @throws Exception
+	 */
     public static void main(String[] args) throws Exception {
 
         m = new Main();
@@ -125,6 +132,11 @@ public class Main extends Application {
         return m;
     }
 
+    /**
+	 * A method that allows to read all JSON files by simply passing the specific file name as paramenter
+	 * @return JSONObject, being the object containing all information of the read file
+	 * @param String file, being the file name
+	 */
     static JSONObject readJSONFile(String file) {
 
         JSONObject items = null;
@@ -163,6 +175,10 @@ public class Main extends Application {
         return items;
     }
 
+    /**
+	 * A method that allows to modify specific JSON files
+	 * @param String file, String identifier, String attribute, String newValue
+	 */
     @SuppressWarnings("unchecked")
     static void modifyJSONFile(String file, String identifier, String attribute, String newValue) {
 
@@ -201,6 +217,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+	 * A method that generates a new JSON file
+	 * @param String type
+	 */
     @SuppressWarnings("unchecked")
     static void createJSONFile(String type) {
 
@@ -399,6 +419,10 @@ public class Main extends Application {
         Main.primaryStage = stage;
     }
 
+    /**
+	 * The method that kicks off the first scene, being the LoginScene
+	 * @param Stage primaryStage
+	 */
     @Override
     public void start(Stage primaryStage) {
 

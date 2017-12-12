@@ -2,6 +2,7 @@ package compgc01;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
+
+/**
+ * A class taking the information from the ManageBookingsController to ultimately display 
+ * a summary of the user's booking information.
+ * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
+ * @since 10.12.2017
+ */
 
 public class BookingSummaryController implements Initializable {
 
@@ -36,7 +44,11 @@ public class BookingSummaryController implements Initializable {
         Main.getStage().centerOnScreen();
     }
 
-
+    /**
+	 * This method sends an email to the customer every time they make a booking so that they will have
+	 * their booking information safely saved in their inbox folder
+	 * @param ActionEvent event
+	 */
     @FXML
     private void emailReminder(ActionEvent event) {
 

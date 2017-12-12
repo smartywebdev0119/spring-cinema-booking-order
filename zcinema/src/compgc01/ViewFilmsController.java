@@ -86,6 +86,10 @@ public class ViewFilmsController implements Initializable {
             e.printStackTrace();
         }}
 
+    /**
+	 * Method that adds ImageView nodes to a GridPane
+	 * @param int index, int colIndex, int rowIndex
+	 */
     private void addImage(int index, int colIndex, int rowIndex) {
 
         String idToCut = fileList.get(index).getName();

@@ -3,7 +3,7 @@ package compgc01;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * A class represeting a booking history item (a single booking).
+ * A class whose objects represet a booking history item (a single booking).
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 08.12.2017
  */

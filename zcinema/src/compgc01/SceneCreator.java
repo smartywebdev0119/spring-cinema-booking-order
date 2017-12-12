@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 /**
- * Class that creates new scenes.
+ * Class that creates new scenes. This class is inherited every time a new scene is launched.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
  * @since 09.12.2017
  */
