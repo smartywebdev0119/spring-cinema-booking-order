@@ -119,14 +119,14 @@ public class EditInfoController implements Initializable {
 				Main.getCurrentUser().setPassword(updatePassword.getText());
 			}
 			alertConf.close();
-			SceneCreator.launchScene("../scenes/UserScene.fxml");
+			SceneCreator.launchScene("/scenes/UserScene.fxml");
 		}
 	}
 
 	@FXML
 	public void backToPrevScene(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("../scenes/UserScene.fxml");
+		SceneCreator.launchScene("/scenes/UserScene.fxml");
 	}
 
 	protected void personaliseScene() throws IOException {

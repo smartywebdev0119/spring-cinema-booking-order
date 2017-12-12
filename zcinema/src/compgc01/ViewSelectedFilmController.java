@@ -122,12 +122,12 @@ public class ViewSelectedFilmController implements Initializable {
     @FXML
     public void goToBookingScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
+        SceneCreator.launchScene("/scenes/ManageBookingsScene.fxml");
     }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("../scenes/ViewFilmsScene.fxml");
+        SceneCreator.launchScene("/scenes/ViewFilmsScene.fxml");
     }
 }

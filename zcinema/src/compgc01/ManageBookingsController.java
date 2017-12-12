@@ -225,14 +225,14 @@ public class ManageBookingsController implements Initializable {
 			Main.readJSONFile("bookingsJSON.txt");
 
 			if(!Main.isEmployee()){
-				SceneCreator.launchScene("../scenes/BookingSummaryScene.fxml");
+				SceneCreator.launchScene("/scenes/BookingSummaryScene.fxml");
 				Main.getStage().centerOnScreen();
 			} else {
 				Alert alert1 = new Alert(AlertType.INFORMATION, "Your have completed the booking for " + customerDropDownList.getValue() + "!", ButtonType.OK);
 				alert1.showAndWait();
 				if(alert1.getResult() == ButtonType.OK) {
 					alert1.close();
-					SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
+					SceneCreator.launchScene("/scenes/ManageBookingsScene.fxml");
 				}
 			}
 		}
@@ -246,13 +246,13 @@ public class ManageBookingsController implements Initializable {
 	@FXML
 	private void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("../scenes/BookingHistoryScene.fxml");
+		SceneCreator.launchScene("/scenes/BookingHistoryScene.fxml");
 	}
 
 	@FXML
 	private void backToPrevScene(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("../scenes/UserScene.fxml");
+		SceneCreator.launchScene("/scenes/UserScene.fxml");
 	}
 
 	/**

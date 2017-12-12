@@ -113,7 +113,7 @@ public class ViewFilmsController implements Initializable {
             try {
                 // storing the selected film to customise the newly created scene
                 Main.setSelectedFilmTitle(id);
-                SceneCreator.launchScene("../scenes/ViewSelectedFilm.fxml");
+                SceneCreator.launchScene("/scenes/ViewSelectedFilm.fxml");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -124,9 +124,9 @@ public class ViewFilmsController implements Initializable {
     public void backToPrevScene(ActionEvent event) throws IOException {
 
         if (Main.isEmployee())
-            SceneCreator.launchScene("../scenes/ManageFilmsScene.fxml");
+            SceneCreator.launchScene("/scenes/ManageFilmsScene.fxml");
         else
-            SceneCreator.launchScene("../scenes/UserScene.fxml");
+            SceneCreator.launchScene("/scenes/UserScene.fxml");
     }
 
     @FXML

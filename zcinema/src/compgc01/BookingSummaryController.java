@@ -42,7 +42,7 @@ public class BookingSummaryController implements Initializable {
     @FXML
     private void closeStage(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
+        SceneCreator.launchScene("/scenes/ManageBookingsScene.fxml");
         Main.getStage().centerOnScreen();
     }
 

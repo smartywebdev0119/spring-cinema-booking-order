@@ -73,23 +73,23 @@ public class UserSceneController {
         Main.resetBookingList();
 
         // loading login scene
-        SceneCreator.launchScene("../scenes/LoginScene.fxml");
+        SceneCreator.launchScene("/scenes/LoginScene.fxml");
     }
 
     @FXML
     public void manageBookingsClick(ActionEvent event) throws IOException {
 
         // calling the scene from parent class and avoiding code duplication
-        SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
+        SceneCreator.launchScene("/scenes/ManageBookingsScene.fxml");
     }
 
     @FXML
     public void manageMoviesClick(ActionEvent event) throws IOException {
 
         if (Main.isEmployee())
-            SceneCreator.launchScene("../scenes/ManageFilmsScene.fxml");
+            SceneCreator.launchScene("/scenes/ManageFilmsScene.fxml");
         else
-            SceneCreator.launchScene("../scenes/ViewFilmsScene.fxml");
+            SceneCreator.launchScene("/scenes/ViewFilmsScene.fxml");
     }
 
     @FXML
@@ -102,7 +102,7 @@ public class UserSceneController {
     @FXML
     public void editInfoClick(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("../scenes/EditInfoScene.fxml");
+        SceneCreator.launchScene("/scenes/EditInfoScene.fxml");
     }
 
     protected void personaliseScene() throws IOException {
@@ -138,7 +138,7 @@ public class UserSceneController {
         Platform.runLater(() -> {
             try {
                 changeImage();
-                SceneCreator.launchScene("../scenes/UserScene.fxml");
+                SceneCreator.launchScene("/scenes/UserScene.fxml");
                 personaliseScene();
             } catch (IOException e) {
                 e.printStackTrace();
