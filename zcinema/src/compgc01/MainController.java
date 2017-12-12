@@ -65,7 +65,7 @@ public class MainController {
                     Main.setChristmasSeason(false);
 
                 // loading user scene
-                SceneCreator.launchScene("UserScene.fxml");
+                SceneCreator.launchScene("../scenes/UserScene.fxml");
             }
             else
                 wrongCredentials.setVisible(true);

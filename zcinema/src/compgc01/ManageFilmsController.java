@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +44,7 @@ import javafx.stage.FileChooser;
  * The controller for the Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 11.12.2017
+ * @since 12.12.2017
  */
 public class ManageFilmsController {
 
@@ -78,22 +77,18 @@ public class ManageFilmsController {
 		newFilmTime1.setText("21:00");
 		filmStartDate.setValue(LocalDate.now());
 		newFilmStartDate.setText(LocalDate.now().toString());
-		File file = new File(
-				URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/DefaultFilmPoster.png", "UTF-8"));
-		Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-		uploadedFilmPoster.setImage(img);
 	}
 
 	@FXML
 	public void launchViewFilms(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("ViewFilmsScene.fxml");
+		SceneCreator.launchScene("../scenes/ViewFilmsScene.fxml");
 	}
 
 	@FXML
 	public void backToPrevScene(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("UserScene.fxml");
+		SceneCreator.launchScene("../scenes/UserScene.fxml");
 	}
 
 	/**

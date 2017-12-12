@@ -35,6 +35,7 @@ import javafx.stage.StageStyle;
  * JavaFX icons made by http://www.jensd.de/wordpress/ for the buttons,
  * film posters and text from http://www.imdb.com/,
  * film trailers from https://www.youtube.com/,
+ * film studio logos from Google Images and are copyright to their respective owners,
  * a .png icon showing a .csv file made by https://thenounproject.com/term/csv-file/56841/,
  * UCLlywood sign inspired by the original Hollywood one at http://www.clker.com/cliparts/A/z/5/z/y/H/hollywood-sign-md.png,
  * default film poster by http://comicbook.com/,
@@ -420,7 +421,7 @@ public class Main extends Application {
     }
 
     /**
-	 * The method that kicks off the first scene, being the LoginScene
+	 * The method that kicks off the first scene of our application, the LoginScene.
 	 * @param Stage primaryStage
 	 */
     @Override
@@ -428,12 +429,12 @@ public class Main extends Application {
 
         try {
             // setting up the login scene
-            root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/scenes/LoginScene.fxml"));
             Main.primaryStage = primaryStage;
             primaryStage.setTitle("Cinema Booking Management System");
             primaryStage.initStyle(StageStyle.UNDECORATED);
             Scene scene = new Scene(root, 700, 400);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/scenes/application.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

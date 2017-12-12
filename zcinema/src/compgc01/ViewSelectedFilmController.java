@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
  * The controller for the View Selected Film Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 11.12.2017
+ * @since 12.12.2017
  */
 public class ViewSelectedFilmController implements Initializable {
 
@@ -122,12 +122,12 @@ public class ViewSelectedFilmController implements Initializable {
     @FXML
     public void goToBookingScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("ManageBookingsScene.fxml");
+        SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
     }
 
     @FXML
     public void backToPrevScene(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("ViewFilmsScene.fxml");
+        SceneCreator.launchScene("../scenes/ViewFilmsScene.fxml");
     }
 }

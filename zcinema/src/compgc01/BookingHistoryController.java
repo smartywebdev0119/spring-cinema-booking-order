@@ -2,7 +2,6 @@ package compgc01;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +27,7 @@ import javafx.scene.input.MouseEvent;
  * The controller for the Booking History Scene.
  * Implementing the interface Initializable, so that the method initialize gets read at load time.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 08.12.2017
+ * @since 12.12.2017
  */
 public class BookingHistoryController implements Initializable {
 
@@ -152,7 +151,7 @@ public class BookingHistoryController implements Initializable {
     public void backToPrevScene(ActionEvent event) throws IOException {
 
         Main.resetBookingList();
-        SceneCreator.launchScene("ManageBookingsScene.fxml");
+        SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
     }
 
     @FXML
@@ -187,7 +186,7 @@ public class BookingHistoryController implements Initializable {
                     if(deleteBookingValidator()){ // comparing booking's date with the current date
                         Main.modifyJSONFile("bookingsJSON.txt", selectedRowId, "status", "cancelled");
                         Main.resetBookingList();
-                        SceneCreator.launchScene("BookingHistoryScene.fxml");
+                        SceneCreator.launchScene("../scenes/BookingHistoryScene.fxml");
                         alert.close();
                     }
                     else {

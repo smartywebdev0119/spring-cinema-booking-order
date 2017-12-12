@@ -2,7 +2,6 @@ package compgc01;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -18,7 +17,7 @@ import javafx.scene.text.Text;
  * A class taking the information from the ManageBookingsController to ultimately display 
  * a summary of the user's booking information.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 10.12.2017
+ * @since 12.12.2017
  */
 
 public class BookingSummaryController implements Initializable {
@@ -43,7 +42,7 @@ public class BookingSummaryController implements Initializable {
     @FXML
     private void closeStage(ActionEvent event) throws IOException {
 
-        SceneCreator.launchScene("ManageBookingsScene.fxml");
+        SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
         Main.getStage().centerOnScreen();
     }
 
@@ -55,11 +54,10 @@ public class BookingSummaryController implements Initializable {
     @FXML
     private void emailReminder(ActionEvent event) {
 
-        // SendEmail.sendEmail(Main.getCurrentUser().getEmail());
         Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like a confirmation to be emailed to you?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
-            SendEmail.sendEmail("lucio.d'alessandro.17@ucl.ac.uk");
+            SendEmail.sendEmail(Main.getCurrentUser().getEmail());
             alert.close();
         }
         else {

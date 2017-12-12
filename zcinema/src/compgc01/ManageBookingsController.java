@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +32,7 @@ import javafx.stage.Stage;
  * The controller for the Bookings Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 10.12.2017
+ * @since 12.12.2017
  */
 public class ManageBookingsController implements Initializable {
 
@@ -51,6 +52,8 @@ public class ManageBookingsController implements Initializable {
 	Label bookedSeatsLabel, availableSeatsLabel, totalSeatsLabel;
 	@FXML
 	Text customer;
+	@FXML
+	MaterialIconView A1, A2, A3, A4, A5, A6, B1, B2, B3, B4, B5, B6, C1, C2, C3, C4, C5, C6;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -222,14 +225,14 @@ public class ManageBookingsController implements Initializable {
 			Main.readJSONFile("bookingsJSON.txt");
 
 			if(!Main.isEmployee()){
-				SceneCreator.launchScene("BookingSummaryScene.fxml");
+				SceneCreator.launchScene("../scenes/BookingSummaryScene.fxml");
 				Main.getStage().centerOnScreen();
 			} else {
-				Alert alert1 = new Alert(AlertType.INFORMATION, "Your have completed the booking for " + customerDropDownList.getValue(), ButtonType.OK);
+				Alert alert1 = new Alert(AlertType.INFORMATION, "Your have completed the booking for " + customerDropDownList.getValue() + "!", ButtonType.OK);
 				alert1.showAndWait();
 				if(alert1.getResult() == ButtonType.OK) {
 					alert1.close();
-					SceneCreator.launchScene("ManageBookingsScene.fxml");
+					SceneCreator.launchScene("../scenes/ManageBookingsScene.fxml");
 				}
 			}
 		}
@@ -243,13 +246,13 @@ public class ManageBookingsController implements Initializable {
 	@FXML
 	private void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("BookingHistoryScene.fxml");
+		SceneCreator.launchScene("../scenes/BookingHistoryScene.fxml");
 	}
 
 	@FXML
 	private void backToPrevScene(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("UserScene.fxml");
+		SceneCreator.launchScene("../scenes/UserScene.fxml");
 	}
 
 	/**

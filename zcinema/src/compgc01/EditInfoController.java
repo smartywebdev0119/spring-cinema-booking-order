@@ -23,7 +23,7 @@ import javafx.scene.input.KeyEvent;
  * The controller for the Edit Info Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 07.12.2017
+ * @since 12.12.2017
  */
 public class EditInfoController implements Initializable {
 
@@ -119,14 +119,14 @@ public class EditInfoController implements Initializable {
 				Main.getCurrentUser().setPassword(updatePassword.getText());
 			}
 			alertConf.close();
-			SceneCreator.launchScene("UserScene.fxml");
+			SceneCreator.launchScene("../scenes/UserScene.fxml");
 		}
 	}
 
 	@FXML
 	public void backToPrevScene(ActionEvent event) throws IOException {
 
-		SceneCreator.launchScene("UserScene.fxml");
+		SceneCreator.launchScene("../scenes/UserScene.fxml");
 	}
 
 	protected void personaliseScene() throws IOException {
