@@ -97,7 +97,7 @@ public class EditInfoController implements Initializable {
 					Main.getCurrentUser().setEmail(updateEmail.getText());
 				}
 				else {
-					Alert alert = new Alert(AlertType.WARNING, "The email must be of this format: \"example01@ucl.com\"", ButtonType.OK);
+					Alert alert = new Alert(AlertType.WARNING, "The email must be of this format: \"example01@ucl.com\"!", ButtonType.OK);
 					alert.showAndWait();
 					if(alert.getResult() == ButtonType.OK){
 						return;
@@ -149,7 +149,7 @@ public class EditInfoController implements Initializable {
 
 	@FXML
 	boolean emailValidator () {
-		return Pattern.matches("[A-Za-z0-9]+([/@])[A-Za-z0-9]+[/.][A-Za-z]+", (CharSequence) updateEmail.getText());
+		return Pattern.matches("[A-Za-z0-9/.]+([/@])[A-Za-z0-9]+[/.][A-Za-z/.]+", (CharSequence) updateEmail.getText());
 	}
 
 }

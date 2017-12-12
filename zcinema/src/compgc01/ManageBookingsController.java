@@ -234,7 +234,7 @@ public class ManageBookingsController implements Initializable {
                 SceneCreator.launchScene("/scenes/BookingSummaryScene.fxml");
                 Main.getStage().centerOnScreen();
             } else {
-                Alert alert1 = new Alert(AlertType.INFORMATION, "Your have completed the booking for " + customerDropDownList.getValue() + "!", ButtonType.OK);
+                Alert alert1 = new Alert(AlertType.INFORMATION, "You have completed the booking for " + customerDropDownList.getValue() + "!", ButtonType.OK);
                 alert1.showAndWait();
                 if(alert1.getResult() == ButtonType.OK) {
                     alert1.close();
@@ -334,7 +334,7 @@ public class ManageBookingsController implements Initializable {
 
     @FXML
     private void throwAlert() {
-        Alert alert = new Alert(AlertType.INFORMATION, "Please, make sure all fields are selected", ButtonType.OK);
+        Alert alert = new Alert(AlertType.INFORMATION, "Please make sure all fields are selected!", ButtonType.OK);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.OK){
             alert.close();
