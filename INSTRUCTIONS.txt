@@ -12,3 +12,7 @@ or password: santa
 for customer christmas mode
 
 UCL MediaCentral video link
+
+
+Important note
+The res folder needs to be located in the same path/directory as the Eclipse workspace folder and the jar file, so that they can find it. It should not be inside the actual project folder with the source code though. If it gets moved to a different location, the application will no longer work.
