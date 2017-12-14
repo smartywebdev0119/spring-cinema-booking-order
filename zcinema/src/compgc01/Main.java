@@ -41,6 +41,9 @@ import javafx.stage.StageStyle;
  * default film poster by http://comicbook.com/,
  * default user icon by https://www.whatsapp.com/,
  * and all other images adapted from originals at https://www.freepik.com/.
+ * Royalty-free music (Palchevel's Canon in D Major performed by Kevin MacLeod)
+ * from http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100301,
+ * licensed under Creative Commons: By Attribution 3.0 License http://creativecommons.org/licenses/by/3.0/.
  */
 public class Main extends Application {
 
@@ -69,7 +72,7 @@ public class Main extends Application {
 
         m = new Main();
 
-        // playMusic("wonderful_world.mp3");
+        // playMusic("canonInDMajor.mp3");
 
         // if files do not exist, create them using default values
         try {

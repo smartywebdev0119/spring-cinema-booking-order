@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -27,14 +29,14 @@ import javafx.scene.text.Text;
  * The controller for the View Selected Film Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 12.12.2017
+ * @since 14.12.2017
  */
 public class ViewSelectedFilmController implements Initializable {
 
     Film selectedFilm = null;
     File imgFile = null;
     Desktop desktop = Desktop.getDesktop();
-    
+
     @FXML
     ImageView selectedFilmPoster;
     @FXML
@@ -94,18 +96,36 @@ public class ViewSelectedFilmController implements Initializable {
         });
     }
 
-    
+
     /**
-	 * Extra feature that allows the user to delete a movie from the list
-	 * @param ActionEvent event
-	 */
+     * Extra feature that allows the user to delete a movie from the list
+     * @param ActionEvent event
+     */
     @FXML
     public void deleteFilm(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to delete this movie?", ButtonType.NO, ButtonType.YES);
         alert.showAndWait();
 
-        if(alert.getResult() == ButtonType.YES){
+        if(alert.getResult() == ButtonType.YES) {
+
+            for (BookingHistoryItem booking : Main.getBookingList()) {
+                
+                // if there is a booking for the selected film
+                // and if the booking's date is in the future
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                if (booking.getFilm().equals(Main.getSelectedFilmTitle()) && LocalDate.parse(booking.getDate(), formatter).compareTo(LocalDate.now()) > 0) {
+                    Alert existingBookingAlert = new Alert(AlertType.WARNING, "You cannot delete a film with future bookings!", ButtonType.OK);
+                    existingBookingAlert.showAndWait();
+                    if (existingBookingAlert.getResult() == ButtonType.OK) {
+                        existingBookingAlert.close();
+                        return;
+                    }
+                }
+            }
+            
+            // if there are no future booking for the selected film
+            // the employee can safely delete it
             Main.modifyJSONFile("filmsJSON.txt", selectedFilm.getTitle(), "", "delete");
             imgFile.delete();
 
