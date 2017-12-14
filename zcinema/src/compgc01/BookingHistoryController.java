@@ -25,9 +25,9 @@ import javafx.scene.input.MouseEvent;
 
 /**
  * The controller for the Booking History Scene.
- * Implementing the interface Initializable, so that the method initialize gets read at load time.
+ * Implements the interface Initializable, so that the method initialize gets executed at load time.
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 12.12.2017
+ * @since 14.12.2017
  */
 public class BookingHistoryController implements Initializable {
 
@@ -95,9 +95,10 @@ public class BookingHistoryController implements Initializable {
 	 * This method checks whether a booking can be deleted by reading today's date and the booking date.
 	 */
     @FXML
-    public boolean deleteBookingValidator() {
-        // getting current date
-        LocalDate currentDate = LocalDate.now(); // for reference
+    public boolean validateBookingCancellation() {
+        
+        // getting current date for reference
+        LocalDate currentDate = LocalDate.now();
 
         // retrieving date from the table and saving it as String
         String selectedBookingDate = table.getSelectionModel().getSelectedItem().getDate();
@@ -111,7 +112,7 @@ public class BookingHistoryController implements Initializable {
         // comparing current date with booking date
         int dateComparison = bookingDate.compareTo(currentDate);
         // System.out.println(dateComparison);
-        return dateComparison > 0 ? true : false;
+        return dateComparison >= 0 ? true : false;
     }
 
     /**
@@ -183,7 +184,7 @@ public class BookingHistoryController implements Initializable {
         if (alert.getResult() == ButtonType.YES) {
             if (isSelectedRowValid(selectedRowId)) {
                 if (table.getSelectionModel().getSelectedItem().getStatus().equals("booked")) {
-                    if(deleteBookingValidator()){ // comparing booking's date with the current date
+                    if (validateBookingCancellation()) { // comparing booking's date with the current date
                         Main.modifyJSONFile("bookingsJSON.txt", selectedRowId, "status", "cancelled");
                         Main.resetBookingList();
                         SceneCreator.launchScene("/scenes/BookingHistoryScene.fxml");
@@ -197,7 +198,7 @@ public class BookingHistoryController implements Initializable {
                     }
                 }
                 else {
-                    Alert alert2 = new Alert(AlertType.ERROR, "Booking already canceled!", ButtonType.CLOSE);
+                    Alert alert2 = new Alert(AlertType.ERROR, "Booking already cancelled!", ButtonType.CLOSE);
                     alert2.showAndWait();
                     if (alert2.getResult() == ButtonType.CLOSE)
                         alert2.close();
