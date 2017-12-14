@@ -38,7 +38,7 @@ import javafx.util.Pair;
 public class UserSceneController {
 
 	@FXML
-	Button logOutButton, manageFilmsButton, manageBookingsButton, sendEmailButton, exportFilmList;
+	Button logOutButton, manageFilmsButton, manageBookingsButton, sendEmailButton, exportFilmList, exportFeedback;
 	@FXML
 	Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
 	@FXML
@@ -137,6 +137,7 @@ public class UserSceneController {
 			manageFilmsButton.setText("View Films");
 			manageBookingsButton.setText("View Bookings");
 			exportFilmList.setVisible(false);
+			exportFeedback.setVisible(false);
 		}
 
 		String path = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");

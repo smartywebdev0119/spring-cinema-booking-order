@@ -43,7 +43,7 @@ public class ManageBookingsController implements Initializable {
     @FXML
     GridPane gridSeats;
     @FXML
-    Button backButton;
+    Button backButton, giveFeedback;
     @FXML
     DatePicker datePicker;
     @FXML
@@ -61,7 +61,9 @@ public class ManageBookingsController implements Initializable {
         if(!Main.isEmployee()) {
             customerDropDownList.setVisible(false); 
             customer.setVisible(false);
+            giveFeedback.setVisible(true);
         }
+        
 
         // setting the date to the current one in the default time-zone of the system
         datePicker.setValue(LocalDate.now());
@@ -253,6 +255,12 @@ public class ManageBookingsController implements Initializable {
     private void showBookingHistoryOnClick(ActionEvent event) throws IOException {
 
         SceneCreator.launchScene("/scenes/BookingHistoryScene.fxml");
+    }
+    
+    @FXML
+    private void giveFeedback(ActionEvent event) throws IOException {
+
+        SceneCreator.launchScene("/scenes/FeedbackScene.fxml");
     }
 
     @FXML
