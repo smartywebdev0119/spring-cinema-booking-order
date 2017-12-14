@@ -18,6 +18,9 @@ Features that do not appear in the video
 You have watched our video. But wait, there’s more!
 Our application encrypts usernames and passwords, so if you open the customers or the employees JSON file, you will see the encrypted stored credentials, rather than the actual ones we use to log in. They are decrypted on the fly, when the application is authenticating users.
 Furthermore, customers can email themselves a confirmation of their booking from the summary screen that appears when they click on Book Seat and make a booking. Check your UCL email account!
+Finally, you can also play music. Towards the beginning of the main Method in the Main class, there is a line that says:
+// playMusic("canonInDMajor.mp3");
+If you uncomment it, it will play a classical music piece when you run the application. We just uncommented it because music might become distracting after a while, when you are testing our program.
 
 Javadoc files
 in doc folder

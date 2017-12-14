@@ -334,6 +334,7 @@ public class ManageBookingsController implements Initializable {
 
     @FXML
     private void throwAlert() {
+
         Alert alert = new Alert(AlertType.INFORMATION, "Please make sure all fields are selected!", ButtonType.OK);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.OK){

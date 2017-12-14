@@ -114,7 +114,7 @@ public class ViewSelectedFilmController implements Initializable {
                 // if there is a booking for the selected film
                 // and if the booking's date is in the future
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                if (booking.getFilm().equals(Main.getSelectedFilmTitle()) && !booking.getStatus().equals("canceled") && LocalDate.parse(booking.getDate(), formatter).compareTo(LocalDate.now()) >= 0) {
+                if (booking.getFilm().equals(Main.getSelectedFilmTitle()) && !booking.getStatus().equals("cancelled") && LocalDate.parse(booking.getDate(), formatter).compareTo(LocalDate.now()) >= 0) {
                     Alert existingBookingAlert = new Alert(AlertType.WARNING, "You cannot delete a film with future bookings!", ButtonType.OK);
                     existingBookingAlert.showAndWait();
                     if (existingBookingAlert.getResult() == ButtonType.OK) {

@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
 
@@ -31,7 +32,7 @@ import javafx.util.Pair;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 12.12.2017
+ * @since 14.12.2017
  */
 public class UserSceneController {
 
@@ -179,11 +180,11 @@ public class UserSceneController {
     }
 
     /**
-	 * This method allows the employee to export a list of films for which any kind of activity has been perfomed such as
-	 * booking a seat or delete a seat.
-	 * @param ActionEvent e
-	 * @throws IOException
-	 */
+     * This method allows the employee to export a list of films for which any kind of activity has been perfomed such as
+     * booking a seat or delete a seat.
+     * @param ActionEvent e
+     * @throws IOException
+     */
     @FXML
     void exportFilmList (ActionEvent e) throws IOException {
 
@@ -195,14 +196,20 @@ public class UserSceneController {
         Main.readJSONFile("filmsJSON.txt");
         Main.readJSONFile("bookingsJSON.txt");
 
+        DirectoryChooser folderChooser = new DirectoryChooser();
+        folderChooser.setTitle("Select folder:");
+        File defaultDirectory = new File(".");
+        folderChooser.setInitialDirectory(defaultDirectory);
+        File selectedDirectory = folderChooser.showDialog(null);
+
         // clearing the export file, in case it exists from before
         PrintWriter pw = new PrintWriter(new FileOutputStream(
-                new File(Main.getPath() + "bookings.csv")));
+                new File(selectedDirectory.toPath() + "/bookings.csv")));
         pw.close();
 
         // creating the printwriter using the append option now
         pw = new PrintWriter(new FileOutputStream(
-                new File(Main.getPath() + "bookings.csv"), 
+                new File(selectedDirectory.toPath() + "/bookings.csv"), 
                 true));
 
         // mapping film titles to a set of strings representing screening dates and times
