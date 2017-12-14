@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
  * The controller for the View Films Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 12.12.2017
+ * @since 14.12.2017
  */
 public class ViewFilmsController implements Initializable {
 
@@ -113,7 +113,7 @@ public class ViewFilmsController implements Initializable {
             try {
                 // storing the selected film to customise the newly created scene
                 Main.setSelectedFilmTitle(id);
-                SceneCreator.launchScene("/scenes/ViewSelectedFilm.fxml");
+                SceneCreator.launchScene("/scenes/ViewSelectedFilmScene.fxml");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
