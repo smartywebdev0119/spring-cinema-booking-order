@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendEmail {
 
-    static void sendEmail(String recipient) {
+    static void sendEmail(String recipient, String type) {
 
         final String username = "uclcinemaapp@gmail.com";
         final String password = "UCLCSisthebest!";
@@ -42,10 +42,21 @@ public class SendEmail {
             message.setFrom(new InternetAddress("uclcinemaapp@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
+            
+            if (type.equals("reminder")) {
             message.setSubject("Booking Confirmation");
             message.setText("Dear " + Main.getCurrentUser().getFirstName() + ",\n\n" +
                     "Your booking for the film " + Main.getSelectedFilmTitle() + " has been confirmed. Please, keep this email as proof of your booking.\n\nLooking forward to seeing you on " + Main.getSelectedDate() +
                     ", at " + Main.getSelectedTime() + "!\n\nStay Awesome!,\nCine UCL");
+            }
+            else {
+                message.setSubject("Feedback");
+                message.setText("Customer: " + Main.getCurrentUser().getUsername() + "\nFilm: " + Main.feedbackFilmTitle +
+                        "\nStars: " + Main.stars +
+                        "\nExperience: " + Main.experience + "\nComment: " + Main.comment
+                        );
+            }
+            
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

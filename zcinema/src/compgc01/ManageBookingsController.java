@@ -232,7 +232,7 @@ public class ManageBookingsController implements Initializable {
             Main.resetBookingList();
             Main.readJSONFile("bookingsJSON.txt");
 
-            if(!Main.isEmployee()){
+            if (!Main.isEmployee()){
                 SceneCreator.launchScene("/scenes/BookingSummaryScene.fxml");
                 Main.getStage().centerOnScreen();
             } else {

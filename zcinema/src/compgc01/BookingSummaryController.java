@@ -57,7 +57,7 @@ public class BookingSummaryController implements Initializable {
         Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like a confirmation to be emailed to you?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
-            SendEmail.sendEmail(Main.getCurrentUser().getEmail());
+            SendEmail.sendEmail(Main.getCurrentUser().getEmail(), "reminder");
             alert.close();
         }
         else {

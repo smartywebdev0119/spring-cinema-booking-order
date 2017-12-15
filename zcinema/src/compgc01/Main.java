@@ -16,8 +16,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -25,7 +23,7 @@ import javafx.stage.StageStyle;
  * The main class for our cinema booking management application, Cine UCL.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 12.12.2017
+ * @since 15.12.2017
  * 
  * References:
  * JSON library by https://code.google.com/archive/p/json-simple/,
@@ -54,8 +52,11 @@ public class Main extends Application {
     static Boolean employeeMode = false, christmasSeason = false;
     static String selectedFilmTitle = "", selectedDate = "", selectedTime = "";
     static ArrayList<String> selectedSeats;
-    static MediaPlayer player;
-    static boolean playMusic;
+    
+    static String stars = "";
+    static String comment = "";
+    static String experience = "";
+    static String feedbackFilmTitle = "";
 
     // arrayLists to be populated with the information from the text files
     static HashSet<Employee> employees = new HashSet<Employee>();
@@ -63,19 +64,16 @@ public class Main extends Application {
     static HashSet<Film> films = new HashSet<Film>();
     static HashSet<BookingHistoryItem> bookings = new HashSet<BookingHistoryItem>();
 
-    
+
     /**
-	 * The main method. It checks whether the designed files exist. If not, it generates them.
-	 * Then, the first scene is launched.
-	 * @param String [] args
-	 * @throws Exception
-	 */
+     * The main method. It checks whether the designed files exist. If not, it generates them.
+     * Then, the first scene is launched.
+     * @param String [] args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         m = new Main();
-
-         readMusicFile("song.mp3");
-         playMusic();
 
         // if files do not exist, create them using default values
         try {
@@ -140,10 +138,10 @@ public class Main extends Application {
     }
 
     /**
-	 * A method that allows to read all JSON files by simply passing the specific file name as paramenter
-	 * @return JSONObject, being the object containing all information of the read file
-	 * @param String file, being the file name
-	 */
+     * A method that allows to read all JSON files by simply passing the specific file name as paramenter
+     * @return JSONObject, being the object containing all information of the read file
+     * @param String file, being the file name
+     */
     static JSONObject readJSONFile(String file) {
 
         JSONObject items = null;
@@ -183,9 +181,9 @@ public class Main extends Application {
     }
 
     /**
-	 * A method that allows to modify specific JSON files
-	 * @param String file, String identifier, String attribute, String newValue
-	 */
+     * A method that allows to modify specific JSON files
+     * @param String file, String identifier, String attribute, String newValue
+     */
     @SuppressWarnings("unchecked")
     static void modifyJSONFile(String file, String identifier, String attribute, String newValue) {
 
@@ -225,9 +223,9 @@ public class Main extends Application {
     }
 
     /**
-	 * A method that generates a new JSON file
-	 * @param String type
-	 */
+     * A method that generates a new JSON file
+     * @param String type
+     */
     @SuppressWarnings("unchecked")
     static void createJSONFile(String type) {
 
@@ -293,28 +291,7 @@ public class Main extends Application {
             ex.printStackTrace();
         }
     }
-
-    static MediaPlayer readMusicFile(String musicFile) {
-        try {
-            File file = new File(URLDecoder.decode(getPath() + "res/sounds/" + musicFile, "UTF-8"));
-            Media backgroundMusic = new Media(file.toPath().toUri().toString());
-            player = new MediaPlayer(backgroundMusic);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return player;
-    }
     
-    static void playMusic(){
-    	player.play();
-    	playMusic = true;
-    }
-    
-    static void stopMusic(){
-    	player.stop();
-    	playMusic = false;
-    }
-
     static String getPath() {
 
         String path = ClassLoader.getSystemClassLoader().getResource(".").getPath();
@@ -436,9 +413,9 @@ public class Main extends Application {
     }
 
     /**
-	 * The method that kicks off the first scene of our application, the LoginScene.
-	 * @param Stage primaryStage
-	 */
+     * The method that kicks off the first scene of our application, the LoginScene.
+     * @param Stage primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
 

@@ -25,6 +25,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
@@ -33,256 +35,293 @@ import javafx.util.Pair;
  * The controller for the User Scene.
  * 
  * @author Team 3: Filippos Zofakis and Lucio D'Alessandro
- * @since 14.12.2017
+ * @since 15.12.2017
  */
 public class UserSceneController {
 
-	@FXML
-	Button logOutButton, manageFilmsButton, manageBookingsButton, sendEmailButton, exportFilmList, exportFeedback;
-	@FXML
-	Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
-	@FXML
-	ImageView userSceneBackground, uploadedUserIcon, stopPlayer;
+    boolean musicPlaying;
+    MediaPlayer player = null;
 
-	@FXML
-	void initialize() throws IOException{
+    @FXML
+    Button logOutButton, manageFilmsButton, manageBookingsButton, sendEmailButton, exportFilmList;
+    @FXML
+    Label windowTitleLabel, firstNameLabel, lastNameLabel, titleLabel, emailLabel;
+    @FXML
+    ImageView userSceneBackground, uploadedUserIcon, stopPlayer;
 
-		personaliseScene();
+    @FXML
+    void initialize() throws IOException {
 
-		String path = URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/", "UTF-8");
+        personaliseScene();
 
-		if (Main.isChristmasSeason() && !Main.isEmployee()) {
-			File file = new File(path + "christmas-02.png");
-			Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-			userSceneBackground.setImage(img);
-		}
-		else {
-			File file = new File(path + "backgroundUserScene-02.png");
-			Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-			userSceneBackground.setImage(img);
-		}
-	}
+        String path = URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/", "UTF-8");
 
+        if (Main.isChristmasSeason() && !Main.isEmployee()) {
+            File file = new File(path + "christmas-02.png");
+            Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+            userSceneBackground.setImage(img);
+        }
+        else {
+            File file = new File(path + "backgroundUserScene-02.png");
+            Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+            userSceneBackground.setImage(img);
+        }
 
-	@FXML
-	public void playStopMusic(MouseEvent e) throws IOException{
-		String path = URLDecoder.decode(Main.getPath() + "zcinema/src/res/images/backgroundImages/", "UTF-8");
-		if(Main.playMusic){
-			Main.stopMusic();
-			File file = new File(path + "playerStop-04.png");
-			Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-			stopPlayer.setImage(img);
-		}
-		else {
-			Main.playMusic();
-			File file = new File(path + "player-04.png");
-			Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-			stopPlayer.setImage(img);
-		}
-	}
+        // setting play music icon
+        File file = new File(path + "player-04.png");
+        Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+        stopPlayer.setImage(img);
 
-	@FXML
-	public void logOutClick(ActionEvent event) throws IOException {
+        musicPlaying = false;
+        file = new File(URLDecoder.decode(Main.getPath() + "res/sounds/canonInDMajor.mp3", "UTF-8"));
+        Media backgroundMusic = new Media(file.toPath().toUri().toString());
+        player = new MediaPlayer(backgroundMusic);
+    }
 
-		// resetting current user for security purposes
-		Main.setCurrentUser(null);
-		Main.setEmployeeMode(false);
-		Main.resetEmployeeList();
-		Main.resetCustomerList();
-		Main.resetFilmList();
-		Main.resetBookingList();
+    @FXML
+    public void playStopMusic(MouseEvent e) {
 
-		// loading login scene
-		SceneCreator.launchScene("/scenes/LoginScene.fxml");
-	}
+        if (musicPlaying) {
+            player.stop();
+            musicPlaying = false;
+        }
+        else {
+            player.play();
+            musicPlaying = true;
+        }
 
-	@FXML
-	public void manageBookingsClick(ActionEvent event) throws IOException {
+        /*
+         * Inspired by:
+         * https://stackoverflow.com/questions/17850191/why-am-i-getting-java-
+         * lang-illegalstateexception-not-on-fx-application-thread
+         * Avoid throwing IllegalStateException by running from a non-JavaFX thread.
+         * Beautiful lambda expression version.
+         */
+        Platform.runLater(() -> {
 
-		// calling the scene from parent class and avoiding code duplication
-		SceneCreator.launchScene("/scenes/ManageBookingsScene.fxml");
-	}
+            try {
+                String path = URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/", "UTF-8");
+                if (musicPlaying) {
+                    File playerIcon = new File(path + "playerStop-04.png");
+                    Image img = SwingFXUtils.toFXImage(ImageIO.read(playerIcon), null);
+                    stopPlayer.setImage(img);
+                }
+                else {
+                    File playerIcon = new File(path + "player-04.png");
+                    Image img = SwingFXUtils.toFXImage(ImageIO.read(playerIcon), null);
+                    stopPlayer.setImage(img);
+                }
+            } catch (IOException e1) {
+                return;
+            }
+        });
+    }
 
-	@FXML
-	public void manageMoviesClick(ActionEvent event) throws IOException {
+    @FXML
+    public void logOutClick(ActionEvent event) throws IOException {
 
-		if (Main.isEmployee())
-			SceneCreator.launchScene("/scenes/ManageFilmsScene.fxml");
-		else
-			SceneCreator.launchScene("/scenes/ViewFilmsScene.fxml");
-	}
+        // resetting current user for security purposes
+        Main.setCurrentUser(null);
+        Main.setEmployeeMode(false);
+        Main.resetEmployeeList();
+        Main.resetCustomerList();
+        Main.resetFilmList();
+        Main.resetBookingList();
 
-	@FXML
-	public void sendEmailClick(ActionEvent event) throws IOException {
+        // loading login scene
+        SceneCreator.launchScene("/scenes/LoginScene.fxml");
+    }
 
-		Main m = Main.getMainApplication();
-		m.getHostServices().showDocument("mailto:" + "uclcinemaapp@gmail.com");
-	}
+    @FXML
+    public void manageBookingsClick(ActionEvent event) throws IOException {
 
-	@FXML
-	public void editInfoClick(ActionEvent event) throws IOException {
+        // calling the scene from parent class and avoiding code duplication
+        SceneCreator.launchScene("/scenes/ManageBookingsScene.fxml");
+    }
 
-		SceneCreator.launchScene("/scenes/EditInfoScene.fxml");
-	}
+    @FXML
+    public void manageMoviesClick(ActionEvent event) throws IOException {
 
-	protected void personaliseScene() throws IOException {
+        if (Main.isEmployee())
+            SceneCreator.launchScene("/scenes/ManageFilmsScene.fxml");
+        else
+            SceneCreator.launchScene("/scenes/ViewFilmsScene.fxml");
+    }
 
-		// personalising page based on logged-in user
-		firstNameLabel.setText(Main.getCurrentUser().getFirstName());
-		lastNameLabel.setText(Main.getCurrentUser().getLastName());
+    @FXML
+    public void sendEmailClick(ActionEvent event) throws IOException {
 
-		if (!Main.isEmployee()) {
-			titleLabel.setText("Customer");
-			windowTitleLabel.setText("Customer View");
-			manageFilmsButton.setText("View Films");
-			manageBookingsButton.setText("View Bookings");
-			exportFilmList.setVisible(false);
-			exportFeedback.setVisible(false);
-		}
+        Main m = Main.getMainApplication();
+        m.getHostServices().showDocument("mailto:" + "uclcinemaapp@gmail.com");
+    }
 
-		String path = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
-		File file = new File(path + Main.getCurrentUser().getUsername() + ".png");
-		Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-		uploadedUserIcon.setImage(img);
-	}
+    @FXML
+    public void editInfoClick(ActionEvent event) throws IOException {
 
-	@FXML
-	public void uploadImageClick(ActionEvent event) throws IOException {
+        SceneCreator.launchScene("/scenes/EditInfoScene.fxml");
+    }
 
-		/*
-		 * Inspired by:
-		 * https://stackoverflow.com/questions/17850191/why-am-i-getting-java-
-		 * lang-illegalstateexception-not-on-fx-application-thread
-		 * Avoid throwing IllegalStateException by running from a non-JavaFX thread.
-		 * Beautiful lambda expression version.
-		 */
-		Platform.runLater(() -> {
-			try {
-				changeImage();
-				SceneCreator.launchScene("/scenes/UserScene.fxml");
-				personaliseScene();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-	}
+    protected void personaliseScene() throws IOException {
 
-	protected void changeImage() throws IOException {
+        // personalising page based on logged-in user
+        firstNameLabel.setText(Main.getCurrentUser().getFirstName());
+        lastNameLabel.setText(Main.getCurrentUser().getLastName());
 
-		try {
-			FileChooser fc = new FileChooser();
-			File selectedImage = fc.showOpenDialog(null);
-			// checking that input file is not null and handling the exception
-			if (selectedImage == null)
-				return;
-			else if (ImageIO.read(selectedImage) == null) {
-				Alert alert = new Alert(AlertType.WARNING, "Please upload an image in PNG or JPG format!", ButtonType.OK);
-				alert.showAndWait();
-				if(alert.getResult() == ButtonType.OK) {
-					return;
-				}
-			}
-			else {
-				Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);
+        if (!Main.isEmployee()) {
+            titleLabel.setText("Customer");
+            windowTitleLabel.setText("Customer View");
+            manageFilmsButton.setText("View Films");
+            manageBookingsButton.setText("View Bookings");
+            exportFilmList.setVisible(false);
+        }
 
-				uploadedUserIcon.setImage(img);
+        String path = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
+        File file = new File(path + Main.getCurrentUser().getUsername() + ".png");
+        Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+        uploadedUserIcon.setImage(img);
+    }
 
-				String folderPath = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
-				File uploads = new File(folderPath);
-				File file = new File(uploads, Main.getCurrentUser().getUsername() + ".png");
-				InputStream input = Files.newInputStream(selectedImage.toPath());
-				Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			}
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE,
-					null, ex);
-		}
-	}
+    @FXML
+    public void uploadImageClick(ActionEvent event) throws IOException {
 
-	/**
-	 * This method allows the employee to export a list of films for which any kind of activity has been perfomed such as
-	 * booking a seat or delete a seat.
-	 * @param ActionEvent e
-	 * @throws IOException
-	 */
-	@FXML
-	void exportFilmList (ActionEvent e) throws IOException {
+        /*
+         * Inspired by:
+         * https://stackoverflow.com/questions/17850191/why-am-i-getting-java-
+         * lang-illegalstateexception-not-on-fx-application-thread
+         * Avoid throwing IllegalStateException by running from a non-JavaFX thread.
+         * Beautiful lambda expression version.
+         */
+        Platform.runLater(() -> {
+            try {
+                changeImage();
+                SceneCreator.launchScene("/scenes/UserScene.fxml");
+                personaliseScene();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-		Main.resetFilmList();
-		Main.resetBookingList();
+    protected void changeImage() throws IOException {
 
-		// reading the films and bookings from the JSON file to ensure we are working with the most recent version
-		// and there is no duplication
-		Main.readJSONFile("filmsJSON.txt");
-		Main.readJSONFile("bookingsJSON.txt");
+        try {
+            FileChooser fc = new FileChooser();
+            File selectedImage = fc.showOpenDialog(null);
+            // checking that input file is not null and handling the exception
+            if (selectedImage == null)
+                return;
+            else if (ImageIO.read(selectedImage) == null) {
+                Alert alert = new Alert(AlertType.WARNING, "Please upload an image in PNG or JPG format!", ButtonType.OK);
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.OK) {
+                    return;
+                }
+            }
+            else {
+                Image img = SwingFXUtils.toFXImage(ImageIO.read(selectedImage), null);
 
-		DirectoryChooser folderChooser = new DirectoryChooser();
-		folderChooser.setTitle("Select folder:");
-		File defaultDirectory = new File(".");
-		folderChooser.setInitialDirectory(defaultDirectory);
-		File selectedDirectory = folderChooser.showDialog(null);
+                uploadedUserIcon.setImage(img);
 
-		// clearing the export file, in case it exists from before
-		PrintWriter pw = new PrintWriter(new FileOutputStream(
-				new File(selectedDirectory.toPath() + "/bookings.csv")));
-		pw.close();
+                String folderPath = URLDecoder.decode(Main.getPath() + "res/images/userImages/", "UTF-8");
+                File uploads = new File(folderPath);
+                File file = new File(uploads, Main.getCurrentUser().getUsername() + ".png");
+                InputStream input = Files.newInputStream(selectedImage.toPath());
+                Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
+    }
 
-		// creating the printwriter using the append option now
-		pw = new PrintWriter(new FileOutputStream(
-				new File(selectedDirectory.toPath() + "/bookings.csv"), 
-				true));
+    /**
+     * This method allows the employee to export a list of films for which any kind of activity has been perfomed such as
+     * booking a seat or delete a seat.
+     * @param ActionEvent e
+     * @throws IOException
+     */
+    @FXML
+    void exportFilmList (ActionEvent e) throws IOException {
 
-		// mapping film titles to a set of strings representing screening dates and times
-		TreeMap<String, TreeSet<String>> map = new TreeMap<String, TreeSet<String>>();
-		for (Film film: Main.getFilmList()) {
-			for (BookingHistoryItem booking : Main.getBookingList()) {
-				if (film.getTitle().equals(booking.getFilm())) {
-					if (!map.containsKey(film.getTitle()))
-						map.put(booking.getFilm(), new TreeSet<String>());
+        Main.resetFilmList();
+        Main.resetBookingList();
 
-					map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
-				}
-			}
-		}
+        // reading the films and bookings from the JSON file to ensure we are working with the most recent version
+        // and there is no duplication
+        Main.readJSONFile("filmsJSON.txt");
+        Main.readJSONFile("bookingsJSON.txt");
 
-		// counting number of bookings for each screening (date and time) of each film
-		for (String filmTitle : map.keySet()) {
-			TreeSet<String> setOfDatesAndTimes = map.get(filmTitle);
-			// System.out.println(filmTitle + ":" + setOfDatesAndTimes.size());
+        DirectoryChooser folderChooser = new DirectoryChooser();
+        folderChooser.setTitle("Select folder:");
+        File defaultDirectory = new File(".");
+        folderChooser.setInitialDirectory(defaultDirectory);
+        File selectedDirectory = folderChooser.showDialog(null);
 
-			for (String dateAndTime : setOfDatesAndTimes) {
-				int numberOfBookingsAtSpecificDateAndTime = 0;
+        // if the user clicks on cancel
+        if (selectedDirectory == null)
+            return;
 
-				for (BookingHistoryItem booking : Main.getBookingList()) {
+        // clearing the export file, in case it exists from before
+        PrintWriter pw = new PrintWriter(new FileOutputStream(
+                new File(selectedDirectory.toPath() + "/bookings.csv")));
+        pw.close();
 
-					if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime) && !booking.getStatus().equals("cancelled")) {
-						numberOfBookingsAtSpecificDateAndTime++;
-					}
+        // creating the printwriter using the append option now
+        pw = new PrintWriter(new FileOutputStream(
+                new File(selectedDirectory.toPath() + "/bookings.csv"), 
+                true));
 
-					// System.out.println(numberOfBookingsAtSpecificDateAndTime);
-				}
-				// printing to export.csv file
-				pw.append("title: " + filmTitle + ", " + dateAndTime + ", booked seats: " + numberOfBookingsAtSpecificDateAndTime + ", available seats: " + (18 - numberOfBookingsAtSpecificDateAndTime) + "\n");    
-			}
-		}
+        // mapping film titles to a set of strings representing screening dates and times
+        TreeMap<String, TreeSet<String>> map = new TreeMap<String, TreeSet<String>>();
+        for (Film film: Main.getFilmList()) {
+            for (BookingHistoryItem booking : Main.getBookingList()) {
+                if (film.getTitle().equals(booking.getFilm())) {
+                    if (!map.containsKey(film.getTitle()))
+                        map.put(booking.getFilm(), new TreeSet<String>());
 
-		pw.close();
+                    map.get(booking.getFilm()).add("date: " + booking.getDate() + ", time: " + booking.getTime());
+                }
+            }
+        }
 
-		// creating a custom dialog to inform the user
-		Dialog<Pair<String, String>> dialog = new Dialog<>();
-		dialog.setTitle("Successful Export!");
-		dialog.setHeaderText("Exported to 'bookings.csv' file.");
+        // counting number of bookings for each screening (date and time) of each film
+        for (String filmTitle : map.keySet()) {
+            TreeSet<String> setOfDatesAndTimes = map.get(filmTitle);
+            // System.out.println(filmTitle + ":" + setOfDatesAndTimes.size());
 
-		// setting the icon
-		// image credit: https://thenounproject.com/term/csv-file/56841/
-		File file = new File(URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/csv.png", "UTF-8"));
-		Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
-		dialog.setGraphic(new ImageView(img));
+            for (String dateAndTime : setOfDatesAndTimes) {
+                int numberOfBookingsAtSpecificDateAndTime = 0;
 
-		// setting the button type
-		ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(okButtonType);
+                for (BookingHistoryItem booking : Main.getBookingList()) {
 
-		dialog.showAndWait();
-	}
+                    if (booking.getFilm().equals(filmTitle) && ("date: " + booking.getDate() + ", time: " + booking.getTime()).equals(dateAndTime) && !booking.getStatus().equals("cancelled")) {
+                        numberOfBookingsAtSpecificDateAndTime++;
+                    }
+
+                    // System.out.println(numberOfBookingsAtSpecificDateAndTime);
+                }
+                // printing to export.csv file
+                pw.append("title: " + filmTitle + ", " + dateAndTime + ", booked seats: " + numberOfBookingsAtSpecificDateAndTime + ", available seats: " + (18 - numberOfBookingsAtSpecificDateAndTime) + "\n");    
+            }
+        }
+
+        pw.close();
+
+        // creating a custom dialog to inform the user
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Successful Export!");
+        dialog.setHeaderText("Exported to 'bookings.csv' file.");
+
+        // setting the icon
+        // image credit: https://thenounproject.com/term/csv-file/56841/
+        File file = new File(URLDecoder.decode(Main.getPath() + "res/images/backgroundImages/csv.png", "UTF-8"));
+        Image img = SwingFXUtils.toFXImage(ImageIO.read(file), null);
+        dialog.setGraphic(new ImageView(img));
+
+        // setting the button type
+        ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType);
+
+        dialog.showAndWait();
+    }
 }

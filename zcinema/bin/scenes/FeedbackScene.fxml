@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compgc01.feedbackController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compgc01.FeedbackController">
    <children>
       <AnchorPane prefHeight="37.0" prefWidth="702.0">
          <children>
@@ -35,7 +35,7 @@
       <Text layoutX="55.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movie:" />
       <Text layoutX="277.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comment: (Optional)" />
       <Text layoutX="57.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stars:" />
-      <Button fx:id="submitButton" layoutX="515.0" layoutY="307.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #353238;" text="Submit" textFill="WHITE">
+      <Button fx:id="submitButton" layoutX="515.0" layoutY="307.0" mnemonicParsing="false" onAction="#sendFeedback" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: #353238;" text="Submit" textFill="WHITE">
          <graphic>
             <MaterialIconView fill="WHITE" glyphName="SEND" size="20" />
          </graphic>

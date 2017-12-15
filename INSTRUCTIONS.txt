@@ -25,7 +25,7 @@ Below you can find a list of extra features we implemented.
 - Ability to choose in which folder to save the exported bookings.csv file.
 - Ability to delete films (only if there are no future bookings for them).
 - Customers can email themselves a confirmation of their booking from the summary screen that appears when they click on Book Seat and make a booking (SendEmail class). Check your UCL email account!
-- You can also play music. There is a playMusic method in the Main class that, when called, plays .mp3 files.
+- You can also play music. There is a playMusic method in the Main class that, when called, plays .mp3 files. Click on the play icon on top of the User Scene.
 - You can click on Send email in the main User Scene (the one that appears after you login successfully) and the native email client opens up with the email account of our cinema already filled-in as the recipient. The code for that can be found in the UserSceneController, in the sendEmailClick method.
 - When you click on a film poster and the pages showing its information (poster, title, description, dates, times) shows up, you can click on the film poster in that page (ViewSelectedFilm Scene) and it will open up YouTube and play the film’s trailer. You can also add a link to the trailer, when adding a new movie.
 - Custom-made background graphics and overall design, mostly by Lucio D’ Alessandro.
@@ -35,6 +35,7 @@ Below you can find a list of extra features we implemented.
 - Interfaces: implementing the Initializable interface, so that we can use its ‘initialize’ method to run code and customize a scene whenever it is created.
 - Importing and using open-source third-party libraries such as JSON Simple, JavaX Mail, and FontAwsomeFX.
 - Uploading images to enable users (both customers and employees) to personalise their experience.
+- Feedback scene to enable customers to leave feedback.
 - Extensive use of Alerts and Dialogs (popups) to provide information to users and prevent unwarranted behavior that might lead to bugs.
 - Comprehensive testing and debugging.
 
