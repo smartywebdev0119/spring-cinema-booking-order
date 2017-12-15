@@ -54,6 +54,8 @@ public class Main extends Application {
     static Boolean employeeMode = false, christmasSeason = false;
     static String selectedFilmTitle = "", selectedDate = "", selectedTime = "";
     static ArrayList<String> selectedSeats;
+    static MediaPlayer player;
+    static boolean playMusic;
 
     // arrayLists to be populated with the information from the text files
     static HashSet<Employee> employees = new HashSet<Employee>();
@@ -72,7 +74,8 @@ public class Main extends Application {
 
         m = new Main();
 
-        // playMusic("canonInDMajor.mp3");
+         readMusicFile("song.mp3");
+         playMusic();
 
         // if files do not exist, create them using default values
         try {
@@ -291,16 +294,25 @@ public class Main extends Application {
         }
     }
 
-    static void playMusic(String musicFile) {
-
+    static MediaPlayer readMusicFile(String musicFile) {
         try {
             File file = new File(URLDecoder.decode(getPath() + "res/sounds/" + musicFile, "UTF-8"));
             Media backgroundMusic = new Media(file.toPath().toUri().toString());
-            MediaPlayer player = new MediaPlayer(backgroundMusic);
-            player.play();
+            player = new MediaPlayer(backgroundMusic);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        return player;
+    }
+    
+    static void playMusic(){
+    	player.play();
+    	playMusic = true;
+    }
+    
+    static void stopMusic(){
+    	player.stop();
+    	playMusic = false;
     }
 
     static String getPath() {

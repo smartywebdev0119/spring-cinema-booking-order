@@ -67,6 +67,8 @@ public class ManageFilmsController {
 
 	@FXML
 	void initialize() throws IOException {
+		
+		filmTrailer.setPromptText("Enter trailer link here... (Optional)");
 
 		ObservableList<String> obsList = FXCollections.observableArrayList("13:00", "14:00", "15:00", "16:00", "17:00",
 				"18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", "01:00", "02:00", "03:00");

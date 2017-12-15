@@ -102,5 +102,13 @@
             </Button>
          </children>
       </AnchorPane>
+      <ImageView fx:id="stopPlayer" fitHeight="21.0" fitWidth="45.0" layoutX="175.0" layoutY="8.0" onMouseClicked="#playStopMusic" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../res/images/backgroundImages/player-04.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>
