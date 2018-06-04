@@ -37,7 +37,7 @@ Below you can find a list of extra features we implemented.
 - Uploading images to enable users (both customers and employees) to personalise their experience.
 - Feedback scene to enable customers to leave feedback.
 - Extensive use of Alerts and Dialogs (popups) to provide information to users and prevent unwarranted behavior that might lead to bugs.
-- Comprehensive testing and debugging.
+- Comprehensive manual testing and debugging. Ability to extend and automate testing using JUnit for projects of a larger scope.
 
 ***Important note***
 The res folder needs to be located in the same path/directory as the Eclipse workspace folder (called zcinema) and the jar file, so that they can find it. It should not be inside the actual project folder with the source code though. If it gets moved to a different location, the application will no longer work.
