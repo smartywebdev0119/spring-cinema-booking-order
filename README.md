@@ -21,7 +21,7 @@ https://mediacentral.ucl.ac.uk/Play/10244
 Below you can find a list of extra features we implemented.
 - Using JSON to create, read, store, and modify data, rather than plain text (Main class readJSONFile method, etc.).
 - Code to create default JSON files programmatically (in the Main class, createJSONFile method).
-- Our application encrypts usernames and passwords, so if you open the customers or the employees JSON file, you will see the encrypted stored credentials, rather than the actual ones we use to log in. They are decrypted on the fly, when the application is authenticating users. The functionality is contained in a class called Encryption.
+- Our application encrypts usernames and passwords (AES), so if you open the customers or the employees JSON file, you will see the encrypted stored credentials, rather than the actual ones we use to log in. They are decrypted on the fly, when the application is authenticating users. The functionality is contained in a class called Encryption.
 - Ability to choose in which folder to save the exported bookings.csv file.
 - Ability to delete films (only if there are no future bookings for them).
 - Customers can email themselves a confirmation of their booking from the summary screen that appears when they click on Book Seat and make a booking (SendEmail class). Check your UCL email account!
